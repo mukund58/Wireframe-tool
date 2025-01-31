@@ -1,3 +1,9 @@
+# Wireframe Tool
+
+A web-based application designed for creating and designing web UI wireframes efficiently.
+
+
+```
 wireframe-tool/
 │── 📂 assets/
 │   ├── styles.css
@@ -21,3 +27,4 @@ wireframe-tool/
 │── dashboard.php
 │── config.php
 │── .htaccess
+```
