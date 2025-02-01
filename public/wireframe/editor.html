@@ -4,17 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wireframe Editor</title>
-    <link rel="stylesheet" href="../assets/styles.css">
-    <script src="../assets/script.js" defer></script>
+<link rel="stylesheet"  href="../assets/editor.css">
+    <script src="../assets/js/script.js" defer></script>
 </head>
 <body>
-    <h2>Wireframe Editor</h2>
-    <div id="toolbox">
-        <button onclick="addElement('button')">Button</button>
-        <button onclick="addElement('text')">Text Field</button>
+    <div id="toolbar">
+        <div class="tool" id="brush">🖌️</div>
+        <div class="tool" id="shape">🔳</div>
+        <div class="tool" id="photo">🖼️</div>
     </div>
-    <div id="canvas" contenteditable="true"></div>
-    <button onclick="saveWireframe()">Save</button>
-</body>
-</html>
+    <div id="canvas-container">
+        <canvas id="canvas"></canvas>
+    </div>
+</body></html>
 
