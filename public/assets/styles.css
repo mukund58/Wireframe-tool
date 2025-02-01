@@ -1,0 +1,31 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    text-align: center;
+}
+
+h1, h2 {
+    color: #333;
+}
+
+form {
+    max-width: 300px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+input, button {
+    margin: 5px;
+    padding: 10px;
+}
+
+#canvas {
+    width: 80%;
+    height: 400px;
+    border: 1px solid black;
+    margin: auto;
+    background: #f8f8f8;
+    position: relative;
+}
+
