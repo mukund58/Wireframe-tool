@@ -1,0 +1,16 @@
+.logo a {
+	text-decoration: none;
+	color: var(--main-bg-color);
+}
+form {
+	max-width: 300px;
+	margin: auto;
+	display: flex;
+	flex-direction: column;
+}
+
+input,
+button {
+	margin: 5px;
+	padding: 10px;
+}
