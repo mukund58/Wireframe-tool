@@ -10,6 +10,8 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("brush").addEventListener("click", () => tool = "brush");
     document.getElementById("shape").addEventListener("click", () => tool = "shape");
     document.getElementById("photo").addEventListener("click", () => tool = "photo");
+    document.getElementById("erase").addEventListener("click", () => tool = "erase");
+    document.getElementById("save").addEventListener("click", saveCanvas);
 
     canvas.addEventListener("mousedown", (e) => {
         drawing = true;
@@ -22,6 +24,8 @@ document.addEventListener("DOMContentLoaded", () => {
         if (tool === "brush") {
             ctx.lineTo(e.offsetX, e.offsetY);
             ctx.stroke();
+        } else if (tool === "erase") {
+            ctx.clearRect(e.offsetX - 10, e.offsetY - 10, 20, 20);
         }
     });
 
@@ -49,6 +53,13 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    function saveCanvas() {
+        const link = document.createElement("a");
+        link.download = "canvas.png";
+        link.href = canvas.toDataURL();
+        link.click();
+    }
+
     const input = document.createElement("input");
     input.type = "file";
     input.accept = "image/*";
@@ -58,4 +69,3 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("photo").addEventListener("click", () => input.click());
     input.addEventListener("change", uploadImage);
 });
-
