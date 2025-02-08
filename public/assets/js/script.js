@@ -6,12 +6,15 @@ document.addEventListener("DOMContentLoaded", () => {
     
     let drawing = false;
     let tool = "brush";
+    let scale = 1;
 
     document.getElementById("brush").addEventListener("click", () => tool = "brush");
     document.getElementById("shape").addEventListener("click", () => tool = "shape");
     document.getElementById("photo").addEventListener("click", () => tool = "photo");
     document.getElementById("erase").addEventListener("click", () => tool = "erase");
     document.getElementById("save").addEventListener("click", saveCanvas);
+    document.getElementById("zoom-in").addEventListener("click", zoomIn);
+    document.getElementById("zoom-out").addEventListener("click", zoomOut);
 
     canvas.addEventListener("mousedown", (e) => {
         drawing = true;
@@ -99,5 +102,19 @@ document.addEventListener("DOMContentLoaded", () => {
             offsetX: touch.clientX - rect.left,
             offsetY: touch.clientY - rect.top
         };
+    }
+
+    function zoomIn() {
+        scale *= 1.1;
+        ctx.scale(1.1, 1.1);
+        ctx.translate(-canvas.width * 0.05, -canvas.height * 0.05);
+        ctx.drawImage(canvas, 0, 0);
+    }
+
+    function zoomOut() {
+        scale /= 1.1;
+        ctx.scale(0.9, 0.9);
+        ctx.translate(canvas.width * 0.05, canvas.height * 0.05);
+        ctx.drawImage(canvas, 0, 0);
     }
 });
