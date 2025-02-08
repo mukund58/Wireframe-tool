@@ -19,16 +19,16 @@ document.addEventListener("DOMContentLoaded", () => {
     canvas.addEventListener("mousedown", (e) => {
         drawing = true;
         ctx.beginPath();
-        ctx.moveTo(e.offsetX, e.offsetY);
+        ctx.moveTo(e.offsetX / scale, e.offsetY / scale);
     });
 
     canvas.addEventListener("mousemove", (e) => {
         if (!drawing) return;
         if (tool === "brush") {
-            ctx.lineTo(e.offsetX, e.offsetY);
+            ctx.lineTo(e.offsetX / scale, e.offsetY / scale);
             ctx.stroke();
         } else if (tool === "erase") {
-            ctx.clearRect(e.offsetX - 10, e.offsetY - 10, 20, 20);
+            ctx.clearRect((e.offsetX / scale) - 10, (e.offsetY / scale) - 10, 20, 20);
         }
     });
 
@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const { offsetX, offsetY } = getTouchPos(touch);
         drawing = true;
         ctx.beginPath();
-        ctx.moveTo(offsetX, offsetY);
+        ctx.moveTo(offsetX / scale, offsetY / scale);
     });
 
     canvas.addEventListener("touchmove", (e) => {
@@ -49,10 +49,10 @@ document.addEventListener("DOMContentLoaded", () => {
         const touch = e.touches[0];
         const { offsetX, offsetY } = getTouchPos(touch);
         if (tool === "brush") {
-            ctx.lineTo(offsetX, offsetY);
+            ctx.lineTo(offsetX / scale, offsetY / scale);
             ctx.stroke();
         } else if (tool === "erase") {
-            ctx.clearRect(offsetX - 10, offsetY - 10, 20, 20);
+            ctx.clearRect((offsetX / scale) - 10, (offsetY / scale) - 10, 20, 20);
         }
     });
 
@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     canvas.addEventListener("click", (e) => {
         if (tool === "shape") {
-            drawRectangle(e.offsetX - 25, e.offsetY - 25, 50, 50);
+            drawRectangle((e.offsetX / scale) - 25, (e.offsetY / scale) - 25, 50, 50);
         }
     });
 
@@ -75,7 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const img = new Image();
             img.src = URL.createObjectURL(file);
             img.onload = () => {
-                ctx.drawImage(img, 50, 50, 100, 100);
+                ctx.drawImage(img, 50 / scale, 50 / scale, 100 / scale, 100 / scale);
             };
         }
     }
@@ -117,4 +117,15 @@ document.addEventListener("DOMContentLoaded", () => {
         ctx.translate(canvas.width * 0.05, canvas.height * 0.05);
         ctx.drawImage(canvas, 0, 0);
     }
+
+    canvas.addEventListener("wheel", (e) => {
+        if (e.ctrlKey) {
+            e.preventDefault();
+            if (e.deltaY < 0) {
+                zoomIn();
+            } else {
+                zoomOut();
+            }
+        }
+    });
 });

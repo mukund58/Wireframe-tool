@@ -12,6 +12,9 @@
             flex-direction: column;
             align-items: center;
             padding: 10px;
+            position: fixed;
+            transform: scale(1);
+            transform-origin: top left;
         }
         .tool {
             width: 50px;
