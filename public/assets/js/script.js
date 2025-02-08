@@ -15,6 +15,8 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("save").addEventListener("click", saveCanvas);
     document.getElementById("zoom-in").addEventListener("click", zoomIn);
     document.getElementById("zoom-out").addEventListener("click", zoomOut);
+    document.getElementById("text").addEventListener("click", () => tool = "text");
+    document.getElementById("line").addEventListener("click", () => tool = "line");
 
     canvas.addEventListener("mousedown", (e) => {
         drawing = true;
@@ -29,6 +31,9 @@ document.addEventListener("DOMContentLoaded", () => {
             ctx.stroke();
         } else if (tool === "erase") {
             ctx.clearRect((e.offsetX / scale) - 10, (e.offsetY / scale) - 10, 20, 20);
+        } else if (tool === "line") {
+            ctx.lineTo(e.offsetX / scale, e.offsetY / scale);
+            ctx.stroke();
         }
     });
 
@@ -53,6 +58,9 @@ document.addEventListener("DOMContentLoaded", () => {
             ctx.stroke();
         } else if (tool === "erase") {
             ctx.clearRect((offsetX / scale) - 10, (offsetY / scale) - 10, 20, 20);
+        } else if (tool === "line") {
+            ctx.lineTo(offsetX / scale, offsetY / scale);
+            ctx.stroke();
         }
     });
 
@@ -66,6 +74,12 @@ document.addEventListener("DOMContentLoaded", () => {
     canvas.addEventListener("click", (e) => {
         if (tool === "shape") {
             drawRectangle((e.offsetX / scale) - 25, (e.offsetY / scale) - 25, 50, 50);
+        } else if (tool === "text") {
+            const text = prompt("Enter text:");
+            if (text) {
+                ctx.font = "20px Arial";
+                ctx.fillText(text, e.offsetX / scale, e.offsetY / scale);
+            }
         }
     });
 

@@ -26,6 +26,9 @@
             justify-content: center;
             cursor: pointer;
             border-radius: 5px;
+            text-align: center;
+            font-size: 12px;
+            line-height: 1.2;
         }
         .tool:hover {
             background: #777;
