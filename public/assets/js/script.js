@@ -31,6 +31,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
     canvas.addEventListener("mouseup", () => drawing = false);
 
+    canvas.addEventListener("touchstart", (e) => {
+        e.preventDefault();
+        const touch = e.touches[0];
+        const { offsetX, offsetY } = getTouchPos(touch);
+        drawing = true;
+        ctx.beginPath();
+        ctx.moveTo(offsetX, offsetY);
+    });
+
+    canvas.addEventListener("touchmove", (e) => {
+        e.preventDefault();
+        if (!drawing) return;
+        const touch = e.touches[0];
+        const { offsetX, offsetY } = getTouchPos(touch);
+        if (tool === "brush") {
+            ctx.lineTo(offsetX, offsetY);
+            ctx.stroke();
+        } else if (tool === "erase") {
+            ctx.clearRect(offsetX - 10, offsetY - 10, 20, 20);
+        }
+    });
+
+    canvas.addEventListener("touchend", () => drawing = false);
+
     function drawRectangle(x, y, width, height) {
         ctx.fillStyle = "rgba(0, 0, 255, 0.5)";
         ctx.fillRect(x, y, width, height);
@@ -68,4 +92,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.getElementById("photo").addEventListener("click", () => input.click());
     input.addEventListener("change", uploadImage);
+
+    function getTouchPos(touch) {
+        const rect = canvas.getBoundingClientRect();
+        return {
+            offsetX: touch.clientX - rect.left,
+            offsetY: touch.clientY - rect.top
+        };
+    }
 });
