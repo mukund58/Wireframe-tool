@@ -61,3 +61,28 @@
                 height: 100%;
             }
         }
+
+        /* Add styles for zoom in/out buttons */
+        #zoom-in, #zoom-out {
+            width: 50px;
+            height: 50px;
+            margin: 10px 0;
+            background: #555;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        #zoom-in:hover, #zoom-out:hover {
+            background: #777;
+        }
+
+        /* Add styles for infinite canvas */
+        #canvas-container {
+            overflow: auto;
+        }
+        canvas {
+            width: 2000px;
+            height: 2000px;
+        }
