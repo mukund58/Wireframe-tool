@@ -6,33 +6,32 @@ document.addEventListener("DOMContentLoaded", () => {
     
     let drawing = false;
     let tool = "brush";
-    let scale = 1;
+    let scale = 0;
 
     document.getElementById("brush").addEventListener("click", () => tool = "brush");
     document.getElementById("shape").addEventListener("click", () => tool = "shape");
     document.getElementById("photo").addEventListener("click", () => tool = "photo");
     document.getElementById("erase").addEventListener("click", () => tool = "erase");
     document.getElementById("save").addEventListener("click", saveCanvas);
-    document.getElementById("zoom-in").addEventListener("click", zoomIn);
-    document.getElementById("zoom-out").addEventListener("click", zoomOut);
+
     document.getElementById("text").addEventListener("click", () => tool = "text");
     document.getElementById("line").addEventListener("click", () => tool = "line");
 
     canvas.addEventListener("mousedown", (e) => {
         drawing = true;
         ctx.beginPath();
-        ctx.moveTo(e.offsetX / scale, e.offsetY / scale);
+        ctx.moveTo(e.offsetX , e.offsetY );
     });
 
     canvas.addEventListener("mousemove", (e) => {
         if (!drawing) return;
         if (tool === "brush") {
-            ctx.lineTo(e.offsetX / scale, e.offsetY / scale);
+            ctx.lineTo(e.offsetX , e.offsetY );
             ctx.stroke();
         } else if (tool === "erase") {
-            ctx.clearRect((e.offsetX / scale) - 10, (e.offsetY / scale) - 10, 20, 20);
+            ctx.clearRect(e.offsetX , e.offsetY  );
         } else if (tool === "line") {
-            ctx.lineTo(e.offsetX / scale, e.offsetY / scale);
+            ctx.lineTo(e.offsetX , e.offsetY);
             ctx.stroke();
         }
     });
@@ -45,7 +44,17 @@ document.addEventListener("DOMContentLoaded", () => {
         const { offsetX, offsetY } = getTouchPos(touch);
         drawing = true;
         ctx.beginPath();
-        ctx.moveTo(offsetX / scale, offsetY / scale);
+        ctx.moveTo(offsetX , offsetY);
+    });
+
+
+    canvas.addEventListener("touchstart", (e) => {
+        e.preventDefault();
+        const touch = e.touches[0];
+        const { offsetX, offsetY } = getTouchPos(touch);
+        drawing = true;
+        ctx.beginPath();
+        ctx.moveTo(offsetX, offsetY);
     });
 
     canvas.addEventListener("touchmove", (e) => {
@@ -54,22 +63,15 @@ document.addEventListener("DOMContentLoaded", () => {
         const touch = e.touches[0];
         const { offsetX, offsetY } = getTouchPos(touch);
         if (tool === "brush") {
-            ctx.lineTo(offsetX / scale, offsetY / scale);
+            ctx.lineTo(offsetX, offsetY);
             ctx.stroke();
         } else if (tool === "erase") {
-            ctx.clearRect((offsetX / scale) - 10, (offsetY / scale) - 10, 20, 20);
-        } else if (tool === "line") {
-            ctx.lineTo(offsetX / scale, offsetY / scale);
-            ctx.stroke();
+            ctx.clearRect(offsetX - 10, offsetY - 10, 20, 20);
         }
     });
 
     canvas.addEventListener("touchend", () => drawing = false);
 
-    function drawRectangle(x, y, width, height) {
-        ctx.fillStyle = "rgba(0, 0, 255, 0.5)";
-        ctx.fillRect(x, y, width, height);
-    }
 
     canvas.addEventListener("click", (e) => {
         if (tool === "shape") {
@@ -118,28 +120,7 @@ document.addEventListener("DOMContentLoaded", () => {
         };
     }
 
-    function zoomIn() {
-        scale *= 1.1;
-        ctx.scale(1.1, 1.1);
-        ctx.translate(-canvas.width * 0.05, -canvas.height * 0.05);
-        ctx.drawImage(canvas, 0, 0);
-    }
+    
 
-    function zoomOut() {
-        scale /= 1.1;
-        ctx.scale(0.9, 0.9);
-        ctx.translate(canvas.width * 0.05, canvas.height * 0.05);
-        ctx.drawImage(canvas, 0, 0);
-    }
 
-    canvas.addEventListener("wheel", (e) => {
-        if (e.ctrlKey) {
-            e.preventDefault();
-            if (e.deltaY < 0) {
-                zoomIn();
-            } else {
-                zoomOut();
-            }
-        }
-    });
 });

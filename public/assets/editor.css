@@ -15,6 +15,7 @@
             position: fixed;
             transform: scale(1);
             transform-origin: top left;
+            z-index: 4;
         }
         .tool {
             width: 50px;
@@ -35,7 +36,7 @@
         }
         #canvas-container {
             flex-grow: 1;
-            background: #fff;
+            /* background: #fff; */
             position: relative;
         }
         canvas {
