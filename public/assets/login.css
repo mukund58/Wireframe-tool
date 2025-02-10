@@ -1,16 +1,198 @@
-.logo a {
-	text-decoration: none;
-	color: var(--main-bg-color);
+/* Base Styles */
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: #fff;
+    line-height: 1.6;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
-form {
-	max-width: 300px;
-	margin: auto;
-	display: flex;
-	flex-direction: column;
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
 
-input,
+
+.sticky-header {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #33130e;
+    padding: 15px 0;
+    z-index: 1000;
+    animation: slideIn 1s ease-out;
+}
+
+.logo a {
+    font-family: 'Pacifico', cursive;
+    font-size: 1em;
+    color: #ffcc00;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: transform 0.3s ease-in-out;
+    margin-bottom: 10px;
+}
+
+.logo a:hover {
+    transform: scale(1.1);
+    color: #fff;
+}
+
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 20px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+nav a:hover {
+    color: #ffd700;
+    transform: translateY(-2px);
+}
+
+/* Hero Section (Login Form Section) */
+.login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 40px 30px;
+    border-radius: 12px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    margin-block-start: 100px;
+
+}
+.register-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 40px 30px;
+    border-radius: 12px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    margin-block-start: 100px;
+
+}
+
+.register-form h2 {
+    font-size: 1.2em;
+    font-weight: 700;
+    padding: 0;
+    margin: 0;
+    color: #fff;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+h2 {
+    font-size: 2.2em;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+input {
+    margin-bottom: 18px;
+    padding: 15px;
+    border-radius: 8px;
+    border: none;
+    font-size: 1em;
+    color: #333;
+    background: #fff;
+    transition: background-color 0.3s ease;
+}
+
+input:focus {
+    outline: none;
+    background: #f7f7f7;
+    border: 2px solid #ffd700;
+}
+
 button {
-	margin: 5px;
-	padding: 10px;
+    padding: 14px;
+    font-size: 1.1em;
+    border-radius: 8px;
+    border: none;
+    background-color: #ffd700;
+    color: #000;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+button:hover {
+    background-color: #ffcc00;
+    transform: translateY(-3px);
+}
+
+/* Footer Styles */
+.footer {
+    text-align: center;
+    padding: 20px;
+    /* background: rgba(0, 0, 0, 0.5); */
+    margin-top: 40px;
+    border-radius: 8px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    font-size: 1em;
+    color: #fff;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.footer footer {
+    margin: 0;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes bounceIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
