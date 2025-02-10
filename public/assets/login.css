@@ -196,3 +196,44 @@ button:hover {
         transform: scale(1);
     }
 }
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .login-form, .register-form {
+        padding: 30px 20px;
+    }
+
+    h2 {
+        font-size: 1.8em;
+    }
+
+    input {
+        padding: 12px;
+        font-size: 0.9em;
+    }
+
+    button {
+        padding: 12px;
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 480px) {
+    .login-form, .register-form {
+        padding: 20px 15px;
+    }
+
+    h2 {
+        font-size: 1.5em;
+    }
+
+    input {
+        padding: 10px;
+        font-size: 0.8em;
+    }
+
+    button {
+        padding: 10px;
+        font-size: 0.9em;
+    }
+}

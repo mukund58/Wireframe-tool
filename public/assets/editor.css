@@ -36,3 +36,44 @@ canvas {
     width: 100%;
     height: 100%;
 }
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    #toolbar {
+        width: 60px;
+    }
+
+    .tool {
+        width: 40px;
+        height: 40px;
+    }
+
+    #canvas-container {
+        padding: 10px;
+    }
+
+    canvas {
+        width: calc(100% - 20px);
+        height: calc(100% - 20px);
+    }
+}
+
+@media (max-width: 480px) {
+    #toolbar {
+        width: 50px;
+    }
+
+    .tool {
+        width: 30px;
+        height: 30px;
+    }
+
+    #canvas-container {
+        padding: 5px;
+    }
+
+    canvas {
+        width: calc(100% - 10px);
+        height: calc(100% - 10px);
+    }
+}
