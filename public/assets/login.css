@@ -6,11 +6,20 @@ body {
     background: linear-gradient(135deg, #6a11cb, #2575fc);
     color: #fff;
     line-height: 1.6;
-    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+}
+.sticky-header {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #33130e;
+    padding: 15px 0;
+    z-index: 1000;
+    animation: slideIn 1s ease-out;
 }
 .navigation {
     display: flex;
@@ -22,19 +31,9 @@ body {
 }
 
 
-.sticky-header {
-    position: sticky;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background: #33130e;
-    padding: 15px 0;
-    z-index: 1000;
-    animation: slideIn 1s ease-out;
-}
 
 .logo a {
-    font-family: 'Pacifico', cursive;
+
     font-size: 1em;
     color: #ffcc00;
     text-transform: uppercase;
@@ -194,5 +193,74 @@ button:hover {
     100% {
         opacity: 1;
         transform: scale(1);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .login-form, .register-form {
+        padding: 30px 20px;
+    }
+
+    h2 {
+        font-size: 1.8em;
+    }
+
+    input {
+        padding: 12px;
+        font-size: 0.9em;
+    }
+
+    button {
+        padding: 12px;
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 480px) {
+    .login-form, .register-form {
+        padding: 20px 15px;
+    }
+
+    h2 {
+        font-size: 1.5em;
+    }
+
+    input {
+        padding: 10px;
+        font-size: 0.8em;
+    }
+
+    button {
+        padding: 10px;
+        font-size: 0.9em;
+    }
+}
+@media (max-width: 1024px) {
+    .logo a{
+        padding: 0;
+        font-size: 0.8em;
+
+    }
+
+    .login-form { 
+        width: 70%;
+    }
+
+    .register-form { 
+        width: 70%;
+    }
+    h2 {
+        font-size: 1.5em;
+    }
+
+    input {
+        padding: 10px;
+        font-size: 0.8em;
+    }
+
+    button {
+        padding: 10px;
+        font-size: 0.9em;
     }
 }

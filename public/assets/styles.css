@@ -230,29 +230,87 @@
             }
 
             .hero h1 {
-                font-size: 3.5em;
+                font-size: 2em;
             }
 
             .hero p {
                 font-size: 1em;
             }
+            .logo a {
+                font-size: 0.7em;
+            }
         }
-
+        
         @media (max-width: 480px) {
             .cta-button {
                 font-size: 1em;
                 padding: 12px 20px;
             }
-
+            .logo a {
+                font-size: 0.7em;
+            }
             .hero h1 {
                 font-size: 2.8em;
             }
-
+            
             .hero p {
                 font-size: 0.9em;
             }
+            
+        }
+    
+    
+    /* Additional Media Queries for Responsiveness */
+    @media (max-width: 1024px) {
+        .navigation {
+            flex-direction: column;
+        }
+        
+        
+        .logo a {
+            font-size: 0.7em;
+        }
+    
+        .about h2 {
 
-            .about h2 {
-                font-size: 2em;
+            .menubar nav a {
+                font-size: 1em;
+                margin: 10px 0;
             }
         }
+
+        @media (max-width: 600px) {
+            .page1 {
+                padding: 20px;
+            }
+
+            .hero h1 {
+                font-size: 2.5em;
+            }
+
+            .hero p {
+                font-size: 1em;
+            }
+
+            .cta-button {
+                font-size: 0.9em;
+                padding: 10px 15px;
+            }
+
+            .about {
+                padding: 50px 10px;
+            }
+
+            .about h2 {
+                font-size: 1.8em;
+            }
+
+            .about p, .about ul {
+                font-size: 1em;
+            }
+
+            .about ul li {
+                line-height: 1.5;
+            }
+        }
+    }
