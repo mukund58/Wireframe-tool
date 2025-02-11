@@ -230,43 +230,48 @@
             }
 
             .hero h1 {
-                font-size: 3.5em;
+                font-size: 2em;
             }
 
             .hero p {
                 font-size: 1em;
             }
+            .logo a {
+                font-size: 0.7em;
+            }
         }
-
+        
         @media (max-width: 480px) {
             .cta-button {
                 font-size: 1em;
                 padding: 12px 20px;
             }
-
+            .logo a {
+                font-size: 0.7em;
+            }
             .hero h1 {
                 font-size: 2.8em;
             }
-
+            
             .hero p {
                 font-size: 0.9em;
             }
-
-            .about h2 {
-                font-size: 2em;
-            }
+            
         }
-
-        /* Additional Media Queries for Responsiveness */
-        @media (max-width: 1024px) {
-            .navigation {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .logo a {
-                font-size: 1.5em;
-            }
+    
+    
+    /* Additional Media Queries for Responsiveness */
+    @media (max-width: 1024px) {
+        .navigation {
+            flex-direction: column;
+        }
+        
+        
+        .logo a {
+            font-size: 0.7em;
+        }
+    
+        .about h2 {
 
             .menubar nav a {
                 font-size: 1em;
@@ -276,8 +281,6 @@
 
         @media (max-width: 600px) {
             .page1 {
-                margin-top: 20px;
-                height: auto;
                 padding: 20px;
             }
 
@@ -286,7 +289,7 @@
             }
 
             .hero p {
-                font-size: 0.8em;
+                font-size: 1em;
             }
 
             .cta-button {
@@ -310,3 +313,4 @@
                 line-height: 1.5;
             }
         }
+    }
