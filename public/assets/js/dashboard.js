@@ -7,7 +7,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const drafts = [
             { id: 1, title: "Draft 1", content: "Content of draft 1" },
             { id: 2, title: "Draft 2", content: "Content of draft 2" },
-            { id: 3, title: "Draft 3", content: "Content of draft 3" }
+            { id: 3, title: "Draft 3", content: "Content of draft 3" },
+            { id: 4, title: "Draft 4", content: "Content of draft 4" }
         ];
 
         drafts.forEach(draft => {
