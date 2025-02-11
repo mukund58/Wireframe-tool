@@ -61,6 +61,21 @@
             transform: translateY(-3px);
         }
 
+        /* New Dashboard Link Styles */
+        .menubar nav a[href="dashboard.html"] {
+            font-size: 1.1em;
+            margin: 0 20px;
+            font-weight: 500;
+            text-transform: uppercase;
+            color: #fff;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .menubar nav a[href="dashboard.html"]:hover {
+            color: #ffcc00;
+            transform: translateY(-3px);
+        }
+
         /* Main Section */
         .page1 {
             margin-top: 40px;
