@@ -1,91 +1,38 @@
-    body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            display: flex;
-            height: 100vh;
-        }
-        #toolbar {
-            width: 80px;
-            background: #333;
-            color: white;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 10px;
-            position: fixed;
-            transform: scale(1);
-            transform-origin: top left;
-        }
-        .tool {
-            width: 50px;
-            height: 50px;
-            margin: 10px 0;
-            background: #555;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-        .tool:hover {
-            background: #777;
-        }
-        #canvas-container {
-            flex-grow: 1;
-            background: #fff;
-            position: relative;
-        }
-        canvas {
-            width: 100%;
-            height: 100%;
-        }
-        /* Add styles for touch interactions and mobile responsiveness */
-        @media (max-width: 768px) {
-            body {
-                flex-direction: column;
-            }
-            #toolbar {
-                flex-direction: row;
-                width: 100%;
-                height: 80px;
-            }
-            .tool {
-                width: 50px;
-                height: 50px;
-                margin: 0 10px;
-            }
-            #canvas-container {
-                flex-grow: 1;
-                width: 100%;
-                height: calc(100vh - 80px);
-            }
-            canvas {
-                width: 100%;
-                height: 100%;
-            }
-        }
-
-        /* Add styles for zoom in/out buttons */
-        #zoom-in, #zoom-out {
-            width: 50px;
-            height: 50px;
-            margin: 10px 0;
-            background: #555;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-        #zoom-in:hover, #zoom-out:hover {
-            background: #777;
-        }
-
-        /* Add styles for infinite canvas */
-        #canvas-container {
-            overflow: auto;
-        }
-        canvas {
-            width: 2000px;
-            height: 2000px;
-        }
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    height: 100vh;
+}
+#toolbar {
+    width: 80px;
+    background: #333;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+}
+.tool {
+    width: 50px;
+    height: 50px;
+    margin: 10px 0;
+    background: #555;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.tool:hover {
+    background: #777;
+}
+#canvas-container {
+    flex-grow: 1;
+    background: #fff;
+    position: relative;
+}
+canvas {
+    width: 100%;
+    height: 100%;
+}
