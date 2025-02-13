@@ -12,6 +12,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let drawing = false;
     let tool = "brush";
+    let isPanning = false;
+    let startX, startY;
+    let scale = 1;
+    let panX = 0, panY = 0;
 
     document.getElementById("brush").addEventListener("click", () => tool = "brush");
     document.getElementById("shape").addEventListener("click", () => tool = "shape");
@@ -20,22 +24,50 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("save").addEventListener("click", saveCanvas);
 
     canvas.addEventListener("mousedown", (e) => {
-        drawing = true;
-        ctx.beginPath();
-        ctx.moveTo(e.offsetX, e.offsetY);
-    });
-
-    canvas.addEventListener("mousemove", (e) => {
-        if (!drawing) return;
-        if (tool === "brush") {
-            ctx.lineTo(e.offsetX, e.offsetY);
-            ctx.stroke();
-        } else if (tool === "erase") {
-            ctx.clearRect(e.offsetX - 10, e.offsetY - 10, 20, 20);
+        if (tool === "pan") {
+            isPanning = true;
+            startX = e.clientX - panX;
+            startY = e.clientY - panY;
+        } else {
+            drawing = true;
+            ctx.beginPath();
+            ctx.moveTo(e.offsetX, e.offsetY);
         }
     });
 
-    canvas.addEventListener("mouseup", () => drawing = false);
+    canvas.addEventListener("mousemove", (e) => {
+        if (isPanning) {
+            panX = e.clientX - startX;
+            panY = e.clientY - startY;
+            updateCanvasTransform();
+        } else if (drawing) {
+            if (tool === "brush") {
+                ctx.lineTo(e.offsetX, e.offsetY);
+                ctx.stroke();
+            } else if (tool === "erase") {
+                ctx.clearRect(e.offsetX - 10, e.offsetY - 10, 20, 20);
+            }
+        }
+    });
+
+    canvas.addEventListener("mouseup", () => {
+        drawing = false;
+        isPanning = false;
+    });
+
+    canvas.addEventListener("wheel", (e) => {
+        e.preventDefault();
+        const scaleAmount = -e.deltaY * 0.01;
+        scale += scaleAmount;
+        scale = Math.min(Math.max(0.1, scale), 5);
+        updateCanvasTransform();
+    });
+
+    function updateCanvasTransform() {
+        ctx.setTransform(scale, 0, 0, scale, panX, panY);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        // Redraw the canvas content here if needed
+    }
 
     function drawRectangle(x, y, width, height) {
         ctx.fillStyle = "rgba(0, 0, 255, 0.5)";
