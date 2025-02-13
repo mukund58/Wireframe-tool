@@ -25,10 +25,31 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("undo").addEventListener("click", undoLastAction);
     document.getElementById("save").addEventListener("click", saveCanvas);
 
+    function getCoordinates(e) {
+        if (e.touches) {
+            return { x: e.touches[0].clientX - canvas.offsetLeft, y: e.touches[0].clientY - canvas.offsetTop };
+        } else {
+            return { x: e.offsetX, y: e.offsetY };
+        }
+    }
+
     canvas.addEventListener("mousedown", (e) => {
         drawing = true;
-        startX = e.offsetX;
-        startY = e.offsetY;
+        const coords = getCoordinates(e);
+        startX = coords.x;
+        startY = coords.y;
+
+        if (tool === "brush") {
+            ctx.beginPath();
+            ctx.moveTo(startX, startY);
+        }
+    });
+
+    canvas.addEventListener("touchstart", (e) => {
+        drawing = true;
+        const coords = getCoordinates(e);
+        startX = coords.x;
+        startY = coords.y;
 
         if (tool === "brush") {
             ctx.beginPath();
@@ -39,20 +60,48 @@ document.addEventListener("DOMContentLoaded", () => {
     canvas.addEventListener("mousemove", (e) => {
         if (!drawing) return;
 
+        const coords = getCoordinates(e);
+
         if (tool === "brush") {
-            ctx.lineTo(e.offsetX, e.offsetY);
+            ctx.lineTo(coords.x, coords.y);
             ctx.stroke();
         } else if (tool === "erase") {
-            ctx.clearRect(e.offsetX - 10, e.offsetY - 10, 20, 20);
+            ctx.clearRect(coords.x - 10, coords.y - 10, 20, 20);
         } else if (tool === "shape") {
             redrawCanvas();
-            drawRectangle(startX, startY, e.offsetX - startX, e.offsetY - startY);
+            drawRectangle(startX, startY, coords.x - startX, coords.y - startY);
+        }
+    });
+
+    canvas.addEventListener("touchmove", (e) => {
+        if (!drawing) return;
+
+        const coords = getCoordinates(e);
+
+        if (tool === "brush") {
+            ctx.lineTo(coords.x, coords.y);
+            ctx.stroke();
+        } else if (tool === "erase") {
+            ctx.clearRect(coords.x - 10, coords.y - 10, 20, 20);
+        } else if (tool === "shape") {
+            redrawCanvas();
+            drawRectangle(startX, startY, coords.x - startX, coords.y - startY);
         }
     });
 
     canvas.addEventListener("mouseup", (e) => {
         if (tool === "shape") {
-            shapes.push({ x: startX, y: startY, width: e.offsetX - startX, height: e.offsetY - startY });
+            const coords = getCoordinates(e);
+            shapes.push({ x: startX, y: startY, width: coords.x - startX, height: coords.y - startY });
+        }
+        undoStack.push(ctx.getImageData(0, 0, canvas.width, canvas.height));
+        drawing = false;
+    });
+
+    canvas.addEventListener("touchend", (e) => {
+        if (tool === "shape") {
+            const coords = getCoordinates(e);
+            shapes.push({ x: startX, y: startY, width: coords.x - startX, height: coords.y - startY });
         }
         undoStack.push(ctx.getImageData(0, 0, canvas.width, canvas.height));
         drawing = false;
