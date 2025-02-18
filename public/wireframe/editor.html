@@ -9,16 +9,46 @@
     <script src="../assets/js/script.js" defer></script>
 </head>
 <body>
-    <div id="toolbar">
-        <div class="tool" id="cursor" title="Cursor">🔲</div>
-        <div class="tool" id="shapes" title="Shapes">🔳</div>
-        <div class="tool" id="text" title="Text">🔤</div>
-        <div class="tool" id="reset" title="Reset">🔄</div>
-        <div class="tool" id="delete" title="Delete">❌</div>
+
+    <div class="drop-down-menu">
+
+        <div id="toolbar">
+            <div class="tool" id="cursor" title="Cursor"><button>⮝</button></div>
+            <div class="tool" title="Shapes">
+                <div class="dropdown">
+                    <button class="dropbtn">🔲</button>
+                    <div class="dropdown-content" id="dropdown-menu">
+             
+                        <a href="#" id="line" ><img src="../uploads/line.svg" alt="" height="30px" width="30px"></a>
+                        <a href="#"><img src="../uploads/arrow-right.svg" alt="" height="30px" width="30px"></a>
+                        <a href="#"><img src="../uploads/image-shapes.svg" alt="" height="30px" width="30px"></a>
+                        <a href="#" id="rectangle" ><img src="../uploads/rectangle.svg" alt="" height="30px" width="30px"></a>
+                        <a href="#" id="circle"><img src="../uploads/circle.svg" alt="" height="30px" width="30px"></a>
+                        <a href="#" id="triangle"><img src="../uploads/triangle.svg" alt="" height="30px" width="30px"></a>
+                    </div>
+                </div>
+            </div>
+            <div class="tool" id="text" title="Text"><button>🔤</button></div>
+            <div class="tool" id="reset" title="Reset"><button>🔄</button></div>
+            <div class="tool" id="delete" title="Delete"><button>❌</button></div>
+
+        </div>
     </div>
     
     <div id="canvas-container">
         <canvas id="canvas"></canvas>
     </div>
+
+    <!-- <div id="settings-panel">
+        <label for="color-picker">Canvas Color:</label>
+        <input type="color" id="color-picker">
+        
+        <label for="canvas-width">Canvas Width (px):</label>
+        <input type="number" id="canvas-width" min="100" max="5000">
+        
+        <label for="canvas-height">Canvas Height (px):</label>
+        <input type="number" id="canvas-height" min="100" max="5000">
+        <button class="minimize-button" id="minimize-settings">_</button>
+    </div> -->
 </body>
 </html>
