@@ -70,4 +70,51 @@ document.addEventListener("DOMContentLoaded", () => {
         canvas.setHeight(parseInt(event.target.value, 10));
         resizeCanvas();
     });
+
+    // Add panning functionality
+    let isPanning = false;
+    let startX, startY;
+
+    canvas.on('mouse:down', (event) => {
+        isPanning = true;
+        startX = event.e.clientX;
+        startY = event.e.clientY;
+    });
+
+    canvas.on('mouse:move', (event) => {
+        if (isPanning) {
+            const deltaX = event.e.clientX - startX;
+            const deltaY = event.e.clientY - startY;
+            canvas.relativePan({ x: deltaX, y: deltaY });
+            startX = event.e.clientX;
+            startY = event.e.clientY;
+        }
+    });
+
+    canvas.on('mouse:up', () => {
+        isPanning = false;
+    });
+
+    // Add zooming functionality
+    canvas.on('mouse:wheel', (event) => {
+        const delta = event.e.deltaY;
+        let zoom = canvas.getZoom();
+        zoom *= 0.999 ** delta;
+        if (zoom > 20) zoom = 20;
+        if (zoom < 0.01) zoom = 0.01;
+        canvas.zoomToPoint({ x: event.e.offsetX, y: event.e.offsetY }, zoom);
+        event.e.preventDefault();
+        event.e.stopPropagation();
+    });
+
+    // Add minimize functionality for toolbar and setting panel
+    document.getElementById("minimize-toolbar").addEventListener("click", () => {
+        const toolbar = document.getElementById("toolbar");
+        toolbar.style.display = toolbar.style.display === "none" ? "flex" : "none";
+    });
+
+    document.getElementById("minimize-settings").addEventListener("click", () => {
+        const settingsPanel = document.getElementById("settings-panel");
+        settingsPanel.style.display = settingsPanel.style.display === "none" ? "flex" : "none";
+    });
 });
