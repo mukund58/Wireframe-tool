@@ -52,6 +52,31 @@ canvas {
     border-radius: 10px;
 }
 
+#settings-panel {
+    width: 200px;
+    background: #333;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    margin-left: 20px;
+    border-radius: 10px;
+}
+
+#settings-panel label {
+    margin: 10px 0;
+    font-size: 14px;
+}
+
+#settings-panel input {
+    margin: 5px 0;
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     #toolbar {
@@ -70,6 +95,18 @@ canvas {
     canvas {
         width: calc(100% - 20px);
         height: calc(100% - 20px);
+    }
+
+    #settings-panel {
+        width: 150px;
+    }
+
+    #settings-panel label {
+        font-size: 12px;
+    }
+
+    #settings-panel input {
+        padding: 3px;
     }
 }
 
@@ -90,5 +127,17 @@ canvas {
     canvas {
         width: calc(100% - 10px);
         height: calc(100% - 10px);
+    }
+
+    #settings-panel {
+        width: 120px;
+    }
+
+    #settings-panel label {
+        font-size: 10px;
+    }
+
+    #settings-panel input {
+        padding: 2px;
     }
 }

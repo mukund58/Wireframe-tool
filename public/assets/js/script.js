@@ -54,4 +54,20 @@ document.addEventListener("DOMContentLoaded", () => {
         });
         link.click();
     }
+
+    // Implement functionality to change canvas color using the color picker
+    document.getElementById("color-picker").addEventListener("input", (event) => {
+        canvas.setBackgroundColor(event.target.value, canvas.renderAll.bind(canvas));
+    });
+
+    // Implement functionality to change canvas width and height using input elements
+    document.getElementById("canvas-width").addEventListener("input", (event) => {
+        canvas.setWidth(parseInt(event.target.value, 10));
+        resizeCanvas();
+    });
+
+    document.getElementById("canvas-height").addEventListener("input", (event) => {
+        canvas.setHeight(parseInt(event.target.value, 10));
+        resizeCanvas();
+    });
 });
