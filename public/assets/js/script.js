@@ -4,44 +4,11 @@ document.addEventListener("DOMContentLoaded", () => {
     function resizeCanvas() {
         canvas.setWidth(window.innerWidth);
         canvas.setHeight(window.innerHeight);
-    
-        // Optional: Adjust objects to scale with canvas
-        // canvas.getObjects().forEach(obj => {
-        //     obj.scaleX = obj.scaleX * (canvas.width / obj.width);
-        //     obj.scaleY = obj.scaleY * (canvas.height / obj.height);
-        //     obj.left = obj.left * (canvas.width / obj.width);
-        //     obj.top = obj.top * (canvas.height / obj.height);
-        //     obj.setCoords();
-        // });
-        drawGrid();
         canvas.renderAll();
     }
-    function drawGrid(gridSize = 50) {
-        canvas.clear(); // Clear previous objects
-        const width = canvas.width;
-        const height = canvas.height;
-    
-        // Draw vertical lines
-        for (let x = 0; x < width; x += gridSize) {
-            canvas.add(new fabric.Line([x, 0, x, height], {
-                stroke: '#ddd',
-                selectable: false, // Prevent grid from being selected
-                evented: false
-            }));
-        }
-    
-        // Draw horizontal lines
-        for (let y = 0; y < height; y += gridSize) {
-            canvas.add(new fabric.Line([0, y, width, y], {
-                stroke: '#ddd',
-                selectable: false,
-                evented: false
-            }));
-        }
-    }
-    
-    
-    
+
+    // Remove these event listeners if they exist
+    canvas.off('after:render');
 
     window.addEventListener("resize", resizeCanvas);
     resizeCanvas();
@@ -52,7 +19,9 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("triangle").addEventListener("click", () => addTriangle());
     document.getElementById("line").addEventListener("click", () => addLine(x1, y1, x2, y2));
     document.getElementById("text").addEventListener("click", () => addText());
-    document.getElementById("reset").addEventListener("click", () => canvas.clear());
+    document.getElementById("reset").addEventListener("click", () => {
+        canvas.clear();
+    });
     document.getElementById("delete").addEventListener("click", () => deleteSelected());
 
     // Add event listeners for brush options
