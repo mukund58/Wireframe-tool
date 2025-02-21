@@ -55,6 +55,14 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("reset").addEventListener("click", () => canvas.clear());
     document.getElementById("delete").addEventListener("click", () => deleteSelected());
 
+    // Add event listeners for brush options
+    document.getElementById("brush-1").addEventListener("click", () => setBrush(1));
+    document.getElementById("brush-2").addEventListener("click", () => setBrush(2));
+    document.getElementById("brush-3").addEventListener("click", () => setBrush(3));
+    document.getElementById("pencil-brush").addEventListener("click", () => setBrush('pencil'));
+    document.getElementById("circle-brush").addEventListener("click", () => setBrush('circle'));
+    document.getElementById("spray-brush").addEventListener("click", () => setBrush('spray'));
+
     function addRect() {
         const rect = new fabric.Rect({
             left: 100,
@@ -241,6 +249,33 @@ document.addEventListener("DOMContentLoaded", () => {
         const settingsPanel = document.getElementById("settings-panel");
         settingsPanel.style.display = settingsPanel.style.display === "none" ? "flex" : "none";
     });
+
+    // Implement brush tool activation logic
+    function setBrush(brushType) {
+        canvas.isDrawingMode = true;
+        switch (brushType) {
+            case 1:
+                canvas.freeDrawingBrush.width = 1;
+                break;
+            case 2:
+                canvas.freeDrawingBrush.width = 5;
+                break;
+            case 3:
+                canvas.freeDrawingBrush.width = 10;
+                break;
+            case 'pencil':
+                canvas.freeDrawingBrush = new fabric.PencilBrush(canvas);
+                break;
+            case 'circle':
+                canvas.freeDrawingBrush = new fabric.CircleBrush(canvas);
+                break;
+            case 'spray':
+                canvas.freeDrawingBrush = new fabric.SprayBrush(canvas);
+                break;
+            default:
+                canvas.freeDrawingBrush.width = 1;
+        }
+    }
 });
 document.querySelector(".dropbtn").addEventListener("click", function() {
     let menu = document.getElementById("dropdown-menu");
