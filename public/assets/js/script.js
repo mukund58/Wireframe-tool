@@ -1,21 +1,20 @@
+import { PencilBrush, CircleBrush, SprayBrush } from 'fabric-brush';
+
 document.addEventListener("DOMContentLoaded", () => {
     const canvas = new fabric.Canvas('canvas');
+
+    const pencilBrush = new PencilBrush(canvas);
+    const circleBrush = new CircleBrush(canvas);
+    const sprayBrush = new SprayBrush(canvas);
 
     function resizeCanvas() {
         canvas.setWidth(window.innerWidth);
         canvas.setHeight(window.innerHeight);
     
-        // Optional: Adjust objects to scale with canvas
-        // canvas.getObjects().forEach(obj => {
-        //     obj.scaleX = obj.scaleX * (canvas.width / obj.width);
-        //     obj.scaleY = obj.scaleY * (canvas.height / obj.height);
-        //     obj.left = obj.left * (canvas.width / obj.width);
-        //     obj.top = obj.top * (canvas.height / obj.height);
-        //     obj.setCoords();
-        // });
         drawGrid();
         canvas.renderAll();
     }
+
     function drawGrid(gridSize = 50) {
         canvas.clear(); // Clear previous objects
         const width = canvas.width;
@@ -39,9 +38,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }));
         }
     }
-    
-    
-    
 
     window.addEventListener("resize", resizeCanvas);
     resizeCanvas();
@@ -58,6 +54,10 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("brush-2").addEventListener("click", () => setBrushThickness(5));
     document.getElementById("brush-3").addEventListener("click", () => setBrushThickness(10));
 
+    document.getElementById("pencil-brush").addEventListener("click", () => canvas.freeDrawingBrush = pencilBrush);
+    document.getElementById("circle-brush").addEventListener("click", () => canvas.freeDrawingBrush = circleBrush);
+    document.getElementById("spray-brush").addEventListener("click", () => canvas.freeDrawingBrush = sprayBrush);
+
     function addRect() {
         const rect = new fabric.Rect({
             left: 100,
@@ -69,29 +69,32 @@ document.addEventListener("DOMContentLoaded", () => {
         });
         canvas.add(rect);
     }
+
     function addCircle() {
         var cir = new fabric.Circle({
             top: 10,
-          left: 100,
-          radius: 50,
-          fill: 'white',
-          stroke: 'black',
-          strokeWidth: 2
-      });
+            left: 100,
+            radius: 50,
+            fill: 'white',
+            stroke: 'black',
+            strokeWidth: 2
+        });
         canvas.add(cir);
     }
+
     function addTriangle() {
         var tri = new fabric.Triangle({
             top: 10,
-          left: 200,
-          width: 150, 
-          height: 100,
-          fill: 'white',
-          stroke: 'black',
-          strokeWidth: 2
-      });
+            left: 200,
+            width: 150, 
+            height: 100,
+            fill: 'white',
+            stroke: 'black',
+            strokeWidth: 2
+        });
         canvas.add(tri);
     }
+
     function addLine(x1, y1, x2, y2) {
         let line = new fabric.Line([x1, y1, x2, y2], {
             stroke: 'black',
@@ -114,44 +117,8 @@ document.addEventListener("DOMContentLoaded", () => {
             selectable: true
         });
     
-        // Update line when dragging the midpoint
-        // midpoint.on('moving', function () {
-        //     let newX = midpoint.left;
-        //     let newY = midpoint.top;
-    
-        //     line.set({
-        //         x1: x1,
-        //         y1: y1,
-        //         x2: x2,
-        //         y2: y2
-        //     });
-    
-        //     // Adjust control point position dynamically
-        //     line.path[0][1] = newX;
-        //     line.path[0][2] = newY;
-    
-        //     canvas.renderAll();
-        // });
-    
         canvas.add(line);
     }
-    
-    // Click event to draw a new line
-    // canvas.on('mouse:down', function (e) {
-    //     if (!e.pointer) return;
-    //     let startX = e.pointer.x;
-    //     let startY = e.pointer.y;
-        
-    //     canvas.on('mouse:up', function (e) {
-    //         if (!e.pointer) return;
-    //         let endX = e.pointer.x;
-    //         let endY = e.pointer.y;
-    
-    //         createLine(startX, startY, endX, endY);
-    //         canvas.off('mouse:up'); // Remove event listener
-    //     });
-    // });
-    
 
     function addText() {
         const text = new fabric.Textbox('Hello World', {
@@ -182,12 +149,10 @@ document.addEventListener("DOMContentLoaded", () => {
         link.click();
     }
 
-    // Implement functionality to change canvas color using the color picker
     document.getElementById("color-picker").addEventListener("input", (event) => {
         canvas.setBackgroundColor(event.target.value, canvas.renderAll.bind(canvas));
     });
 
-    // Implement functionality to change canvas width and height using input elements
     document.getElementById("canvas-width").addEventListener("input", (event) => {
         canvas.setWidth(parseInt(event.target.value, 10));
         resizeCanvas();
@@ -198,7 +163,6 @@ document.addEventListener("DOMContentLoaded", () => {
         resizeCanvas();
     });
 
-    // Add panning functionality
     let isPanning = false;
     let startX, startY;
 
@@ -222,7 +186,6 @@ document.addEventListener("DOMContentLoaded", () => {
         isPanning = false;
     });
 
-    // Add zooming functionality
     canvas.on('mouse:wheel', (event) => {
         const delta = event.e.deltaY;
         let zoom = canvas.getZoom();
@@ -234,7 +197,6 @@ document.addEventListener("DOMContentLoaded", () => {
         event.e.stopPropagation();
     });
 
-    // Add minimize functionality for toolbar and setting panel
     document.getElementById("minimize-toolbar").addEventListener("click", () => {
         const toolbar = document.getElementById("toolbar");
         toolbar.style.display = toolbar.style.display === "none" ? "flex" : "none";
@@ -246,15 +208,17 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     function setBrushThickness(thickness) {
-        canvas.freeDrawingBrush.width = thickness;
+        if (canvas.freeDrawingBrush) {
+            canvas.freeDrawingBrush.width = thickness;
+        }
     }
 });
+
 document.querySelector(".dropbtn").addEventListener("click", function() {
     let menu = document.getElementById("dropdown-menu");
     menu.style.display = (menu.style.display === "flex") ? "none" : "flex";
 });
 
-// Close dropdown if clicked outside
 window.addEventListener("click", function(event) {
     if (!event.target.matches(".dropbtn")) {
         document.getElementById("dropdown-menu").style.display = "none";
