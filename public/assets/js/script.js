@@ -253,3 +253,14 @@ window.addEventListener("click", function(event) {
         document.getElementById("dropdown-menu").style.display = "none";
     }
 });
+document.querySelector(".brush-dropbtn").addEventListener("click", function() {
+    let menu = document.getElementById("brush-dropdown-menu");
+    menu.style.display = (menu.style.display === "flex") ? "none" : "flex";
+});
+
+// Close dropdown if clicked outside
+window.addEventListener("click", function(event) {
+    if (!event.target.matches(".brush-dropbtn")) {
+        document.getElementById("brush-dropdown-menu").style.display = "none";
+    }
+});

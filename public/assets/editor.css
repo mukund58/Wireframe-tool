@@ -18,12 +18,33 @@ button{
   align-content: center;
   align-items: center;
 }
+.brush-drop-down-menu{
+    display: flex;
+  align-content: center;
+  align-items: center;
+}
 .dropdown {
+    position: relative;
+    display: inline-block;
+}
+.brush-dropdown {
     position: relative;
     display: inline-block;
 }
 
 .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 150px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-left: 70px;
+}
+
+.brush-dropdown-content {
     display: none;
     position: absolute;
     background-color: white;
@@ -41,7 +62,20 @@ button{
     text-decoration: none;
     display: block;
 }
+.brush-dropdown-content a {
+    color: black;
+    padding: 10px;
+    text-decoration: none;
+    display: block;
+}
 .dropbtn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+}
+.brush-dropbtn{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -52,9 +86,15 @@ button{
 .dropdown-content a:hover {
     background-color: #f1f1f1;
 }
+.brush-dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
 
 /* Show dropdown on hover */
 .dropdown:hover .dropdown-content {
+    display: flex;
+}
+.brush-dropdown:hover .brush-dropdown-content {
     display: flex;
 }
  
@@ -180,8 +220,6 @@ canvas {
         height: 40px;
     }
 
-  ding: 10px;
-    }
 
     canvas {
         width: calc(100% - 20px);
