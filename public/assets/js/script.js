@@ -200,9 +200,11 @@ document.addEventListener("DOMContentLoaded", () => {
     let startX, startY;
 
     canvas.on('mouse:down', (event) => {
-        isPanning = true;
-        startX = event.e.clientX;
-        startY = event.e.clientY;
+        if (event.e.button === 2) { // Right-click
+            isPanning = true;
+            startX = event.e.clientX;
+            startY = event.e.clientY;
+        }
     });
 
     canvas.on('mouse:move', (event) => {
@@ -240,6 +242,13 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("minimize-settings").addEventListener("click", () => {
         const settingsPanel = document.getElementById("settings-panel");
         settingsPanel.style.display = settingsPanel.style.display === "none" ? "flex" : "none";
+    });
+
+    // Prevent context menu from appearing on right-click
+    canvas.on('mouse:down', (event) => {
+        if (event.e.button === 2) { // Right-click
+            event.e.preventDefault();
+        }
     });
 });
 document.querySelector(".dropbtn").addEventListener("click", function() {
