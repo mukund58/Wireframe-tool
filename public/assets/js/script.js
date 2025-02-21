@@ -54,6 +54,9 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("text").addEventListener("click", () => addText());
     document.getElementById("reset").addEventListener("click", () => canvas.clear());
     document.getElementById("delete").addEventListener("click", () => deleteSelected());
+    document.getElementById("brush-1").addEventListener("click", () => setBrushThickness(1));
+    document.getElementById("brush-2").addEventListener("click", () => setBrushThickness(5));
+    document.getElementById("brush-3").addEventListener("click", () => setBrushThickness(10));
 
     function addRect() {
         const rect = new fabric.Rect({
@@ -241,6 +244,10 @@ document.addEventListener("DOMContentLoaded", () => {
         const settingsPanel = document.getElementById("settings-panel");
         settingsPanel.style.display = settingsPanel.style.display === "none" ? "flex" : "none";
     });
+
+    function setBrushThickness(thickness) {
+        canvas.freeDrawingBrush.width = thickness;
+    }
 });
 document.querySelector(".dropbtn").addEventListener("click", function() {
     let menu = document.getElementById("dropdown-menu");

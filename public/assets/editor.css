@@ -169,6 +169,43 @@ canvas {
     background: #777;
 }
 
+/* Styles for the brush tool button */
+.tool.brush {
+    background: #ffcc00;
+}
+
+.tool.brush:hover {
+    background: #ff9900;
+}
+
+/* Styles for the brush thickness drop-down menu */
+#brush-dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 150px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    flex-direction: column;
+    margin-left: 70px;
+}
+
+#brush-dropdown-menu a {
+    color: black;
+    padding: 10px;
+    text-decoration: none;
+    display: block;
+}
+
+#brush-dropdown-menu a:hover {
+    background-color: #f1f1f1;
+}
+
+/* Show brush drop-down on hover */
+.dropdown:hover #brush-dropdown-menu {
+    display: flex;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     #toolbar {
