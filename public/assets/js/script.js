@@ -241,6 +241,39 @@ document.addEventListener("DOMContentLoaded", () => {
         const settingsPanel = document.getElementById("settings-panel");
         settingsPanel.style.display = settingsPanel.style.display === "none" ? "flex" : "none";
     });
+
+    // Add event listeners for right-click to enable canvas movement
+    let isRightClickPanning = false;
+    let rightClickStartX, rightClickStartY;
+
+    canvas.on('mouse:down', (event) => {
+        if (event.e.button === 2) { // Right-click
+            isRightClickPanning = true;
+            rightClickStartX = event.e.clientX;
+            rightClickStartY = event.e.clientY;
+        }
+    });
+
+    canvas.on('mouse:move', (event) => {
+        if (isRightClickPanning) {
+            const deltaX = event.e.clientX - rightClickStartX;
+            const deltaY = event.e.clientY - rightClickStartY;
+            canvas.relativePan({ x: deltaX, y: deltaY });
+            rightClickStartX = event.e.clientX;
+            rightClickStartY = event.e.clientY;
+        }
+    });
+
+    canvas.on('mouse:up', (event) => {
+        if (event.e.button === 2) { // Right-click
+            isRightClickPanning = false;
+        }
+    });
+
+    // Prevent context menu from appearing on right-click
+    canvas.upperCanvasEl.addEventListener('contextmenu', (event) => {
+        event.preventDefault();
+    });
 });
 document.querySelector(".dropbtn").addEventListener("click", function() {
     let menu = document.getElementById("dropdown-menu");
