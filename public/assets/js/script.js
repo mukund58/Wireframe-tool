@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const canvas = new fabric.Canvas('canvas');
 
     function resizeCanvas() {
+        const canvasState = canvas.toJSON(); // Save the current state of the canvas
         canvas.setWidth(window.innerWidth);
         canvas.setHeight(window.innerHeight);
     
@@ -14,10 +15,9 @@ document.addEventListener("DOMContentLoaded", () => {
         //     obj.setCoords();
         // });
         drawGrid();
-        canvas.renderAll();
+        canvas.loadFromJSON(canvasState, canvas.renderAll.bind(canvas)); // Restore the saved state
     }
     function drawGrid(gridSize = 50) {
-        canvas.clear(); // Clear previous objects
         const width = canvas.width;
         const height = canvas.height;
     
