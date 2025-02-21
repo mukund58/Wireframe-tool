@@ -169,6 +169,24 @@ canvas {
     background: #777;
 }
 
+/* Styles for the new button to enable right-click canvas movement */
+#right-click-move {
+    width: 50px;
+    height: 50px;
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background 0.3s, transform 0.3s;
+}
+
+#right-click-move:hover {
+    background: #777;
+    transform: scale(1.1);
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     #toolbar {
