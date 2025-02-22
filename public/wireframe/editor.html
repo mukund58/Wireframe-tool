@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wireframe Editor</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="../assets/editor.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.5.0/fabric.min.js"></script>
-    <script src="../assets/js/script.js" defer></script>
+   
 </head>
 <body>
 
@@ -65,15 +65,24 @@
             </div>
         </div>
         <div class="exportbtn">
-            <button id="export-btn"><img src="../uploads/export.svg"  height="30px" width="30px" alt=""></button>
+            <button id="export-btn">
+                <h1>
+                    <i class='bx bx-export'></i>
+                    </h1>
+                </button>
+        </div>
+        <div class="importbtn">
+            <button id="import-btn"><h1><i class='bx bx-import' ></i></h1></button>
         </div>
         <div class="savebtn">
-            <button id="save-btn"><img src="../uploads/download.svg"  height="30px" width="30px" alt=""></button>
+            <button id="save-btn"><h1><i class='bx bx-save' ></i></h1></button>
         </div>
         <div class="sharebtn">
             <button id="share-btn">Share</button>
         </div>
     </div>
- 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.5.0/fabric.min.js"></script>
+
+    <script src="../assets/js/script.js" defer></script>
 </body>
 </html>
