@@ -88,43 +88,11 @@ document.addEventListener("DOMContentLoaded", () => {
             selectable: true
         });
     
-        // Update line when dragging the midpoint
-        // midpoint.on('moving', function () {
-        //     let newX = midpoint.left;
-        //     let newY = midpoint.top;
-    
-        //     line.set({
-        //         x1: x1,
-        //         y1: y1,
-        //         x2: x2,
-        //         y2: y2
-        //     });
-    
-        //     // Adjust control point position dynamically
-        //     line.path[0][1] = newX;
-        //     line.path[0][2] = newY;
-    
-        //     canvas.renderAll();
-        // });
+
     
         canvas.add(line);
     }
-    
-    // Click event to draw a new line
-    // canvas.on('mouse:down', function (e) {
-    //     if (!e.pointer) return;
-    //     let startX = e.pointer.x;
-    //     let startY = e.pointer.y;
-        
-    //     canvas.on('mouse:up', function (e) {
-    //         if (!e.pointer) return;
-    //         let endX = e.pointer.x;
-    //         let endY = e.pointer.y;
-    
-    //         createLine(startX, startY, endX, endY);
-    //         canvas.off('mouse:up'); // Remove event listener
-    //     });
-    // });
+
     
 
     function addText() {
@@ -257,14 +225,24 @@ window.addEventListener("click", function(event) {
         document.getElementById("dropdown-menu").style.display = "none";
     }
 });
+
 document.querySelector(".brush-dropbtn").addEventListener("click", function() {
     let menu = document.getElementById("brush-dropdown-menu");
     menu.style.display = (menu.style.display === "flex") ? "none" : "flex";
 });
-
-// Close dropdown if clicked outside
 window.addEventListener("click", function(event) {
     if (!event.target.matches(".brush-dropbtn")) {
         document.getElementById("brush-dropdown-menu").style.display = "none";
+    }
+});
+
+document.querySelector(".profile-dropdown").addEventListener("click", function() {
+    let menu = document.getElementById("profile");
+    menu.style.display = (menu.style.display === "flex") ? "none" : "flex";
+});
+// Close dropdown if clicked outside
+window.addEventListener("click", function(event) {
+    if (!event.target.matches(".profile-dropdown")) {
+        document.getElementById("profile").style.display = "none";
     }
 });

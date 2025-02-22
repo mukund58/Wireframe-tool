@@ -108,7 +108,52 @@ button{
     box-shadow: 2px 0 5px rgba(0,0,0,0.1);
     z-index: 1000;
 }
+.profile-dropdown{
+    cursor: pointer;
+}
 
+.user-toolbar {
+    /* margin-top: 10px; */
+    height: 50px;
+    /* background-color: rgb(146, 31, 31); */
+    color: white;
+    display: flex;
+    flex-direction:row;
+    box-shadow: 4px 5px 12px  rgba(0,0,0,0.1);
+    z-index: 1000;
+}
+
+.profile{
+  position: absolute;
+  display: none;
+  flex-wrap: wrap;
+  flex-direction: column;
+  text-decoration: none;
+  margin-top: 10px;
+  box-shadow: 8px 6px 9px rgba(0, 0, 0, 0.1);
+}
+.profile a{
+    text-decoration: none;
+    color: black;
+    margin: 10px;
+}
+.profile-dropdown:hover .profile  { 
+    display: flex;
+    
+}
+
+.exportbtn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+}
+#create-team{
+    padding: 5px;
+    color: white;
+    background-color:rgb(89, 89, 235);
+}
 .tool {
     width: 50px;
     height: 50px;
@@ -126,7 +171,18 @@ button{
     background: #777;
     transform: scale(1.1);
 }
+#share-btn{
 
+    color: white;
+    background-color: rgb(89, 89, 235);
+    border-radius: 10px;
+    height: 80%;
+}
+.sharebtn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 #canvas-container {
     flex-grow: 1;
     background: #fff;
@@ -149,31 +205,6 @@ canvas {
     z-index: 1;
 }
 
-#settings-panel {
-    width: 200px;
-    background: #333;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 10px;
-    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
-    margin-left: 20px;
-    border-radius: 10px;
-    z-index: 1000;
-}
-
-#settings-panel label {
-    margin: 10px 0;
-    font-size: 14px;
-}
-
-#settings-panel input {
-    margin: 5px 0;
-    padding: 5px;
-    border-radius: 5px;
-    border: none;
-}
 
 /* New styles for infinite canvas and zooming */
 #canvas-container {
@@ -190,23 +221,17 @@ canvas {
     width: 2000px;
     height: 2000px;
 }
-
-/* New styles for minimize button */
-.minimize-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: #555;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-    border-radius: 5px;
-    z-index: 1001;
+.user-toolbar button{
+    padding: 10px;
+    background-color: #fff;
 }
-
-.minimize-button:hover {
-    background: #777;
+#user-profile{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    width: 100%;
 }
 
 /* Responsive Design */
