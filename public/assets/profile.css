@@ -5,3 +5,20 @@
 .container {
     margin-top: 6em;
 }
+.profile{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#input-file{
+    display: none;
+}
+.profile label {
+    margin-top: 10px;
+    padding: 10px;
+    color: white;
+    background-color: rgb(89, 89, 235);
+    border-radius: 10px;
+    cursor: pointer;
+}
