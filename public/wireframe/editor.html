@@ -52,17 +52,28 @@
     <div id="canvas-container">
         <canvas id="canvas"></canvas>
     </div>
-
-    <!-- <div id="settings-panel">
-        <label for="color-picker">Canvas Color:</label>
-        <input type="color" id="color-picker">
-        
-        <label for="canvas-width">Canvas Width (px):</label>
-        <input type="number" id="canvas-width" min="100" max="5000">
-        
-        <label for="canvas-height">Canvas Height (px):</label>
-        <input type="number" id="canvas-height" min="100" max="5000">
-        <button class="minimize-button" id="minimize-settings">_</button>
-    </div> -->
+    <div class="user-toolbar">
+        <div class="user-toolbar-btns">
+            <div class="profile-dropdown">
+            <button class="profile-dropdown" id="user-profile"><img src="../uploads/profile.svg" height="60px" width="30px" alt=""></button>
+                <div class="profile" id="brush-dropdown-menu">
+                    <a href="#" id="username">username</a>
+                    <a href="#" id="profileSetting">Profile settings</a>
+                    <a href="../wireframe/dashboard.html" id="dasboard">Dashboard</a>
+                    <a href="#" id="create-team">Create Team</a>
+                </div>
+            </div>
+        </div>
+        <div class="exportbtn">
+            <button id="export-btn"><img src="../uploads/export.svg"  height="30px" width="30px" alt=""></button>
+        </div>
+        <div class="savebtn">
+            <button id="save-btn"><img src="../uploads/download.svg"  height="30px" width="30px" alt=""></button>
+        </div>
+        <div class="sharebtn">
+            <button id="share-btn">Share</button>
+        </div>
+    </div>
+ 
 </body>
 </html>

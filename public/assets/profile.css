@@ -1,0 +1,7 @@
+.navigation {
+    display: flex;
+    flex-direction: row;
+}
+.container {
+    margin-top: 6em;
+}

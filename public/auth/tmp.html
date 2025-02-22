@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Validation Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 50px;
+            text-align: center;
+        }
+        form {
+            display: inline-block;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+        input {
+            margin: 10px;
+            padding: 8px;
+            width: 250px;
+        }
+        .error {
+            color: red;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Password Validation Form</h2>
+    <form onsubmit="return validateForm(event)">
+        <label for="password">Enter Password:</label><br>
+        <input type="password" id="password" name="password" required>
+        <br>
+        <span id="error-message" class="error"></span>
+        <br>
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        function validateForm(event) {
+            event.preventDefault(); // Prevent form submission for demo
+            
+            let password = document.getElementById("password").value;
+            let errorMessage = document.getElementById("error-message");
+
+            let passwordPattern = /^(?=.*?[0-9])(?=.*?[A-Za-z]).{8,32}$/;
+
+            if (!passwordPattern.test(password)) {
+                errorMessage.textContent = "Password must be 8-32 characters long and contain at least one letter and one number.";
+                return false;
+            }
+
+            errorMessage.textContent = "Password is valid!";
+            errorMessage.style.color = "green";
+            return true;
+        }
+    </script>
+
+</body>
+</html>
