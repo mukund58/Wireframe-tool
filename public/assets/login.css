@@ -3,9 +3,9 @@ body {
     font-family: 'Inter', sans-serif;
     margin: 0;
     padding: 0;
-    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    background: linear-gradient(171deg, #000, #ff3d00);
     color: #fff;
-    line-height: 1.6;
+    /* line-height: 1.6; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -17,8 +17,8 @@ body {
     left: 0;
     width: 100%;
     background: #33130e;
-    padding: 15px 0;
     z-index: 1000;
+    box-shadow: 1px 4px 24px #000;
     animation: slideIn 1s ease-out;
 }
 .navigation {
@@ -27,9 +27,12 @@ body {
     align-items: center;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 20px;
+    /* padding: 0 20px; */
 }
-
+.logo img {
+    filter: invert(100%);
+    mix-blend-mode: lighten;
+}
 
 
 .logo a {
@@ -53,7 +56,6 @@ nav a {
     text-decoration: none;
     margin-left: 20px;
     font-weight: 600;
-    letter-spacing: 1px;
     transition: color 0.3s ease, transform 0.3s ease;
 }
 
@@ -68,14 +70,14 @@ nav a:hover {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: rgba(0, 0, 0, 0.5);
+    background:linear-gradient(-2deg, #970808, #ff3d00);
     padding: 40px 30px;
     border-radius: 12px;
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
     width: 100%;
     max-width: 400px;
     margin: 0 auto;
-    margin-block-start: 100px;
+    margin-block-start: 60px;
 
 }
 .register-form {
@@ -83,14 +85,14 @@ nav a:hover {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: rgba(0, 0, 0, 0.5);
+    background:linear-gradient(-2deg, #970808, #ff3d00);
     padding: 40px 30px;
     border-radius: 12px;
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
     width: 100%;
     max-width: 400px;
     margin: 0 auto;
-    margin-block-start: 100px;
+    margin-block-start: 60px;
 
 }
 

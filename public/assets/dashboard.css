@@ -2,7 +2,8 @@ body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
-    background: linear-gradient(135deg, #ff6f61, #ff3d00);
+    background:	linear-gradient(-10deg, #000, #860000);
+    background: linear-gradient(171deg, #000, #ff3d00);
     color: #fff;
     overflow-x: hidden;
 }
@@ -19,7 +20,7 @@ h1, h2, h3, p {
     left: 0;
     width: 100%;
     background: #33130e;
-  
+    box-shadow: 1px 4px 24px #000;
     z-index: 1000;
     animation: slideIn 1s ease-out;
 }
@@ -31,6 +32,10 @@ h1, h2, h3, p {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
+}
+.logo img {
+    filter: invert(100%);
+    mix-blend-mode: lighten;
 }
 
 .logo a {
@@ -85,7 +90,7 @@ logo h1 {
     padding: 20px;
     max-width: 1200px;
     margin: 80px auto 0;
-    background: #fff;
+    background:linear-gradient(-2deg, #970808, #ff3d00);
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
 }
@@ -93,18 +98,21 @@ logo h1 {
 .dashboard-content h2 {
     font-size: 2em;
     margin-bottom: 20px;
-    color: #333;
+    color: #ffffff;
+    
 }
 
 .drafts-container {
     display: flex;
     flex-wrap: wrap;
+    
     gap: 20px;
 }
 
 .draft {
-    background: #f9f9f9;
+  
     padding: 20px;
+    background-color:wheat;
     border: 1px solid #ddd;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -153,7 +161,7 @@ logo h1 {
 .footer {
     text-align: center;
     padding: 20px;
-    background: #333;
+    background: rgb(15, 15, 15);
     color: #fff;
     font-size: 1em;
     font-weight: 500;
@@ -163,9 +171,6 @@ logo h1 {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 @media (max-width: 1024px) {
-    .navigation {
-        flex-direction: column;
-    }
     .menubar{
         padding-bottom: 15px;
     }
@@ -196,3 +201,4 @@ logo h1 {
         margin-top: 103px;
     }
 }
+ 

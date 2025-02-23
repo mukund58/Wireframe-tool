@@ -149,6 +149,10 @@ button{
     width: 50px;
     height: 50px;
 }
+ h1 {
+    margin: 0;
+    padding: 0;
+}
 #create-team{
     padding: 5px;
     color: white;
@@ -222,7 +226,6 @@ canvas {
     height: 2000px;
 }
 .user-toolbar button{
-    padding: 10px;
     background-color: #fff;
 }
 #user-profile{
