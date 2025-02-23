@@ -32,6 +32,10 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("circle-brush").addEventListener("click", () => setBrush('circle'));
     document.getElementById("spray-brush").addEventListener("click", () => setBrush('spray'));
 
+    // Add event listeners for undo and redo buttons
+    document.getElementById("undo").addEventListener("click", () => canvas.historyUndo());
+    document.getElementById("redo").addEventListener("click", () => canvas.historyRedo());
+
     function addRect() {
         const rect = new fabric.Rect({
             left: 100,
@@ -213,6 +217,15 @@ document.addEventListener("DOMContentLoaded", () => {
                 canvas.freeDrawingBrush.width = 1;
         }
     }
+
+    // Update canvas initialization to include history tracking
+    canvas.historyUndo = function() {
+        // Implement undo functionality
+    };
+
+    canvas.historyRedo = function() {
+        // Implement redo functionality
+    };
 });
 document.querySelector(".dropbtn").addEventListener("click", function() {
     let menu = document.getElementById("dropdown-menu");
