@@ -22,3 +22,15 @@
     border-radius: 10px;
     cursor: pointer;
 }
+.mb-3 span , mb-3 text-center profile {
+position: absolute;
+bottom: 12px;
+ right: 17px;
+ font-size: 14px;
+  color: red;
+
+}
+.d-grid gap-2{
+
+    color: red;
+}
