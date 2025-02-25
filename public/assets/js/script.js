@@ -1,5 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     const canvas = new fabric.Canvas('canvas');
+    let undoStack = [];
+    let redoStack = [];
 
     function resizeCanvas() {
         canvas.setWidth(window.innerWidth);
@@ -31,6 +33,10 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("pencil-brush").addEventListener("click", () => setBrush('pencil'));
     document.getElementById("circle-brush").addEventListener("click", () => setBrush('circle'));
     document.getElementById("spray-brush").addEventListener("click", () => setBrush('spray'));
+
+    // Add event listeners for undo and redo buttons
+    document.getElementById("undo").addEventListener("click", () => canvas.historyUndo());
+    document.getElementById("redo").addEventListener("click", () => canvas.historyRedo());
 
     function addRect() {
         const rect = new fabric.Rect({
@@ -213,12 +219,39 @@ document.addEventListener("DOMContentLoaded", () => {
                 canvas.freeDrawingBrush.width = 1;
         }
     }
+
+    function saveState() {
+        redoStack = []; // Clear redo stack on new action
+        undoStack.push(JSON.stringify(canvas));
+    }
+    // Update canvas initialization to include history tracking
+    canvas.historyUndo = function() {
+        // Implement undo functionality
+        if (undoStack.length > 0) {
+            redoStack.push(JSON.stringify(canvas));
+            let previousState = undoStack.pop();
+            canvas.loadFromJSON(previousState, canvas.renderAll.bind(canvas));
+        }
+    };
+
+    canvas.historyRedo = function() {
+        // Implement redo functionality
+        if (redoStack.length > 0) {
+            undoStack.push(JSON.stringify(canvas));
+            let nextState = redoStack.pop();
+            canvas.loadFromJSON(nextState, canvas.renderAll.bind(canvas));
+        }
+    };
+    canvas.on('object:added', saveState);
+    canvas.on('object:modified', saveState);
+    canvas.on('object:removed', saveState);
 });
+
+
 document.querySelector(".dropbtn").addEventListener("click", function() {
     let menu = document.getElementById("dropdown-menu");
     menu.style.display = (menu.style.display === "flex") ? "none" : "flex";
 });
-
 // Close dropdown if clicked outside
 window.addEventListener("click", function(event) {
     if (!event.target.matches(".dropbtn")) {
@@ -236,13 +269,13 @@ window.addEventListener("click", function(event) {
     }
 });
 
-document.querySelector(".profile-dropdown").addEventListener("click", function() {
-    let menu = document.getElementById("profile");
-    menu.style.display = (menu.style.display === "flex") ? "none" : "flex";
+document.querySelector(".user-toolbar-btns").addEventListener("click", function() {
+    let menu = document.querySelector(".profile");
+    menu.style.display = (menu.style.visibility === "visible") ? "none" : "visible";
 });
 // Close dropdown if clicked outside
 window.addEventListener("click", function(event) {
-    if (!event.target.matches(".profile-dropdown")) {
-        document.getElementById("profile").style.display = "none";
+    if (!event.target.matches(".user-toolbar-btns")) {
+        document.querySelector(".profile").style.visibility = "hidden";
     }
 });
