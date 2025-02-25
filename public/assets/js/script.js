@@ -245,6 +245,38 @@ document.addEventListener("DOMContentLoaded", () => {
     canvas.on('object:added', saveState);
     canvas.on('object:modified', saveState);
     canvas.on('object:removed', saveState);
+
+    // Function to export the canvas as JSON and download it as a file
+    function exportCanvasAsJSON() {
+        const json = JSON.stringify(canvas.toJSON());
+        const blob = new Blob([json], { type: 'application/json' });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = 'canvas.json';
+        link.click();
+    }
+
+    // Function to import a JSON file and load it onto the canvas
+    function importCanvasFromJSON(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const json = e.target.result;
+                canvas.loadFromJSON(json, canvas.renderAll.bind(canvas));
+            };
+            reader.readAsText(file);
+        }
+    }
+
+    // Add event listeners for the export and import buttons
+    document.getElementById("export-btn").addEventListener("click", exportCanvasAsJSON);
+    document.getElementById("import-btn").addEventListener("click", () => {
+        document.getElementById("import-input").click();
+    });
+
+    // Add event listener for the import input element
+    document.getElementById("import-input").addEventListener("change", importCanvasFromJSON);
 });
 
 
