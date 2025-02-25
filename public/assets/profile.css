@@ -23,14 +23,24 @@
     cursor: pointer;
 }
 .mb-3 span , mb-3 text-center profile {
-position: absolute;
-bottom: 12px;
- right: 17px;
- font-size: 14px;
-  color: red;
 
+white-space: nowrap;
+ font-size:1em;
+ color: red;
+
+}
+.flex{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 }
 .d-grid gap-2{
 
     color: red;
+}
+.mb-3 span i{
+    font-size: 2em;
+     color: seagreen;
+    font-size: 2em;
 }

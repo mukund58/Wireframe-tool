@@ -41,7 +41,7 @@ function validateName() {
     nameError.innerHTML = " Write Full Name";
     return false;
   }
-  nameError.innerHTML = "Valid";
+  nameError.innerHTML = "<i class='bx bx-check-circle'></i>";
   return true;
 }
 function validatePhone() {
@@ -58,7 +58,7 @@ function validatePhone() {
     phoneError.innerHTML = "Phone number is required";
     return false;
   }
-  phoneError.innerHTML = "Valid";
+  phoneError.innerHTML = "<i class='bx bx-check-circle'></i>";
   return true;
 }
 function validateEmail() {
@@ -67,11 +67,11 @@ function validateEmail() {
     emailError.innerHTML = "email is required";
     return false;
   }
-  if (!email.match(/^[A-Za-z]\._\-[0-9]*[@][A-Za-z]*[\.][a-z]{2,4}$/)) {
+  if (!email.match(/^[A-Za-z][A-Za-z0-9._-]*@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/)) {
     emailError.innerHTML = "email invalid";
     return false;
   }
-  emailError.innerHTML = "Valid";
+  emailError.innerHTML = "<i class='bx bx-check-circle'></i>";
   return true;
 }
 function validateBio() {
@@ -82,7 +82,7 @@ function validateBio() {
     bioError.innerHTML = left + "more characters required";
     return false;
   }
-  bioError.innerHTML = "Valid";
+  bioError.innerHTML = "<i class='bx bx-check-circle'></i>";
   return true;
 }
 function validateForm() {
