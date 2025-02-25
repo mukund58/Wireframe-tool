@@ -271,11 +271,49 @@ window.addEventListener("click", function(event) {
 
 document.querySelector(".user-toolbar-btns").addEventListener("click", function() {
     let menu = document.querySelector(".profile");
-    menu.style.display = (menu.style.visibility === "visible") ? "none" : "visible";
+    menu.style.display = (menu.style.display === "block") ? "none" : "block";
 });
 // Close dropdown if clicked outside
 window.addEventListener("click", function(event) {
     if (!event.target.matches(".user-toolbar-btns")) {
-        document.querySelector(".profile").style.visibility = "hidden";
+        document.querySelector(".profile").style.display = "none";
     }
+});
+
+document.querySelector(".file-drop-down").addEventListener("click", function() {
+    let menu = document.querySelector(".drop-dron-menu");
+    menu.style.display = (menu.style.display === "block") ? "none" : "block";
+});
+// Close dropdown if clicked outside
+window.addEventListener("click", function(event) {
+    if (!event.target.matches(".file-drop-down")) {
+        document.querySelector(".drop-dron-menu").style.display = "none";
+    }
+});
+
+document.getElementById("export-btn").addEventListener("click", function() {
+    const json = JSON.stringify(canvas.toJSON());
+    const blob = new Blob([json], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "canvas.json";
+    a.click();
+    URL.revokeObjectURL(url);
+});
+
+document.getElementById("import-btn").addEventListener("click", function() {
+    const input = document.createElement("input");
+    input.type = "file";
+    input.accept = "application/json";
+    input.onchange = function(event) {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const json = e.target.result;
+            canvas.loadFromJSON(json, canvas.renderAll.bind(canvas));
+        };
+        reader.readAsText(file);
+    };
+    input.click();
 });

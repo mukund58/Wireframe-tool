@@ -134,21 +134,21 @@ button{
 .profile{
     /* position: absolute; */
     display: flex;
-    visibility: hidden;
     flex-wrap: wrap;
     flex-direction: column;
     text-decoration: none;
     margin-top: 10px;
     box-shadow: 8px 6px 9px rgba(0, 0, 0, 0.1);
     margin-right:10px ;
+    display: none;
 }
 .profile a{
     text-decoration: none;
     color: black;
     margin: 10px;
 }
-.profile-dropdown:hover .profile  { 
-    visibility: visible;
+.profile-dropdown .profile  { 
+    display: block;
     
 }
 
@@ -276,16 +276,12 @@ canvas {
     text-align: center;
     cursor: pointer;
 }
-.file-drop-down:hover .drop-dron-menu{
-    visibility:visible;
-}
-.drop-dron-menu{
+.file-drop-down .drop-dron-menu{
     display: block;
-    visibility:hidden;
     padding: 5px;
     box-shadow: 8px 6px 9px rgba(0, 0, 0, 0.1);    ;
     margin-left: 20px;
-
+    display: none;
 }
 /* Responsive Design */
 @media (max-width: 768px) {
