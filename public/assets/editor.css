@@ -106,31 +106,41 @@ button{
     flex-direction: column;
     align-items: center;
     box-shadow: 2px 0 5px rgba(0,0,0,0.1);
-    z-index: 1000;
+    z-index: 1;
 }
 .profile-dropdown{
+    z-index: 11;
     cursor: pointer;
+    /* box-shadow: 4px 5px 12px  rgba(0,0,0,0.1); */
 }
+.user-toolbar-btns{
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    padding: 10px;
 
+}
 .user-toolbar {
+    display: flex;
+ justify-content: space-between;
+ width: 100%;
     /* margin-top: 10px; */
     height: 50px;
     /* background-color: rgb(146, 31, 31); */
     color: white;
     display: flex;
-    flex-direction:row;
-    box-shadow: 4px 5px 12px  rgba(0,0,0,0.1);
-    z-index: 1000;
+    flex-direction:row-reverse;
+    z-index: 10;
 }
 
 .profile{
-  position: absolute;
-  display: none;
-  flex-wrap: wrap;
-  flex-direction: column;
-  text-decoration: none;
-  margin-top: 10px;
-  box-shadow: 8px 6px 9px rgba(0, 0, 0, 0.1);
+    /* position: absolute; */
+    display: flex;
+    visibility: hidden;
+    flex-wrap: wrap;
+    flex-direction: column;
+    text-decoration: none;
+    margin-top: 10px;
+    box-shadow: 8px 6px 9px rgba(0, 0, 0, 0.1);
+    margin-right:10px ;
 }
 .profile a{
     text-decoration: none;
@@ -138,17 +148,17 @@ button{
     margin: 10px;
 }
 .profile-dropdown:hover .profile  { 
-    display: flex;
+    visibility: visible;
     
 }
 
-.exportbtn{
+.flex-row{
     display: flex;
-    justify-content: center;
+    flex-direction: row;
     align-items: center;
-    width: 50px;
-    height: 50px;
+    padding: 5px;
 }
+
  h1 {
     margin: 0;
     padding: 0;
@@ -179,9 +189,10 @@ button{
 
     color: white;
     background-color: rgb(89, 89, 235);
-    border-radius: 10px;
-    height: 80%;
+    /* border-radius: 10px; */
+    /* height: 80%; */
 }
+
 .sharebtn{
     display: flex;
     justify-content: center;
@@ -226,15 +237,16 @@ canvas {
     height: 2000px;
 }
 .user-toolbar button{
+    cursor: pointer;
     background-color: #fff;
 }
+
 #user-profile{
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    height: 50px;
-    width: 100%;
+    /* width: 100%; */
 }
 
 /* Styles for undo and redo buttons */
@@ -254,7 +266,27 @@ canvas {
     background: #777;
     transform: scale(1.1);
 }
+.bx-share-alt{
+    padding: 10px;
+}
+.file-drop-down {
+    z-index: 11;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    cursor: pointer;
+}
+.file-drop-down:hover .drop-dron-menu{
+    visibility:visible;
+}
+.drop-dron-menu{
+    display: block;
+    visibility:hidden;
+    padding: 5px;
+    box-shadow: 8px 6px 9px rgba(0, 0, 0, 0.1);    ;
+    margin-left: 20px;
 
+}
 /* Responsive Design */
 @media (max-width: 768px) {
     #toolbar {
