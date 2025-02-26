@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Fjalla+One&family=Lilita+One&family=Maven+Pro:wght@500&family=Signika+Negative:wght@500&family=Ubuntu:wght@500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&family=Merienda:wght@300..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap');
+
 
 
 
@@ -19,6 +19,4 @@
 	--font6: 'Courier New', Courier, monospace;
 	--font7: "Atkinson Hyperlegible", sans-serif;
 	--font8: "Merienda", cursive;
-	--font9:'Nunito', sans-serif;
-
 }
