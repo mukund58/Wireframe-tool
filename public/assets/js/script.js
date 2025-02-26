@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const canvas = new fabric.Canvas('canvas');
     let undoStack = [];
     let redoStack = [];
+    let isDrawing = false; // Pd3d4
 
     function resizeCanvas() {
         canvas.setWidth(window.innerWidth);
@@ -195,7 +196,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Implement brush tool activation logic
     function setBrush(brushType) {
-        canvas.isDrawingMode = true;
+        canvas.isDrawingMode = true; // P6fe7
         switch (brushType) {
             case 1:
                 canvas.freeDrawingBrush.width = 1;
@@ -245,6 +246,25 @@ document.addEventListener("DOMContentLoaded", () => {
     canvas.on('object:added', saveState);
     canvas.on('object:modified', saveState);
     canvas.on('object:removed', saveState);
+
+    // Add event listener for mousedown to start drawing
+    canvas.on('mouse:down', (event) => {
+        if (canvas.isDrawingMode) {
+            isDrawing = true;
+        }
+    }); // P73c8
+
+    // Add event listener for mousemove to continue drawing
+    canvas.on('mouse:move', (event) => {
+        if (isDrawing) {
+            // Drawing logic here
+        }
+    }); // Pc312
+
+    // Add event listener for mouseup to stop drawing
+    canvas.on('mouse:up', () => {
+        isDrawing = false;
+    }); // P255a
 });
 
 
