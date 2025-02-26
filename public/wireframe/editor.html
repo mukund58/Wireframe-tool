@@ -49,14 +49,60 @@
 
             <div class="tool" id="reset" title="Reset"><button>🔄</button></div>
             <div class="tool" id="delete" title="Delete"><button>❌</button></div>
-            <div class="tool" id="undo" title="Undo"><button>↩️</button></div>
-            <div class="tool" id="redo" title="Redo"><button>↪️</button></div>
+            <!-- <div class="tool" id="undo" title="Undo"><button>↩️</button></div>
+            <div class="tool" id="redo" title="Redo"><button>↪️</button></div> -->
 
         </div>
     </div>
 
     <div id="canvas-container">
         <canvas id="canvas"></canvas>
+    </div>
+    <div class="magicToolBarHolder">
+        <div class="magicToolBar">
+            <div class="widget-search">
+                <i class='bx bx-search' ></i>
+                <input type="search" name="widget" id="widgetElement">
+                
+            </div>
+            <div class="widget-list">
+                <ul>    
+                    <div class="widget-list-header">Element</div>
+                    <li >
+                        <button type="button" class="flex-row-li" ><i class='bx bx-square-rounded' ></i><div>Box</div></button>
+                    </li>
+                    <li >
+                        <button type="button" class="flex-row-li" ><i class='bx bx-text' ></i><div>Text</div></button>
+                    </li>
+                    <li >
+                        <button type="button" class="flex-row-li" ><i class='bx bx-image' ></i><div>Image</div></button>
+                    </li>
+                    <li >
+                        <button type="button" class="flex-row-li" ><i class='bx bx-checkbox-minus'></i><div>Box</div></button>
+                    </li>
+                    <li >
+                        <button type="button" class="flex-row-li" ><i class='bx bx-circle'></i><div>Circle</div></button>
+                    </li>
+                    <li >
+                        <button type="button" class="flex-row-li" ><i class='bx bx-rectangle'></i><div>Text Input</div></button>
+                    </li>
+                    <li >
+                        <button type="button" class="flex-row-li" ><i class='bx bx-minus' style="rotate: 1 1 0 190deg;"></i><div>Line</div></button>
+                    </li>
+                    <li >
+                        <button type="button" class="flex-row-li" ><i class='bx bx-minus'></i><div>Line</div></button>
+                    </li>
+                </ul>
+            </div>
+            <div class="widget-preview">
+                <div class="widget-image-container">
+
+                </div>
+                <div class="widget-image-info">
+                    
+                </div>
+            </div>
+        </div>
     </div>
     <div class="user-toolbar">
         <div class="user-toolbar-btns">
@@ -72,10 +118,17 @@
                 </div>
             </div>
         </div>
+        
         <div class="file-drop-down">
             <h3 style="color: black;"><i class='bx bx-menu'></i></h3>
             <div class="drop-dron-menu">
                 <div class="exportbtn">
+                    <button id="element-btn" class="flex-row">
+                        <span>All Element</span>
+                        <h1><i class='bx bx-right-arrow-alt'></i></h1>
+                    </button>
+                </div>
+                <div class="exportbtn" >
                     <button id="export-btn" class="flex-row">
                         <h1><i class='bx bx-export'></i></h1>
                         <span>Export As Json</span>
@@ -104,8 +157,10 @@
         </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.5.0/fabric.min.js"></script>
+    <script src="../assets/js/viewport.js"></script>
 
     <script src="../assets/js/script.js" defer></script>
+    <script src="../assets/js/toolbar.js" defer></script>
 </body>
 
 </html>
