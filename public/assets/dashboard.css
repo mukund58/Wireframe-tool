@@ -2,7 +2,6 @@ body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
-    background:	linear-gradient(-10deg, #000, #860000);
     background: linear-gradient(171deg, #000, #ff3d00);
     color: #fff;
     overflow-x: hidden;
@@ -90,7 +89,7 @@ logo h1 {
     padding: 20px;
     max-width: 1200px;
     margin: 80px auto 0;
-    background:linear-gradient(-2deg, #970808, #ff3d00);
+    background: linear-gradient(-2deg, #970808, #ff3d00);
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
 }
@@ -112,7 +111,7 @@ logo h1 {
 .draft {
   
     padding: 20px;
-    background-color:wheat;
+    background-color: wheat;
     border: 1px solid #ddd;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -144,7 +143,7 @@ logo h1 {
 }
 
 .draft .actions button {
-    background: #ff3d00;
+    background: linear-gradient(171deg, #000, #ff3d00);
     color: #fff;
     border: none;
     padding: 10px 15px;
@@ -154,14 +153,14 @@ logo h1 {
 }
 
 .draft .actions button:hover {
-    background: #ff6f61;
+    background: linear-gradient(171deg, #000, #ff6f61);
 }
 
 /* Footer Styles */
 .footer {
     text-align: center;
     padding: 20px;
-    background: rgb(15, 15, 15);
+    background: #33130e;
     color: #fff;
     font-size: 1em;
     font-weight: 500;
@@ -201,4 +200,3 @@ logo h1 {
         margin-top: 103px;
     }
 }
- 
