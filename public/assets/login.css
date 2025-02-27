@@ -142,14 +142,14 @@ button {
     font-size: 1.1em;
     border-radius: 8px;
     border: none;
-    background-color: #ffd700;
+    background: linear-gradient(171deg, #000, #ff3d00);
     color: #000;
     cursor: pointer;
     transition: background 0.3s ease, transform 0.3s ease;
 }
 
 button:hover {
-    background-color: #ffcc00;
+    background: linear-gradient(171deg, #000, #ff6f61);
     transform: translateY(-3px);
 }
 
@@ -157,7 +157,7 @@ button:hover {
 .footer {
     text-align: center;
     padding: 20px;
-    /* background: rgba(0, 0, 0, 0.5); */
+    background: #33130e;
     margin-top: 40px;
     border-radius: 8px;
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
