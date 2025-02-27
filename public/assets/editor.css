@@ -9,6 +9,7 @@ body {
     height: 100vh;
     background: #b3adad;}
 
+
 button {
     border: none;
     width: 100%;
@@ -154,6 +155,7 @@ button {
 .importbtn i {
     font-size: 2em;
 }
+
 .profile {
     /* position: absolute; */
     display: flex;
@@ -165,6 +167,7 @@ button {
     box-shadow: 8px 6px 9px rgba(0, 0, 0, 0.1);
     margin-right: 10px;
     background: white;
+
     transition: visibility 0.2s, opacity 0.2s ease-in-out;
 
 }
@@ -176,6 +179,10 @@ button {
 }
 
 
+.profile-dropdown:hover .profile {
+    visibility: visible;
+
+}
 
 .flex-row {
     display: flex;
@@ -288,6 +295,22 @@ canvas {
     top: 76px;
     transform: translate(-50%) translate(60px);
     display: grid;
+}
+
+.flex-row-li {
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+    background-color: gray;
+    color: #ddd;
+    font-size: 1.2em;
+
+}
+.widget-search{
+    padding: 10px;
+}
+
 }
 
 .flex-row-li {

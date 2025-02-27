@@ -331,5 +331,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Add event listener for the import input element
     document.getElementById("import-input").addEventListener("change", importCanvasFromJSON);
+
 });
 

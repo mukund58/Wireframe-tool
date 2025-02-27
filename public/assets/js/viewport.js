@@ -4,10 +4,13 @@ pointX = 0,
 pointY = 0,
 start = { x: 0, y: 0 },
 zoom = document.getElementById("canvas-container"),
-canvas = document.getElementById("canvas");
+canvas = document.getElementById("canvas"),
+exportBtn = document.getElementById("export-btn");
+
 // Set initial canvas size
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
+
 
 
 // Apply transformations
@@ -15,6 +18,7 @@ function setTransform() {
     zoom.style.transform = `translate(${pointX}px, ${pointY}px) scale(${scale})`;
     drawCanvas(); // Redraw canvas after transform
     canvas.renderAll();
+
 
 }
 
@@ -58,6 +62,15 @@ zoom.oncontextmenu = function (e) {
     e.preventDefault();
 };
 
+
+exportjs.onclick = function () {
+    let json = JSON.stringify(objects, null, 2); // Convert objects to JSON
+    let blob = new Blob([json], { type: "application/json" }); // Create a file
+    let a = document.createElement("a"); // Create a download link
+    a.href = URL.createObjectURL(blob);
+    a.download = "canvas.json"; // File name
+    a.click();
+};
 
 
 // Initial render
