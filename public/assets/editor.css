@@ -247,14 +247,19 @@ canvas {
     top: 0;
     left: 0;
     z-index: 0;
+    transform-origin: 0px 0px;
+    transform: scale(1) translate(0px, 0px);
+    cursor: grab;
 }
 
 canvas {
     width: 2000px;
     height: 2000px;
+    
 }
 
 .magicToolBarHolder {
+    display: none;
     z-index: 10;
     color: #fff;
     filter: drop-shadow(0 -1px #ffffff4d)drop-shadow(0 1px #ffffff4d)drop-shadow(-1px 0 #ffffff4d)drop-shadow(1px 0 #ffffff4d);
