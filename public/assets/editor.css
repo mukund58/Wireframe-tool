@@ -7,8 +7,7 @@ body {
     font-family: Arial, sans-serif;
     display: flex;
     height: 100vh;
-    background: #f0f0f0;
-}
+    background: #b3adad;}
 
 button {
     border: none;
@@ -138,7 +137,23 @@ button {
     flex-direction: row-reverse;
     z-index: 10;
 }
-
+#jsonFileInput{
+   display: none;
+}
+.importbtn{
+    color: black;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    align-items: center;
+    font-size: 1em;
+}
+.importbtn button{
+    width: auto;
+}
+.importbtn i {
+    font-size: 2em;
+}
 .profile {
     /* position: absolute; */
     display: flex;
@@ -149,7 +164,7 @@ button {
     margin-top: 10px;
     box-shadow: 8px 6px 9px rgba(0, 0, 0, 0.1);
     margin-right: 10px;
-
+    background: white;
     transition: visibility 0.2s, opacity 0.2s ease-in-out;
 
 }
@@ -160,10 +175,7 @@ button {
     margin: 10px;
 }
 
-.profile-dropdown:hover .profile {
-    visibility: visible;
 
-}
 
 .flex-row {
     display: flex;
@@ -312,7 +324,7 @@ canvas {
 
 .user-toolbar button {
     cursor: pointer;
-    background-color: #fff;
+    background-color: #fff0;
 }
 
 #user-profile {
@@ -354,7 +366,7 @@ canvas {
     flex-direction: column;
     text-align: center;
     cursor: pointer;
-    position: relative;
+    /* position: relative; */
 }
 
 .file-drop-down:hover .drop-dron-menu {

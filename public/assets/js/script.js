@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
         canvas.setWidth(window.innerWidth);
         canvas.setHeight(window.innerHeight);
         canvas.renderAll();
+        
     }
 
     // Remove these event listeners if they exist
@@ -35,8 +36,13 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("spray-brush").addEventListener("click", () => setBrush('spray'));
 
     // Add event listeners for undo and redo buttons
-    document.getElementById("undo").addEventListener("click", () => canvas.historyUndo());
-    document.getElementById("redo").addEventListener("click", () => canvas.historyRedo());
+    document.getElementById("undo").addEventListener("click", undo);
+    document.getElementById("redo").addEventListener("click", redo);
+
+    document.getElementById("savePNG").addEventListener("click", saveCanvasAsPNG);
+    document.getElementById("saveJSON").addEventListener("click", saveCanvasAsJSON);
+    document.getElementById("loadJSON").addEventListener("click", loadCanvasFromJSON);
+
 
     function addRect() {
         const rect = new fabric.Rect({
@@ -118,17 +124,76 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    document.getElementById("save").addEventListener("click", saveCanvas);
 
-    function saveCanvas() {
-        const link = document.createElement("a");
-        link.download = "canvas.png";
-        link.href = canvas.toDataURL({
+    function saveCanvasAsPNG() {
+        var dataURL = canvas.toDataURL({
             format: 'png',
-            multiplier: 2
+            quality: 1.0
         });
+
+        var link = document.createElement('a');
+        link.href = dataURL;
+        link.download = 'canvas.png';
         link.click();
     }
+    function saveCanvasAsJSON() {
+        var json = JSON.stringify(canvas.toJSON());
+
+        var blob = new Blob([json], { type: 'application/json' });
+        var link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = 'canvas.json';
+        link.click();
+    }
+
+    // Load JSON from File Input
+    function loadCanvasFromJSON() {
+        var input = document.getElementById('jsonFileInput');
+        var file = input.files[0];
+        if (!file) {
+            alert("Please select a JSON file first!");
+            return;
+        }
+
+        var reader = new FileReader();
+        reader.onload = function(event) {
+            var json = event.target.result;
+            canvas.loadFromJSON(json, function() {
+                canvas.renderAll();
+            });
+        };
+        reader.readAsText(file);
+    }
+
+    function saveState() {
+        undoStack.push(JSON.stringify(canvas.toJSON()));
+        // redoStack = []; // Clear redo stack on new action
+    }
+
+    // Undo Function
+    function undo() {
+        if (undoStack.length > 1) {
+            redoStack.push(undoStack.pop()); // Move current state to redo stack
+            var previousState = undoStack[undoStack.length - 1];
+            canvas.loadFromJSON(previousState, function() {
+                canvas.renderAll();
+            });
+        }
+    }
+
+    // Redo Function (Fixed)
+    function redo() {
+        if (redoStack.length > 0) {
+            var nextState = redoStack.pop();
+            undoStack.push(nextState); // Save redo state back to undo stack
+            canvas.loadFromJSON(nextState, function() {
+                canvas.renderAll();
+            });
+        }
+    }
+
+    canvas.on('object:modified', saveState);
+    canvas.on('object:added', saveState);
 
     // Implement functionality to change canvas color using the color picker
     document.getElementById("color-picker").addEventListener("input", (event) => {
