@@ -129,7 +129,7 @@
             text-align: center;
             height: 100vh;
             animation: fadeIn 1.5s ease-in-out;
-            background: linear-gradient(171deg, #000, #ff3d00);
+            background: #f0f0f0;
 
         }
 
@@ -200,7 +200,7 @@
 
         /* About Section */
         .about {
-            background: linear-gradient(28deg, #391313, #000);
+            background: #f0f0f0;
             padding: 100px 20px;
             text-align: center;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);

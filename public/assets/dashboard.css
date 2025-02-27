@@ -2,8 +2,7 @@ body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
-    background:	linear-gradient(-10deg, #000, #860000);
-    background: linear-gradient(171deg, #000, #ff3d00);
+    background: #f0f0f0;
     color: #fff;
     overflow-x: hidden;
 }
@@ -19,7 +18,7 @@ h1, h2, h3, p {
     top: 0;
     left: 0;
     width: 100%;
-    background: #33130e;
+    background: #333;
     box-shadow: 1px 4px 24px #000;
     z-index: 1000;
     animation: slideIn 1s ease-out;
@@ -90,7 +89,7 @@ logo h1 {
     padding: 20px;
     max-width: 1200px;
     margin: 80px auto 0;
-    background:linear-gradient(-2deg, #970808, #ff3d00);
+    background: #fff;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
 }
@@ -98,7 +97,7 @@ logo h1 {
 .dashboard-content h2 {
     font-size: 2em;
     margin-bottom: 20px;
-    color: #ffffff;
+    color: #333;
     
 }
 
