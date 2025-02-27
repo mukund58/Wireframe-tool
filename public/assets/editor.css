@@ -1,32 +1,37 @@
-*{
+* {
     box-sizing: border-box;
 }
+
 body {
     margin: 0;
     font-family: Arial, sans-serif;
     display: flex;
     height: 100vh;
-    background: #f0f0f0;
-}
-button{
+    background: #b3adad;}
+
+button {
     border: none;
-  width: 100%;
-  height: 100%;
+    width: 100%;
+    height: 100%;
 }
-.drop-down-menu{
+
+.drop-down-menu {
     display: flex;
-  align-content: center;
-  align-items: center;
+    align-content: center;
+    align-items: center;
 }
-.brush-drop-down-menu{
+
+.brush-drop-down-menu {
     display: flex;
-  align-content: center;
-  align-items: center;
+    align-content: center;
+    align-items: center;
 }
+
 .dropdown {
     position: relative;
     display: inline-block;
 }
+
 .brush-dropdown {
     position: relative;
     display: inline-block;
@@ -62,20 +67,23 @@ button{
     text-decoration: none;
     display: block;
 }
+
 .brush-dropdown-content a {
     color: black;
     padding: 10px;
     text-decoration: none;
     display: block;
 }
-.dropbtn{
+
+.dropbtn {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 50px;
     height: 50px;
 }
-.brush-dropbtn{
+
+.brush-dropbtn {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -86,6 +94,7 @@ button{
 .dropdown-content a:hover {
     background-color: #f1f1f1;
 }
+
 .brush-dropdown-content a:hover {
     background-color: #f1f1f1;
 }
@@ -94,10 +103,11 @@ button{
 .dropdown:hover .dropdown-content {
     display: flex;
 }
+
 .brush-dropdown:hover .brush-dropdown-content {
     display: flex;
 }
- 
+
 #toolbar {
     width: 80px;
     background-color: white;
@@ -105,10 +115,11 @@ button{
     display: flex;
     flex-direction: column;
     align-items: center;
-    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
     z-index: 1;
 }
-.profile-dropdown{
+
+.profile-dropdown {
     z-index: 11;
     cursor: pointer;
     /* box-shadow: 4px 5px 12px  rgba(0,0,0,0.1); */
@@ -116,18 +127,34 @@ button{
 
 .user-toolbar {
     display: flex;
- justify-content: space-between;
- width: 100%;
+    justify-content: space-between;
+    width: 100%;
     /* margin-top: 10px; */
     height: 50px;
     /* background-color: rgb(146, 31, 31); */
     color: white;
     display: flex;
-    flex-direction:row-reverse;
+    flex-direction: row-reverse;
     z-index: 10;
 }
-
-.profile{
+#jsonFileInput{
+   display: none;
+}
+.importbtn{
+    color: black;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    align-items: center;
+    font-size: 1em;
+}
+.importbtn button{
+    width: auto;
+}
+.importbtn i {
+    font-size: 2em;
+}
+.profile {
     /* position: absolute; */
     display: flex;
     visibility: hidden;
@@ -136,37 +163,38 @@ button{
     text-decoration: none;
     margin-top: 10px;
     box-shadow: 8px 6px 9px rgba(0, 0, 0, 0.1);
-    margin-right:10px ;
-
+    margin-right: 10px;
+    background: white;
     transition: visibility 0.2s, opacity 0.2s ease-in-out;
 
 }
-.profile a{
+
+.profile a {
     text-decoration: none;
     color: black;
     margin: 10px;
 }
-.profile-dropdown:hover .profile  { 
-    visibility: visible;
-    
-}
 
-.flex-row{
+
+
+.flex-row {
     display: flex;
     flex-direction: row;
     align-items: center;
     padding: 5px;
 }
 
- h1 {
+h1 {
     margin: 0;
     padding: 0;
 }
-#create-team{
+
+#create-team {
     padding: 5px;
     color: white;
-    background-color:rgb(89, 89, 235);
+    background-color: rgb(89, 89, 235);
 }
+
 .tool {
     width: 50px;
     height: 50px;
@@ -184,7 +212,8 @@ button{
     background: #777;
     transform: scale(1.1);
 }
-#share-btn{
+
+#share-btn {
 
     color: white;
     background-color: rgb(89, 89, 235);
@@ -192,17 +221,18 @@ button{
     /* height: 80%; */
 }
 
-.sharebtn{
+.sharebtn {
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
 #canvas-container {
     flex-grow: 1;
     background: #fff;
     position: relative;
     padding: 0;
-    box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     margin: 0;
     display: flex;
@@ -229,27 +259,86 @@ canvas {
     top: 0;
     left: 0;
     z-index: 0;
+    transform-origin: 0px 0px;
+    transform: scale(1) translate(0px, 0px);
+    cursor: grab;
 }
 
 canvas {
     width: 2000px;
     height: 2000px;
-}
-.user-toolbar button{
-    cursor: pointer;
-    background-color: #fff;
+    
 }
 
-#user-profile{
+.magicToolBarHolder {
+    display: none;
+    z-index: 10;
+    color: #fff;
+    filter: drop-shadow(0 -1px #ffffff4d)drop-shadow(0 1px #ffffff4d)drop-shadow(-1px 0 #ffffff4d)drop-shadow(1px 0 #ffffff4d);
+    position: absolute;
+    top: 118px;
+    left: 530px;
+}
+
+.magicToolBar {
+    /* width: 50%;
+    height: 50%; */
+    background-color: gray;
+    left: 240px;
+    top: 76px;
+    transform: translate(-50%) translate(60px);
+    display: grid;
+}
+
+.flex-row-li {
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+    background-color: gray;
+    color: #ddd;
+    font-size: 1.2em;
+
+}
+.widget-search{
+    padding: 10px;
+}
+.widget-list ul {
+    list-style: none;
+    padding-left: 27px;
+}
+.widget-list{
+    border-right: 1px solid var(--grey-1);
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+  scrollbar-color: var(--grey-1)#ffffff;
+  scrollbar-width: thin;
+  width: 100%;
+  height: 320px;
+  scroll-margin-bottom: 2rem;
+  position: relative;
+  overflow: hidden scroll;
+  /* -webkit-mask-image: linear-gradient(#000 0% 90%,#0000 100%); */
+  mask-image: linear-gradient(#000 0% 90%,#0000 100%);
+}
+
+.user-toolbar button {
+    cursor: pointer;
+    background-color: #fff0;
+}
+
+#user-profile {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    margin-top: 14px;
     /* width: 100%; */
 }
 
 /* Styles for undo and redo buttons */
-#undo, #redo {
+#undo,
+#redo {
     width: 50px;
     height: 50px;
     margin: 10px 0;
@@ -261,25 +350,30 @@ canvas {
     transition: background 0.3s, transform 0.3s;
 }
 
-#undo:hover, #redo:hover {
+#undo:hover,
+#redo:hover {
     background: #777;
     transform: scale(1.1);
 }
-.bx-share-alt{
+
+.bx-share-alt {
     padding: 10px;
 }
+
 .file-drop-down {
     z-index: 11;
     display: flex;
     flex-direction: column;
     text-align: center;
     cursor: pointer;
-    position: relative;
+    /* position: relative; */
 }
-.file-drop-down:hover .drop-dron-menu{
-    visibility:visible;
+
+.file-drop-down:hover .drop-dron-menu {
+    visibility: visible;
 }
-.drop-dron-menu{
+
+.drop-dron-menu {
     visibility: hidden;
     opacity: 0;
     /* position: absolute; */
@@ -292,6 +386,7 @@ canvas {
     border-radius: 5px;
 
 }
+
 /* Responsive Design */
 @media (max-width: 768px) {
     #toolbar {

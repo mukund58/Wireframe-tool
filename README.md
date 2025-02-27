@@ -14,19 +14,53 @@ A web-based application designed for creating and designing web UI wireframes ef
 
 ```
 .
-├── backend
-│   └── sql
+├── CNAME
+├── LICENSE
 ├── public
-│   ├── assets
-│   │   └── styles.css
-│   ├── auth
-│   │   ├── login.html
-│   │   └── register.html
-│   ├── index.html
-│   ├── uploads
-│   └── wireframe
-│       └── editor.html
+│   ├── assets
+│   │   ├── dashboard.css
+│   │   ├── editor.css
+│   │   ├── js
+│   │   │   ├── dashboard.js
+│   │   │   ├── login.js
+│   │   │   ├── profile.js
+│   │   │   ├── script.js
+│   │   │   ├── toolbar.js
+│   │   │   └── viewport.js
+│   │   ├── login.css
+│   │   ├── profile.css
+│   │   ├── styles.css
+│   │   └── utiles.css
+│   ├── auth
+│   │   ├── login.html
+│   │   └── register.html
+│   ├── index.html
+│   ├── uploads
+│   │   ├── abstract-colors-2048x1152-wallpaper.jpg
+│   │   ├── arrow-right.svg
+│   │   ├── arrow.svg
+│   │   ├── avatar.svg
+│   │   ├── Brush_103.png
+│   │   ├── circle.svg
+│   │   ├── close-icon.svg
+│   │   ├── cursor-2.svg
+│   │   ├── download.svg
+│   │   ├── export.svg
+│   │   ├── favicon.ico
+│   │   ├── image-shapes.svg
+│   │   ├── line.svg
+│   │   ├── logo.jpeg
+│   │   ├── pfp.jpeg
+│   │   ├── profile.svg
+│   │   ├── rectangle.svg
+│   │   └── triangle.svg
+│   └── wireframe
+│       ├── dashboard.html
+│       ├── editor.html
+│       └── profile.html
 └── README.md
+
+7 directories, 39 files
 ```
 
 ## Installation

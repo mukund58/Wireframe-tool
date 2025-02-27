@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
         canvas.setWidth(window.innerWidth);
         canvas.setHeight(window.innerHeight);
         canvas.renderAll();
+        
     }
 
     // Remove these event listeners if they exist
@@ -35,8 +36,13 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("spray-brush").addEventListener("click", () => setBrush('spray'));
 
     // Add event listeners for undo and redo buttons
-    document.getElementById("undo").addEventListener("click", () => canvas.historyUndo());
-    document.getElementById("redo").addEventListener("click", () => canvas.historyRedo());
+    document.getElementById("undo").addEventListener("click", undo);
+    document.getElementById("redo").addEventListener("click", redo);
+
+    document.getElementById("savePNG").addEventListener("click", saveCanvasAsPNG);
+    document.getElementById("saveJSON").addEventListener("click", saveCanvasAsJSON);
+    document.getElementById("loadJSON").addEventListener("click", loadCanvasFromJSON);
+
 
     function addRect() {
         const rect = new fabric.Rect({
@@ -118,17 +124,76 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    document.getElementById("save").addEventListener("click", saveCanvas);
 
-    function saveCanvas() {
-        const link = document.createElement("a");
-        link.download = "canvas.png";
-        link.href = canvas.toDataURL({
+    function saveCanvasAsPNG() {
+        var dataURL = canvas.toDataURL({
             format: 'png',
-            multiplier: 2
+            quality: 1.0
         });
+
+        var link = document.createElement('a');
+        link.href = dataURL;
+        link.download = 'canvas.png';
         link.click();
     }
+    function saveCanvasAsJSON() {
+        var json = JSON.stringify(canvas.toJSON());
+
+        var blob = new Blob([json], { type: 'application/json' });
+        var link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = 'canvas.json';
+        link.click();
+    }
+
+    // Load JSON from File Input
+    function loadCanvasFromJSON() {
+        var input = document.getElementById('jsonFileInput');
+        var file = input.files[0];
+        if (!file) {
+            alert("Please select a JSON file first!");
+            return;
+        }
+
+        var reader = new FileReader();
+        reader.onload = function(event) {
+            var json = event.target.result;
+            canvas.loadFromJSON(json, function() {
+                canvas.renderAll();
+            });
+        };
+        reader.readAsText(file);
+    }
+
+    function saveState() {
+        undoStack.push(JSON.stringify(canvas.toJSON()));
+        // redoStack = []; // Clear redo stack on new action
+    }
+
+    // Undo Function
+    function undo() {
+        if (undoStack.length > 1) {
+            redoStack.push(undoStack.pop()); // Move current state to redo stack
+            var previousState = undoStack[undoStack.length - 1];
+            canvas.loadFromJSON(previousState, function() {
+                canvas.renderAll();
+            });
+        }
+    }
+
+    // Redo Function (Fixed)
+    function redo() {
+        if (redoStack.length > 0) {
+            var nextState = redoStack.pop();
+            undoStack.push(nextState); // Save redo state back to undo stack
+            canvas.loadFromJSON(nextState, function() {
+                canvas.renderAll();
+            });
+        }
+    }
+
+    canvas.on('object:modified', saveState);
+    canvas.on('object:added', saveState);
 
     // Implement functionality to change canvas color using the color picker
     document.getElementById("color-picker").addEventListener("input", (event) => {
@@ -180,17 +245,6 @@ document.addEventListener("DOMContentLoaded", () => {
         canvas.zoomToPoint({ x: event.e.offsetX, y: event.e.offsetY }, zoom);
         event.e.preventDefault();
         event.e.stopPropagation();
-    });
-
-    // Add minimize functionality for toolbar and setting panel
-    document.getElementById("minimize-toolbar").addEventListener("click", () => {
-        const toolbar = document.getElementById("toolbar");
-        toolbar.style.display = toolbar.style.display === "none" ? "flex" : "none";
-    });
-
-    document.getElementById("minimize-settings").addEventListener("click", () => {
-        const settingsPanel = document.getElementById("settings-panel");
-        settingsPanel.style.display = settingsPanel.style.display === "none" ? "flex" : "none";
     });
 
     // Implement brush tool activation logic
@@ -245,68 +299,37 @@ document.addEventListener("DOMContentLoaded", () => {
     canvas.on('object:added', saveState);
     canvas.on('object:modified', saveState);
     canvas.on('object:removed', saveState);
-});
 
-
-document.querySelector(".dropbtn").addEventListener("click", function() {
-    let menu = document.getElementById("dropdown-menu");
-    menu.style.display = (menu.style.display === "flex") ? "none" : "flex";
-});
-// Close dropdown if clicked outside
-window.addEventListener("click", function(event) {
-    if (!event.target.matches(".dropbtn")) {
-        document.getElementById("dropdown-menu").style.display = "none";
+    // Function to export the canvas as JSON and download it as a file
+    function exportCanvasAsJSON() {
+        const json = JSON.stringify(canvas.toJSON());
+        const blob = new Blob([json], { type: 'application/json' });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = 'canvas.json';
+        link.click();
     }
+
+    // Function to import a JSON file and load it onto the canvas
+    function importCanvasFromJSON(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const json = e.target.result;
+                canvas.loadFromJSON(json, canvas.renderAll.bind(canvas));
+            };
+            reader.readAsText(file);
+        }
+    }
+
+    // Add event listeners for the export and import buttons
+    document.getElementById("export-btn").addEventListener("click", exportCanvasAsJSON);
+    document.getElementById("import-btn").addEventListener("click", () => {
+        document.getElementById("import-input").click();
+    });
+
+    // Add event listener for the import input element
+    document.getElementById("import-input").addEventListener("change", importCanvasFromJSON);
 });
 
-document.querySelector(".brush-dropbtn").addEventListener("click", function() {
-    let menu = document.getElementById("brush-dropdown-menu");
-    menu.style.display = (menu.style.display === "flex") ? "none" : "flex";
-});
-window.addEventListener("click", function(event) {
-    if (!event.target.matches(".brush-dropbtn")) {
-        document.getElementById("brush-dropdown-menu").style.display = "none";
-    }
-});
-
-document.getElementById("user-profile").addEventListener("click", function(event) {
-    event.stopPropagation(); // Prevent closing immediately
-    let menu = document.getElementById("profile-menu");
-    if (menu.style.visibility === "visible") {
-        menu.style.visibility = "hidden";
-        menu.style.opacity = "0";
-    } else {
-        menu.style.visibility = "visible";
-        menu.style.opacity = "1";
-    }
-});
-
-// Close dropdown if clicked outside
-window.addEventListener("click", function(event) {
-    let menu = document.getElementById("profile-menu");
-    if (menu.style.visibility === "visible" && !event.target.closest(".profile-dropdown")) {
-        menu.style.visibility = "hidden";
-        menu.style.opacity = "0";
-    }
-});
-
-document.querySelector(".file-drop-down h3").addEventListener("click", function(event) {
-    event.stopPropagation(); // Prevent closing immediately
-    let menu = document.querySelector(".drop-dron-menu");
-    if (menu.style.visibility === "visible") {
-        menu.style.visibility = "hidden";
-        menu.style.opacity = "0";
-    } else {
-        menu.style.visibility = "visible";
-        menu.style.opacity = "1";
-    }
-});
-
-// Close dropdown if clicked outside
-window.addEventListener("click", function(event) {
-    let menu = document.querySelector(".drop-dron-menu");
-    if (menu.style.visibility === "visible" && !event.target.closest(".file-drop-down")) {
-        menu.style.visibility = "hidden";
-        menu.style.opacity = "0";
-    }
-});
