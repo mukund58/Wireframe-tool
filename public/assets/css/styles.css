@@ -2,7 +2,7 @@
             font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #ddd;
+            background-color: white;
             color: #fff;
             overflow-x: hidden;
             
@@ -139,7 +139,7 @@
             margin-top: 0;
             padding-top: 0;
             /* background-color: #ddd; */
-            background: linear-gradient(150deg,#f87777 15%,#e56767 70%);
+            /* background: linear-gradient(150deg,#f87777 15%,#e56767 70%); */
             /* background-image: url(../../uploads/1.svg); */
             color: #525f7f;
         }
@@ -205,7 +205,8 @@
 
         /* About Section */
         .about {
-            background: linear-gradient(150deg,#f87777 15%,#a067e5 70%,#bf6e55 94%);
+            /* background: linear-gradient(150deg,#f87777 15%,#a067e5 70%,#bf6e55 94%); */
+            background-color: white;
             color: black;
             padding: 100px 20px;
             text-align: center;
@@ -252,19 +253,17 @@
 
         /* Footer */
         .footer {
-            text-align: center;
-            padding: 20px;
+            /* text-align: center; */
+            /* padding: 20px; */
             background: rgb(15, 15, 15);
 
             font-size: 1.1em;
-            color: #fff;
-            font-weight: 500;
+            /* color: #fff; */
+            /* font-weight: 500; */
             transition: background 0.3s ease;
         }
 
-        .footer:hover {
-            background: rgba(0, 0, 0, 0.6);
-        }
+       
 
         /* Canvas Styling */
         #canvas {

@@ -1,137 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wireframe Tool</title>
-    <link rel="stylesheet" href="assets/css/styles.css">
-    <link rel="stylesheet" href="assets/css/utilities.css">
-<link href="assets/css/tailwindstyles.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wireframe Tool</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/utilities.css">
+  <link href="assets/css/tailwindstyles.css" rel="stylesheet">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
 </head>
 
 <body>
-    <header class="sticky-header ">
-        <div class="navigation">
-            <div class="logo">
-                <h1><a href="index.html"><img src="uploads/logo.png" width="50px" height="50px" alt=""></a></h1>
-            </div>
-            <div class="menubar">
-                <nav>
-                    <a href="wireframe/profile.html">Profile</a>
-                    <a href="wireframe/dashboard.html">Dashboard</a>
-                    <a href="wireframe/contact.html">Contact Sales</a>
-                    <a href="auth/login.html" id="login">Login</a>
-                    <a href="auth/register.html" id="signup">Sign Up Free</a>
-                </nav>
-                <div class="user">
-                    <div class="user-icon">
-                      <img src="uploads/avatar.svg" alt="avatar" />
-                      <div class="green-dot"></div>
-                    </div>
-                    <span>UserName</span>
-                    <label class="close-icon" for="hamburger-checkbox">
-                      <img src="uploads/close-icon.svg" alt="close-icon" />
-                    </label>
-                  </div>
-            </div>
-        </div>
-    </header>
-
-    <div class="page1">
-        <div class="hero">
-            <h1 >Design Seamlessly with Our Wireframe Tool</h1>
-            <p>Create professional wireframes quickly and efficiently with our easy-to-use editor. Perfect for designers, developers, and teams.</p>
-        </div>
-        <a href="wireframe/editor.html" class="cta-button">Start Designing</a>
-    </div>
-
-    <div class="about" id="page2">
-      <section class="text-gray-600 body-font">
-        <div class="container px-5 py-24 mx-auto flex flex-wrap">
-          <div class="lg:w-2/3 mx-auto">
-            <div class="flex flex-wrap w-full bg-gray-100 py-32 px-10 relative mb-4">
-              <img alt="gallery" class="w-full object-cover h-full object-center block opacity-25 absolute inset-0" src="https://dummyimage.com/820x340">
-              <div class="text-center relative z-10 w-full">
-                <h2 class="text-2xl text-gray-900 font-medium title-font mb-2">Click and Drag to Draw</h2>
-                <p class="leading-relaxed">Skateboard +1 mustache fixie paleo lumbersexual.</p>
-                <a class="mt-3 text-indigo-500 inline-flex items-center">Learn More
-                  <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
-                    <path d="M5 12h14M12 5l7 7-7 7"></path>
-                  </svg>
-                </a>
-              </div>
-            </div>
-            <div class="flex flex-wrap -mx-2">
-              <div class="px-2 w-1/2">
-                <div class="flex flex-wrap w-full bg-gray-100 sm:py-24 py-16 sm:px-10 px-6 relative">
-                  <img alt="gallery" class="w-full object-cover h-full object-center block opacity-25 absolute inset-0" src="https://dummyimage.com/542x460">
-                  <div class="text-center relative z-10 w-full">
-                    <h2 class="text-xl text-gray-900 font-medium title-font mb-2">Shooting Stars</h2>
-                    <p class="leading-relaxed">Skateboard +1 mustache fixie paleo lumbersexual.</p>
-                    <a class="mt-3 text-indigo-500 inline-flex items-center">Learn More
-                      <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
-                        <path d="M5 12h14M12 5l7 7-7 7"></path>
-                      </svg>
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div class="px-2 w-1/2">
-                <div class="flex flex-wrap w-full bg-gray-100 sm:py-24 py-16 sm:px-10 px-6 relative">
-                  <img alt="gallery" class="w-full object-cover h-full object-center block opacity-25 absolute inset-0" src="https://dummyimage.com/542x420">
-                  <div class="text-center relative z-10 w-full">
-                    <h2 class="text-xl text-gray-900 font-medium title-font mb-2">Shooting Stars</h2>
-                    <p class="leading-relaxed">Skateboard +1 mustache fixie paleo lumbersexual.</p>
-                    <a class="mt-3 text-indigo-500 inline-flex items-center">Learn More
-                      <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
-                        <path d="M5 12h14M12 5l7 7-7 7"></path>
-                      </svg>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
+  <header class="sticky-header ">
+    <div class="navigation">
+      <div class="logo">
+        <h1><a href="index.html"><img src="uploads/logo.png" width="50px" height="50px" alt=""></a></h1>
+      </div>
+      <div class="menubar">
+        <nav>
+          <a href="wireframe/profile.html">Profile</a>
+          <a href="wireframe/dashboard.html">Dashboard</a>
+          <a href="wireframe/contact.html">Contact Sales</a>
+          <a href="auth/login.html" id="login">Login</a>
+          <a href="auth/register.html" id="signup">Sign Up Free</a>
+        </nav>
+        <div class="user">
+          <div class="user-icon">
+            <img src="uploads/avatar.svg" alt="avatar" />
+            <div class="green-dot"></div>
           </div>
+          <span>UserName</span>
+          <label class="close-icon" for="hamburger-checkbox">
+            <img src="uploads/close-icon.svg" alt="close-icon" />
+          </label>
         </div>
-      </section>
+      </div>
     </div>
-    <div class="about" >
-        <h2>What is a Wireframe?</h2>
-        <p>A wireframe is a simple sketch or blueprint that shows the basic layout of a website or app. It helps designers and developers plan where things like text, images, and buttons will go without worrying about colors or design details yet.</p>
-        <div class="container">
-            <div class="box" id="box1">
-                <h3>Brainstorm software in the fastest way</h3>
-                <ul>
-                    <li><strong>Clarify Ideas:</strong> Wireframes show how a site or app will look and work, making it easier to understand the basic structure.</li>
-                    <li><strong>Get Feedback:</strong> They help teams, clients, and users give feedback on the layout before investing in detailed designs.</li>
-                    <li><strong>Save Time:</strong> By spotting problems early, wireframes can save time and money that might be spent on changes later in the design process.</li>
-                    <li><strong>Focus on Function:</strong> They help focus on how the website or app will work, rather than just how it looks.</li>
-                </ul>
-            </div>
-        <div class="box" id="box2">
-            <h3>Benefits of Using Wireframes</h3>
-            <ul>
-                <li><strong>Improves User Experience:</strong> Wireframes show how users will interact with the site or app, helping create a better experience.</li>
-                <li><strong>Faster Changes:</strong> They’re quick to create, so you can try out different ideas and make changes fast.</li>
-                <li><strong>Clearer Development:</strong> Wireframes give developers a clear guide on how the site should work, making the development process smoother.</li>
-                <li><strong>Save Costs:</strong> By avoiding costly design mistakes, wireframes can help save money.</li>
-            </ul>
-        </div>
-        <div class="box" class="box3">
-            <h3>Types of Wireframes</h3>
-            <ul>
-                <li><strong>Low-Fidelity:</strong> Simple, basic sketches that show the layout and structure without much detail.</li>
-                <li><strong>High-Fidelity:</strong> Detailed wireframes that closely resemble the final design.</li>
-            </ul>
-        </div>
-        </div>
+  </header>
+  <div class="page1">
+    <div class="hero">
+      <h1>Design Seamlessly with Our Wireframe Tool</h1>
+      <p>Create professional wireframes quickly and efficiently with our easy-to-use editor. Perfect for designers,
+        developers, and teams.</p>
     </div>
-    
-    
-    <div class="footer">
-        <footer>
-            © 2025 Wireframe Tool, All rights reserved.
-        </footer>
+    <a href="wireframe/editor.html" class="cta-button">Start Designing</a>
+  </div>
+
+  <section class="bg-gray-900">
+    <div class="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
+      <div class="mr-auto place-self-center lg:col-span-7">
+        <h1
+          class="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl bg-white:text-slate-800">
+          Click to Drag and Draw</h1>
+        <p class="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">To create an
+          element, draw a rectangle on the canvas and then select the stencil that you want to insert. To edit the
+          element, click on it. </p>
+
+      </div>
+      <div class=" lg:mt-0 lg:col-span-5 lg:flex">
+        <img src="uploads/drag&drop.GIF" alt="mockup">
+      </div>
     </div>
+  </section>
+  <section class="text-white body-font">
+    <div class="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
+      <div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6 mb-10 md:mb-0">
+        <img class="object-cover object-center rounded" alt="hero" src="uploads/palette.webp">
+      </div>
+      <div class="lg:flex-grow md:w-1/2 lg:pl-24 md:pl-16 flex flex-col md:items-start md:text-left items-center text-center">
+        <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">A limited palette 
+        </h1>
+        <p class="mb-8 leading-relaxed  text-gray-900">of colors and options can help you avoid wasting time on unneeded details, allowing you to focus on what truly matters.</p>
+        <div class="flex justify-center">
+          
+        </div>
+      </div>
+    </div>
+  </section>
+ 
+
+
+
+  <div class="footer">
+    <footer class="text-white body-font">
+      <div class="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col">
+        <a class="flex title-font font-medium items-center md:justify-start justify-center text-white">
+          <img class="w-10 h-10 text-white p-2 bg-white rounded-full" src="uploads/logo.png" alt="">
+          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+          </svg>
+          <span class="ml-3 text-xl">Design Frame</span>
+        </a>
+        <p class="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">© 2025
+          Design Frame —
+          <a href="https://github.com/mukund58" class="text-gray-600 ml-1" rel="noopener noreferrer"
+            target="_blank">@Mukund</a>
+          <a href="https://github.com/jaivik2005" class="text-gray-600 ml-1" rel="noopener noreferrer"
+            target="_blank">@Javik</a>
+        </p>
+        <span class="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
+          <a class="text-gray-500" href="https://github.com/mukund58/Wireframe-tool" target="_blank" ><i class='bx bxl-github text-3xl'></i></a>
+        </span>
+      </div>
+    </footer>
+  </div>
 </body>
+
 </html>
