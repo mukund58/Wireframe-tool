@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener("resize", resizeCanvas);
     resizeCanvas();
 
-    document.getElementById("cursor").addEventListener("click", () => canvas.isDrawingMode = false);
+    document.getElementById("cursor").addEventListener("click", () => deleteSelected(canvas));
     document.getElementById("rectangle").addEventListener("click", () => addRect());
     document.getElementById("circle").addEventListener("click", () => addCircle());
     document.getElementById("triangle").addEventListener("click", () => addTriangle());
@@ -43,29 +43,231 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("saveJSON").addEventListener("click", saveCanvasAsJSON);
     document.getElementById("loadJSON").addEventListener("click", loadCanvasFromJSON);
 
-
     function addRect() {
-        const rect = new fabric.Rect({
-            left: 100,
-            top: 100,
-            fill: 'white',
-            stroke: 'black',
-            width: 60,
-            height: 70
-        });
-        canvas.add(rect);
+        canvas.discardActiveObject().renderAll();
+        canvas.isDrawingMode = false; // Turn off drawing mode
+        var Rectangle = (function () {
+            function Rectangle(canvas) {
+                this.canvas = canvas;
+                this.className = 'Rectangle';
+                this.isDrawing = false;
+                this.origX = 0;
+                this.origY = 0;
+                this.bindEvents();
+            }
+    
+            Rectangle.prototype.bindEvents = function () {
+                var inst = this;
+                inst.canvas.on('mouse:down', function (o) {
+                    inst.onMouseDown(o);
+                });
+                inst.canvas.on('mouse:move', function (o) {
+                    inst.onMouseMove(o);
+                });
+                inst.canvas.on('mouse:up', function (o) {
+                    inst.onMouseUp(o);
+                });
+                inst.canvas.on('object:moving', function (o) {
+                    inst.disable();
+                });
+            };
+    
+            Rectangle.prototype.onMouseUp = function (o) {
+                var inst = this;
+                inst.disable();
+            };
+    
+            Rectangle.prototype.onMouseMove = function (o) {
+                var inst = this;
+                if (!inst.isEnable()) return;
+    
+                var pointer = inst.canvas.getPointer(o.e);
+                var activeObj = inst.canvas.getActiveObject();
+                
+                if (!activeObj) return; // Prevent errors if no object is selected
+    
+                activeObj.set({
+                    stroke: 'black',
+                    strokeWidth: 5,
+                    fill: 'transparent',
+                    width: Math.abs(inst.origX - pointer.x),
+                    height: Math.abs(inst.origY - pointer.y),
+                });
+    
+                if (inst.origX > pointer.x) activeObj.set({ left: Math.abs(pointer.x) });
+                if (inst.origY > pointer.y) activeObj.set({ top: Math.abs(pointer.y) });
+    
+                activeObj.setCoords();
+                inst.canvas.renderAll();
+            };
+    
+            Rectangle.prototype.onMouseDown = function (o) {
+                var inst = this;
+    
+                // Deselect any selected object before drawing a new one
+                inst.canvas.discardActiveObject().renderAll();
+    
+                inst.enable();
+                var pointer = inst.canvas.getPointer(o.e);
+                inst.origX = pointer.x;
+                inst.origY = pointer.y;
+    
+                var rect = new fabric.Rect({
+                    left: inst.origX,
+                    top: inst.origY,
+                    originX: 'left',
+                    originY: 'top',
+                    width: 0,
+                    height: 0,
+                    angle: 0,
+                    transparentCorners: false,
+                    hasBorders: false,
+                    hasControls: false,
+                });
+    
+                inst.canvas.add(rect).setActiveObject(rect);
+            };
+    
+            Rectangle.prototype.isEnable = function () {
+                return this.isDrawing;
+            };
+    
+            Rectangle.prototype.enable = function () {
+                this.isDrawing = true;
+            };
+    
+            Rectangle.prototype.disable = function () {
+                this.isDrawing = false;
+            };
+    
+            return Rectangle;
+        })();
+    
+        // Reset cursor before drawing
+        canvas.defaultCursor = 'default';
+    
+        // Initialize the Rectangle class
+        new Rectangle(canvas);
+        
     }
-    function addCircle() {
-        var cir = new fabric.Circle({
-            top: 10,
-          left: 100,
-          radius: 50,
-          fill: 'white',
-          stroke: 'black',
-          strokeWidth: 2
-      });
-        canvas.add(cir);
-    }
+    
+    
+  function addCircle() {
+    canvas.discardActiveObject().renderAll();
+    canvas.isDrawingMode = false; // Turn off drawing mode
+    var Circle = (function () {
+        function Circle(canvas) {
+            this.canvas = canvas;
+            this.className = 'Circle';
+            this.isDrawing = false;
+            this.origX = 0;
+            this.origY = 0;
+            this.bindEvents();
+        }
+
+        Circle.prototype.bindEvents = function () {
+            var inst = this;
+            inst.canvas.on('mouse:down', function (o) {
+                inst.onMouseDown(o);
+            });
+            inst.canvas.on('mouse:move', function (o) {
+                inst.onMouseMove(o);
+            });
+            inst.canvas.on('mouse:up', function (o) {
+                inst.onMouseUp(o);
+            });
+            inst.canvas.on('object:moving', function (o) {
+                inst.disable();
+            });
+        };
+
+        Circle.prototype.onMouseUp = function (o) {
+            var inst = this;
+            inst.disable();
+            
+            // Enable selection & dragging after drawing is finished
+            var activeObj = inst.canvas.getActiveObject();
+            if (activeObj) {
+                activeObj.set({
+                    selectable: true,
+                    hasControls: true,
+                    hasBorders: true
+                });
+            }
+        };
+
+        Circle.prototype.onMouseMove = function (o) {
+            var inst = this;
+            if (!inst.isEnable()) return;
+
+            var pointer = inst.canvas.getPointer(o.e);
+            var activeObj = inst.canvas.getActiveObject();
+            if (!activeObj) return;
+
+            var radius = Math.sqrt(Math.pow(pointer.x - inst.origX, 2) + Math.pow(pointer.y - inst.origY, 2)) / 2;
+
+            activeObj.set({
+                radius: radius,
+                left: inst.origX ,
+                top: inst.origY 
+            });
+
+            activeObj.setCoords();
+            inst.canvas.renderAll();
+        };
+
+        Circle.prototype.onMouseDown = function (o) {
+            var inst = this;
+
+            // Deselect any active object
+            inst.canvas.discardActiveObject().renderAll();
+
+            inst.enable();
+            var pointer = inst.canvas.getPointer(o.e);
+            inst.origX = pointer.x;
+            inst.origY = pointer.y;
+
+            var circle = new fabric.Circle({
+                left: inst.origX,
+                top: inst.origY,
+                radius: 0,
+                fill: 'transparent',
+                stroke: 'black',
+                strokeWidth: 5,
+                originX: 'center',
+                originY: 'center',
+                hasBorders: false,
+                hasControls: false,
+                selectable: true // Prevent selection box while drawing
+            });
+
+            inst.canvas.add(circle).setActiveObject(circle);
+        };
+
+        Circle.prototype.isEnable = function () {
+            return this.isDrawing;
+        };
+
+        Circle.prototype.enable = function () {
+            this.isDrawing = true;
+        };
+
+        Circle.prototype.disable = function () {
+            this.isDrawing = false;
+        };
+
+        return Circle;
+    })();
+
+    // Reset cursor before drawing
+    canvas.defaultCursor = 'default';
+
+    // Initialize the Circle class
+    new Circle(canvas);
+}
+
+    
+    
     function addTriangle() {
         var tri = new fabric.Triangle({
             top: 10,
@@ -117,12 +319,13 @@ document.addEventListener("DOMContentLoaded", () => {
         canvas.add(text);
     }
 
-    function deleteSelected() {
-        const activeObject = canvas.getActiveObject();
-        if (activeObject) {
-            canvas.remove(activeObject);
-        }
+    function deleteSelected(canvas) {
+        canvas.defaultCursor = 'default';
+        canvas.isDrawingMode = false; // Turn off drawing mode
+
+        canvas.discardActiveObject().renderAll();
     }
+    
 
 
     function saveCanvasAsPNG() {
@@ -196,59 +399,18 @@ document.addEventListener("DOMContentLoaded", () => {
     canvas.on('object:added', saveState);
 
     // Implement functionality to change canvas color using the color picker
-    document.getElementById("color-picker").addEventListener("input", (event) => {
-        canvas.setBackgroundColor(event.target.value, canvas.renderAll.bind(canvas));
-    });
+  
 
-    // Implement functionality to change canvas width and height using input elements
-    document.getElementById("canvas-width").addEventListener("input", (event) => {
-        canvas.setWidth(parseInt(event.target.value, 10));
-        resizeCanvas();
-    });
-
-    document.getElementById("canvas-height").addEventListener("input", (event) => {
-        canvas.setHeight(parseInt(event.target.value, 10));
-        resizeCanvas();
-    });
-
-    // Add panning functionality
-    let isPanning = false;
-    let startX, startY;
-
-    canvas.on('mouse:down', (event) => {
-        isPanning = true;
-        startX = event.e.clientX;
-        startY = event.e.clientY;
-    });
-
-    canvas.on('mouse:move', (event) => {
-        if (isPanning) {
-            const deltaX = event.e.clientX - startX;
-            const deltaY = event.e.clientY - startY;
-            canvas.relativePan({ x: deltaX, y: deltaY });
-            startX = event.e.clientX;
-            startY = event.e.clientY;
-        }
-    });
-
-    canvas.on('mouse:up', () => {
-        isPanning = false;
-    });
-
-    // Add zooming functionality
-    canvas.on('mouse:wheel', (event) => {
-        const delta = event.e.deltaY;
-        let zoom = canvas.getZoom();
-        zoom *= 0.999 ** delta;
-        if (zoom > 20) zoom = 20;
-        if (zoom < 0.01) zoom = 0.01;
-        canvas.zoomToPoint({ x: event.e.offsetX, y: event.e.offsetY }, zoom);
-        event.e.preventDefault();
-        event.e.stopPropagation();
-    });
-
+ 
     // Implement brush tool activation logic
     function setBrush(brushType) {
+        canvas.isDrawingMode = false;
+        canvas.defaultCursor = 'default';
+
+        // Deselect any selected object
+        canvas.discardActiveObject().renderAll();
+    
+        // Now enable drawing mode
         canvas.isDrawingMode = true;
         switch (brushType) {
             case 1:
@@ -323,13 +485,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // Add event listeners for the export and import buttons
-    document.getElementById("export-btn").addEventListener("click", exportCanvasAsJSON);
-    document.getElementById("import-btn").addEventListener("click", () => {
-        document.getElementById("import-input").click();
-    });
-
-    // Add event listener for the import input element
-    document.getElementById("import-input").addEventListener("change", importCanvasFromJSON);
+   
 });
 
