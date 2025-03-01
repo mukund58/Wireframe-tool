@@ -10,6 +10,7 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 
+
 // Apply transformations
 function setTransform() {
     zoom.style.transform = `translate(${pointX}px, ${pointY}px) scale(${scale})`;
@@ -18,7 +19,7 @@ function setTransform() {
 
 }
 
-// Right-click for panning
+// // Right-click for panning
 zoom.onmousedown = function (e) {
     if (e.button === 2) {
         e.preventDefault();
@@ -61,4 +62,4 @@ zoom.oncontextmenu = function (e) {
 
 
 // Initial render
-drawCanvas();
+// drawCanvas();
