@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
         canvas.clear();
     });
     document.getElementById("delete").addEventListener("click", () => {
-        clearSelection();
+        // clearSelection();
         deleteSelected();
     });
 
@@ -361,10 +361,21 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function deleteSelected() {
-        canvas.defaultCursor = 'default';
-        canvas.isDrawingMode = false; // Turn off drawing mode
-        canvas.discardActiveObject().renderAll();
+        let activeObject = canvas.getActiveObject();
+        
+        if (activeObject) {
+            if (activeObject.type === "activeSelection") {
+                activeObject.forEachObject((obj) => {
+                    canvas.remove(obj);
+                });
+                canvas.discardActiveObject(); // Remove selection outline
+            } else {
+                canvas.remove(activeObject);
+            }
+            canvas.renderAll();
+        }
     }
+    
 
     function saveCanvasAsPNG() {
         var dataURL = canvas.toDataURL({
