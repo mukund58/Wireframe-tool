@@ -19,26 +19,61 @@
         <h1><a href="index.html"><img src="uploads/logo.png" width="50px" height="50px" alt=""></a></h1>
       </div>
       <div class="menubar">
-        <nav>
-          <a href="wireframe/profile.html">Profile</a>
-          <a href="wireframe/dashboard.html">Dashboard</a>
-          <a href="wireframe/contact.html">Contact Sales</a>
-          <a href="auth/login.html" id="login">Login</a>
-          <a href="auth/register.html" id="signup">Sign Up Free</a>
+        <input type="checkbox" id="hamburger-checkbox" style="display: none;">
+        <label for="hamburger-checkbox">
+            <img class="menu-icon" src="uploads/avatar.svg" alt="menu-icon">
+        </label>
+    
+        <nav class="nav-user">
+            <label for="hamburger-checkbox">
+                <img class="close-icon" src="uploads/close-icon.svg" alt="close-icon">
+            </label>
+            <a href="wireframe/profile.html">Profile</a>
+            <a href="wireframe/dashboard.html">Dashboard</a>
+            <a href="wireframe/contact.html">Contact Sales</a>
+            <a id="openModal">Login</a>
+            <a href="auth/register.html" id="signup">Sign Up Free</a>
         </nav>
-        <div class="user">
-          <div class="user-icon">
-            <img src="uploads/avatar.svg" alt="avatar" />
-            <div class="green-dot"></div>
-          </div>
-          <span>UserName</span>
-          <label class="close-icon" for="hamburger-checkbox">
-            <img src="uploads/close-icon.svg" alt="close-icon" />
-          </label>
-        </div>
-      </div>
+    </div>
+      
     </div>
   </header>
+  <div id="loginModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h3>Sign in to our platform</h3>
+        <form onsubmit="return validateForm(event)">
+            <div class="form-group">
+                <label for="email">Your email</label>
+                <input type="email" id="email" placeholder="name@company.com" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Your password</label>
+                <input type="password" id="password" placeholder="••••••••" required>
+            </div>
+            <p id="error-message" class="error-message"></p>
+            <div class="flex justify-between">
+							<div class="flex items-start">
+								<div class="flex items-center h-5">
+									<input id="remember" aria-describedby="remember"
+										type="checkbox"	required="">
+								</div>
+								<div QQ>
+									<label for="remember"
+										class="font-medium text-gray-900 dark:text-gray-300">Remember
+										me</label>
+								</div>
+							</div>
+							<a href="#"
+								class="text-sm text-blue-700 hover:underline dark:text-blue-500">Lost
+								Password?</a>
+						</div>
+            <button type="submit"
+							class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Login
+							to your account</button>
+        </form>
+    </div>
+</div>
   <div class="page1">
     <div class="hero">
       <h1>Design Seamlessly with Our Wireframe Tool</h1>
@@ -47,6 +82,8 @@
     </div>
     <a href="wireframe/editor.html" class="cta-button">Start Designing</a>
   </div>
+
+ 
 
   <section class="bg-gray-900">
     <div class="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
@@ -105,6 +142,7 @@
       </div>
     </footer>
   </div>
+  <script src="assets/js/login.js"></script>
 </body>
 
 </html>

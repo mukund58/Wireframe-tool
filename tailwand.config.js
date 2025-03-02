@@ -9,7 +9,7 @@ module.exports = {
   },
   plugins: [],
 };
-
+@themesberg/flowbite@1.2.0
 tailwind.config = {
   darkMode: 'class',
   theme: {
