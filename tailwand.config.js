@@ -2,14 +2,14 @@
 module.exports = {
   content: [
     "./public/**/*.html",
-    "./public/assets/js/**/*.js"
+    "./public/assets/js/**/*.js",
+    "./public/wireframe/*.html"
   ],
   theme: {
     extend: {},
   },
   plugins: [],
 };
-@themesberg/flowbite@1.2.0
 tailwind.config = {
   darkMode: 'class',
   theme: {

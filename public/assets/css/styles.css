@@ -135,9 +135,13 @@
         .user-icon-1 {
             display: none;
         }
-
-        .modeal {
+        #loginModal{
             display: none;
+        }
+        #signUpModal{
+            display: none;
+        }
+        .modeal {
             position: fixed;
             z-index: 1000;
             left: 0;
@@ -157,12 +161,13 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             width: 60%;
         }
-
-        .close {
-            float: right;
+        .close-login{
             cursor: pointer;
         }
+        .close-signup{
+            cursor: pointer;
 
+        }
         .form-group {
             margin: 15px;
         }
