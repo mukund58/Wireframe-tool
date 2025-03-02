@@ -78,8 +78,11 @@
         .menubar {
             display: flex;
             flex-grow: 1;
+            flex-direction: row-reverse;
+  margin-right: 16px;
+}
 
-        }
+        
 
         .close-icon {
             right: 17%;
@@ -87,7 +90,10 @@
             filter: opacity;
             filter: invert(100%);
             mix-blend-mode: lighten;
+            opacity: 0;
+            
         }
+       
 
         .logo img {
             filter: invert(100%);
@@ -402,6 +408,7 @@
             .menubar {
                 display: flex;
                 justify-content: end;
+                
             }
             .menubar img{
                 cursor: pointer;
@@ -426,10 +433,7 @@
                 justify-content: end;
                 cursor: pointer;
             }
-            .close-icon{
-                position: absolut;
-                right: 17px;
-            }
+            
 
             .cta-button {
                 font-size: 1.2em;
