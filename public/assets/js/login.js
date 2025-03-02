@@ -1,18 +1,30 @@
-var modal = document.getElementById("loginModal");
+document.addEventListener("DOMContentLoaded", () => {
+var moda = document.getElementById("loginModal");
+var signUpModal = document.getElementById("signUpModal");
+
 var btn = document.getElementById("loginOpenModal");
-var closeBtn = document.querySelector(".close");
+var closeButton = document.querySelector(".close-login");
+var switchToSignup = document.getElementById("switchToSignup");
+var switchToSignin = document.getElementById("switchToSignin");
 btn.onclick = function() {
-    modal.style.display = "flex";
+    moda.style.display = "flex";
 }
-closeBtn.onclick = function() {
-    modal.style.display = "none";
+closeButton.onclick = function() {
+    moda.style.display = "none";
 }
 window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
+    if (event.target == moda) {
+        moda.style.display = "none";
     }
 }
-
+switchToSignup.onclick = function() {
+    moda.style.display = "none";
+    signUpModal.style.display = "flex";
+};
+switchToSignin.onclick = function() {
+    moda.style.display = "flex";
+    signUpModal.style.display = "none";
+};
 function validateForm(event) {
     event.preventDefault(); // Prevent form submission for demo
     
@@ -37,3 +49,4 @@ function validateForm(event) {
 
     return true;
 }
+});

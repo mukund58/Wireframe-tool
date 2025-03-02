@@ -1,15 +1,21 @@
+document.addEventListener("DOMContentLoaded", () => {
 var mo = document.getElementById("signUpModal");
 var btn = document.getElementById("signUpopenModal");
-var closeBtn = document.querySelector(".close");
+var closeBtn = document.querySelector(".close-signup");
+
 btn.onclick = function() {
     mo.style.display = "flex";
 }
 closeBtn.onclick = function() {
     mo.style.display = "none";
 }
+var moda = document.getElementById("loginModal");
 window.onclick = function(event) {
-    if (event.target == modeal) {
+    if (event.target == (mo)) {
         mo.style.display = "none";
+    }
+    if (event.target == (moda)) {
+        moda.style.display = "none";
     }
 }
 
@@ -37,3 +43,4 @@ function validateForm(event) {
 
     return true;
 }
+});

@@ -28,7 +28,7 @@
           <label for="hamburger-checkbox">
             <img class="close-icon" src="uploads/close-icon.svg" alt="close-icon">
           </label>
-          <a href="wireframe/profile.html">Profile</a>
+          <a href="wireframe/setting.html">Profile</a>
           <a href="wireframe/dashboard.html">Dashboard</a>
           <a href="wireframe/contact.html">Contact Sales</a>
           <a id="loginOpenModal">Login</a>
@@ -41,7 +41,7 @@
 
   <div id="loginModal" class="modeal">
     <div class="modal-content relative  max-w-md px-4  ">
-      <div class="flex flex-col">
+      <div class="close-login flex flex-col">
 
         <svg class="close h-5 ml-auto" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
           <path fill-rule="evenodd"
@@ -52,11 +52,11 @@
       </div>
       <form onsubmit="return validateForm(event)">
         <div class="form-group ">
-          <label for="email">Your email</label>
+          <label for="email">Email or Username</label>
           <input type="email" id="email" placeholder="name@company.com" required>
         </div>
         <div class="form-group">
-          <label for="password">Your password</label>
+          <label for="password">Password</label>
           <input type="password" id="password" placeholder="••••••••" required>
         </div>
         <p id="error-message" class="error-message"></p>
@@ -76,8 +76,8 @@
         <button type="submit"
           class="w-full my-5 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center my-3 ">Login
           to your account</button>
-        <div class="text-sm font-medium text-gray-500 ">
-          Not registered? <a href="#" class="text-blue-700 hover:underline ">Create
+        <div class="text-sm font-medium text-gray-500 cursor-pointer">
+          Not registered? <a id="switchToSignup" class="text-blue-700 hover:underline ">Create
             account</a>
         </div>
       </form>
@@ -85,8 +85,7 @@
   </div>
   <div id="signUpModal" class="modeal">
     <div class="modal-content relative  max-w-md px-4  ">
-      <div class="close flex flex-col">
-
+      <div class="close-signup flex flex-row-reverse">
         <svg class=" h-5 ml-auto" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
           <path fill-rule="evenodd"
             d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
@@ -96,11 +95,15 @@
       </div>
       <form onsubmit="return validateForm(event)">
         <div class="form-group ">
-          <label for="email">Your email</label>
+          <label for="email">Email</label>
           <input type="email" id="email" placeholder="name@company.com" required>
         </div>
+        <div class="form-group ">
+          <label for="username">Username</label>
+          <input type="username" id="username" placeholder="username123" required>
+        </div>
         <div class="form-group">
-          <label for="password">Your password</label>
+          <label for="password">Password</label>
           <input type="password" id="password" placeholder="••••••••" required>
         </div>
         <p id="error-message" class="error-message"></p>
@@ -118,10 +121,10 @@
             Password?</a>
         </div>
         <button type="submit"
-          class="w-full my-5 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center my-3 ">Login
+          class="w-full my-5 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center my-3 ">Register
           to your account</button>
-        <div class="text-sm font-medium text-gray-500 ">
-          Not registered? <a href="#" class="text-blue-700 hover:underline ">Create
+        <div class="text-sm font-medium text-gray-500 cursor-pointer">
+          Already have an account? <a id="switchToSignin" class="text-blue-700 hover:underline ">Login
             account</a>
         </div>
       </form>
@@ -177,7 +180,7 @@
 
 
   <div class="footer">
-    <footer class="text-white body-font">
+    <footer class="text-white body-font my-">
       <div class="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col">
         <a class="flex title-font font-medium items-center md:justify-start justify-center text-white">
           <img class="w-10 h-10 text-white p-2 bg-white rounded-full" src="uploads/logo.png" alt="">
@@ -199,8 +202,8 @@
       </div>
     </footer>
   </div>
-  <script src="assets/js/register.js"></script>
   <script src="assets/js/login.js"></script>
+  <script src="assets/js/register.js"></script>
 </body>
 
 </html>
