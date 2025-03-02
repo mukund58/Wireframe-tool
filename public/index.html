@@ -21,59 +21,113 @@
       <div class="menubar">
         <input type="checkbox" id="hamburger-checkbox" style="display: none;">
         <label for="hamburger-checkbox">
-            <img class="menu-icon" src="uploads/avatar.svg" alt="menu-icon">
+          <img class="menu-icon" src="uploads/avatar.svg" alt="menu-icon">
         </label>
-    
+
         <nav class="nav-user">
-            <label for="hamburger-checkbox">
-                <img class="close-icon" src="uploads/close-icon.svg" alt="close-icon">
-            </label>
-            <a href="wireframe/profile.html">Profile</a>
-            <a href="wireframe/dashboard.html">Dashboard</a>
-            <a href="wireframe/contact.html">Contact Sales</a>
-            <a id="openModal">Login</a>
-            <a href="auth/register.html" id="signup">Sign Up Free</a>
+          <label for="hamburger-checkbox">
+            <img class="close-icon" src="uploads/close-icon.svg" alt="close-icon">
+          </label>
+          <a href="wireframe/profile.html">Profile</a>
+          <a href="wireframe/dashboard.html">Dashboard</a>
+          <a href="wireframe/contact.html">Contact Sales</a>
+          <a id="loginOpenModal">Login</a>
+          <a id="signUpopenModal">Sign Up Free</a>
         </nav>
-    </div>
-      
+      </div>
+
     </div>
   </header>
-  <div id="loginModal" class="modal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <h3>Sign in to our platform</h3>
-        <form onsubmit="return validateForm(event)">
-            <div class="form-group">
-                <label for="email">Your email</label>
-                <input type="email" id="email" placeholder="name@company.com" required>
+
+  <div id="loginModal" class="modeal">
+    <div class="modal-content relative  max-w-md px-4  ">
+      <div class="flex flex-col">
+
+        <svg class="close h-5 ml-auto" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd"
+            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+            clip-rule="evenodd"></path>
+        </svg>
+        <h2 class="text-xl font-medium text-gray-900">Sign in to our platform</h2>
+      </div>
+      <form onsubmit="return validateForm(event)">
+        <div class="form-group ">
+          <label for="email">Your email</label>
+          <input type="email" id="email" placeholder="name@company.com" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Your password</label>
+          <input type="password" id="password" placeholder="••••••••" required>
+        </div>
+        <p id="error-message" class="error-message"></p>
+        <div class="flex justify-between m-4">
+          <div class="flex items-start">
+            <div class="flex items-center h-5">
+              <input id="remember" aria-describedby="remember" type="checkbox" required="">
             </div>
-            <div class="form-group">
-                <label for="password">Your password</label>
-                <input type="password" id="password" placeholder="••••••••" required>
+            <div class="text-sm ml-3">
+              <label for="remember" class=" text-gray-900  ">Remember
+                me</label>
             </div>
-            <p id="error-message" class="error-message"></p>
-            <div class="flex justify-between">
-							<div class="flex items-start">
-								<div class="flex items-center h-5">
-									<input id="remember" aria-describedby="remember"
-										type="checkbox"	required="">
-								</div>
-								<div QQ>
-									<label for="remember"
-										class="font-medium text-gray-900 dark:text-gray-300">Remember
-										me</label>
-								</div>
-							</div>
-							<a href="#"
-								class="text-sm text-blue-700 hover:underline dark:text-blue-500">Lost
-								Password?</a>
-						</div>
-            <button type="submit"
-							class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Login
-							to your account</button>
-        </form>
+          </div>
+          <a href="#" class="text-sm text-blue-700 hover:underline dark:text-blue-500">Lost
+            Password?</a>
+        </div>
+        <button type="submit"
+          class="w-full my-5 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center my-3 ">Login
+          to your account</button>
+        <div class="text-sm font-medium text-gray-500 ">
+          Not registered? <a href="#" class="text-blue-700 hover:underline ">Create
+            account</a>
+        </div>
+      </form>
     </div>
-</div>
+  </div>
+  <div id="signUpModal" class="modeal">
+    <div class="modal-content relative  max-w-md px-4  ">
+      <div class="close flex flex-col">
+
+        <svg class=" h-5 ml-auto" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd"
+            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+            clip-rule="evenodd"></path>
+        </svg>
+        <h2 class="text-xl font-medium text-gray-900">Sign Up to our platform</h2>
+      </div>
+      <form onsubmit="return validateForm(event)">
+        <div class="form-group ">
+          <label for="email">Your email</label>
+          <input type="email" id="email" placeholder="name@company.com" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Your password</label>
+          <input type="password" id="password" placeholder="••••••••" required>
+        </div>
+        <p id="error-message" class="error-message"></p>
+        <div class="flex justify-between m-4">
+          <div class="flex items-start">
+            <div class="flex items-center h-5">
+              <input id="remember" aria-describedby="remember" type="checkbox" required="">
+            </div>
+            <div class="text-sm ml-3">
+              <label for="remember" class=" text-gray-900  ">Remember
+                me</label>
+            </div>
+          </div>
+          <a href="#" class="text-sm text-blue-700 hover:underline dark:text-blue-500">Lost
+            Password?</a>
+        </div>
+        <button type="submit"
+          class="w-full my-5 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center my-3 ">Login
+          to your account</button>
+        <div class="text-sm font-medium text-gray-500 ">
+          Not registered? <a href="#" class="text-blue-700 hover:underline ">Create
+            account</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <div class="page1">
     <div class="hero">
       <h1>Design Seamlessly with Our Wireframe Tool</h1>
@@ -83,7 +137,7 @@
     <a href="wireframe/editor.html" class="cta-button">Start Designing</a>
   </div>
 
- 
+
 
   <section class="bg-gray-900">
     <div class="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
@@ -106,17 +160,19 @@
       <div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6 mb-10 md:mb-0">
         <img class="object-cover object-center rounded" alt="hero" src="uploads/palette.webp">
       </div>
-      <div class="lg:flex-grow md:w-1/2 lg:pl-24 md:pl-16 flex flex-col md:items-start md:text-left items-center text-center">
-        <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">A limited palette 
+      <div
+        class="lg:flex-grow md:w-1/2 lg:pl-24 md:pl-16 flex flex-col md:items-start md:text-left items-center text-center">
+        <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">A limited palette
         </h1>
-        <p class="mb-8 leading-relaxed  text-gray-900">of colors and options can help you avoid wasting time on unneeded details, allowing you to focus on what truly matters.</p>
+        <p class="mb-8 leading-relaxed  text-gray-900">of colors and options can help you avoid wasting time on unneeded
+          details, allowing you to focus on what truly matters.</p>
         <div class="flex justify-center">
-          
+
         </div>
       </div>
     </div>
   </section>
- 
+
 
 
 
@@ -137,11 +193,13 @@
             target="_blank">@Javik</a>
         </p>
         <span class="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
-          <a class="text-gray-500" href="https://github.com/mukund58/Wireframe-tool" target="_blank" ><i class='bx bxl-github text-3xl'></i></a>
+          <a class="text-gray-500" href="https://github.com/mukund58/Wireframe-tool" target="_blank"><i
+              class='bx bxl-github text-3xl'></i></a>
         </span>
       </div>
     </footer>
   </div>
+  <script src="assets/js/register.js"></script>
   <script src="assets/js/login.js"></script>
 </body>
 

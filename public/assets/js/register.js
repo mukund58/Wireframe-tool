@@ -1,15 +1,15 @@
-var modal = document.getElementById("loginModal");
-var btn = document.getElementById("loginOpenModal");
+var mo = document.getElementById("signUpModal");
+var btn = document.getElementById("signUpopenModal");
 var closeBtn = document.querySelector(".close");
 btn.onclick = function() {
-    modal.style.display = "flex";
+    mo.style.display = "flex";
 }
 closeBtn.onclick = function() {
-    modal.style.display = "none";
+    mo.style.display = "none";
 }
 window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
+    if (event.target == modeal) {
+        mo.style.display = "none";
     }
 }
 
