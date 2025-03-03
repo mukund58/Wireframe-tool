@@ -23,11 +23,11 @@
             top: 0;
             left: 0;
             width: 100%;
-            background: indianred;
+            background: var(--bg-navbar);
             padding: 15px 0;
             z-index: 1000;
             animation: slideIn 1s ease-out;
-            /* box-shadow: 1px 4px 24px #000; */
+            box-shadow: 1px 4px 24px #000;
             font-family: var(--font1);
         }
 
@@ -212,7 +212,7 @@
             height: 100vh;
             animation: fadeIn 1.5s ease-in-out;
             /* background: linear-gradient(171deg, #000, #ff3d00); */
-            background-image: linear-gradient(rgba(243, 129, 129, 0.9), rgba(252, 227, 138, 0.9));
+            background-image: linear-gradient(171deg, #000, #ff3d00);
 
         }
 
@@ -401,7 +401,7 @@
                 position: absolute;
                 top: 85%;
                 flex-direction: column;
-                background-color: #cd5c5c;
+                background-color: var(--bg-navbar);
                 box-shadow: 0px 1px 11px black;
                 align-items: flex-start;
                 visibility: hidden;
