@@ -1046,9 +1046,6 @@
 .bg-red-500\/\[50\%\] {
   background-color: color-mix(in oklab, var(--color-red-500) 50%, transparent);
 }
-.bg-red-950 {
-  background-color: var(--color-red-950);
-}
 .bg-white {
   background-color: var(--color-white);
 }
@@ -2161,7 +2158,6 @@
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
     --color-red-500: oklch(0.637 0.237 25.331);
-    --color-red-950: oklch(0.258 0.092 26.042);
     --color-yellow-200: oklch(0.945 0.129 101.54);
     --color-yellow-700: oklch(0.554 0.135 66.442);
     --color-blue-300: oklch(0.809 0.105 251.813);
