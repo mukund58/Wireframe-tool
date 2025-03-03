@@ -43,5 +43,73 @@
             © 2025 Wireframe Tool, All rights reserved.
         </footer>
     </div>
+
+    <?php
+    // Database connection
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "wireframe_tool";
+
+    // Create connection
+    $conn = new mysqli($servername, $username, $password, $dbname);
+
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    // Fetch drafts
+    if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+        $sql = "SELECT id, title, content FROM drafts";
+        $result = $conn->query($sql);
+
+        $drafts = array();
+        if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                $drafts[] = $row;
+            }
+        }
+        echo json_encode($drafts);
+    }
+
+    // Delete draft
+    if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
+        $id = $_GET['id'];
+        $sql = "DELETE FROM drafts WHERE id=$id";
+        if ($conn->query($sql) === TRUE) {
+            echo "Draft deleted successfully";
+        } else {
+            echo "Error deleting draft: " . $conn->error;
+        }
+    }
+
+    // Re-edit draft
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['reEdit'])) {
+        $id = $_POST['id'];
+        $title = $_POST['title'];
+        $content = $_POST['content'];
+        $sql = "UPDATE drafts SET title='$title', content='$content' WHERE id=$id";
+        if ($conn->query($sql) === TRUE) {
+            echo "Draft updated successfully";
+        } else {
+            echo "Error updating draft: " . $conn->error;
+        }
+    }
+
+    // Autosave draft
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['autosave'])) {
+        $title = $_POST['title'];
+        $content = $_POST['content'];
+        $sql = "INSERT INTO drafts (title, content) VALUES ('$title', '$content')";
+        if ($conn->query($sql) === TRUE) {
+            echo "Draft saved successfully";
+        } else {
+            echo "Error saving draft: " . $conn->error;
+        }
+    }
+
+    $conn->close();
+    ?>
 </body>
 </html>

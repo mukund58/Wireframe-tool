@@ -100,3 +100,24 @@ function validateForm() {
     return false;
   }
 }
+
+// Autosave functionality
+function autosaveDraft(title, content) {
+  fetch('public/wireframe/draft.html', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    body: `autosave=true&title=${title}&content=${content}`
+  })
+    .then(response => response.text())
+    .then(result => console.log(result))
+    .catch(error => console.error('Error autosaving draft:', error));
+}
+
+// Call autosaveDraft function periodically
+setInterval(() => {
+  const title = "Autosave Draft";
+  const content = "Profile Page Content"; // Replace with actual content if needed
+  autosaveDraft(title, content);
+}, 30000); // Autosave every 30 seconds
