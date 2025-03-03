@@ -7,7 +7,7 @@
     <link href="../assets/css/tailwindstyles.css" rel="stylesheet">
     <link rel="icon" type="image/png" href="../uploads/white-logo.png"  >
     <link rel="stylesheet" href="../assets/css/utilities.css">
-        <link rel="stylesheet" href="../assets/css/dashboard.css">
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body class="bg-gray-100">
@@ -38,25 +38,90 @@
             </div>
             <div class=" md:w-3/4 w-full ">
                 <div id="account-general">
-                  
-                    
-                    
-                        <div class="dashboard-content ">
-                            <h2>Saved Drafts</h2>
-                            <div class="drafts-container">
-                                <!-- Drafts will be dynamically loaded here -->
-                            </div>
-                            <div class="export-import-buttons">
-                                <button id="export-drafts-btn" class="w-full my-5 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center cursor-pointer">Export Drafts as JSON</button>
-                                <button id="import-drafts-btn"class="w-full  text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center cursor-pointer" >Import Drafts from JSON</button>
-                                <input type="file" id="import-drafts-input" accept="application/json" style="display: none;">
-                            </div>
+                    <div class="dashboard-content ">
+                        <h2>Saved Drafts</h2>
+                        <div class="drafts-container">
+                            <!-- Drafts will be dynamically loaded here -->
                         </div>
-                   
+                        <div class="export-import-buttons">
+                            <button id="export-drafts-btn" class="w-full my-5 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center cursor-pointer">Export Drafts as JSON</button>
+                            <button id="import-drafts-btn"class="w-full  text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center cursor-pointer" >Import Drafts from JSON</button>
+                            <input type="file" id="import-drafts-input" accept="application/json" style="display: none;">
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <?php
+    // Database connection
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "wireframe_tool";
+
+    // Create connection
+    $conn = new mysqli($servername, $username, $password, $dbname);
+
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    // Fetch drafts
+    if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+        $sql = "SELECT id, title, content FROM drafts";
+        $result = $conn->query($sql);
+
+        $drafts = array();
+        if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                $drafts[] = $row;
+            }
+        }
+        echo json_encode($drafts);
+    }
+
+    // Delete draft
+    if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
+        $id = $_GET['id'];
+        $sql = "DELETE FROM drafts WHERE id=$id";
+        if ($conn->query($sql) === TRUE) {
+            echo "Draft deleted successfully";
+        } else {
+            echo "Error deleting draft: " . $conn->error;
+        }
+    }
+
+    // Re-edit draft
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['reEdit'])) {
+        $id = $_POST['id'];
+        $title = $_POST['title'];
+        $content = $_POST['content'];
+        $sql = "UPDATE drafts SET title='$title', content='$content' WHERE id=$id";
+        if ($conn->query($sql) === TRUE) {
+            echo "Draft updated successfully";
+        } else {
+            echo "Error updating draft: " . $conn->error;
+        }
+    }
+
+    // Autosave draft
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['autosave'])) {
+        $title = $_POST['title'];
+        $content = $_POST['content'];
+        $sql = "INSERT INTO drafts (title, content) VALUES ('$title', '$content')";
+        if ($conn->query($sql) === TRUE) {
+            echo "Draft saved successfully";
+        } else {
+            echo "Error saving draft: " . $conn->error;
+        }
+    }
+
+    $conn->close();
+    ?>
+
     <script src="../assets/js/setting.js"></script>
     <script src="../assets/js/dashboard.js"></script>
 </body>

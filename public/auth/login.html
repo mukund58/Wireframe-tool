@@ -44,6 +44,36 @@
             &copy; 2025 Free Wireframe Tool, All Rights Reserved.
         </footer>
     </div>
+
+    <?php
+    // Database connection
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "wireframe_tool";
+
+    // Create connection
+    $conn = new mysqli($servername, $username, $password, $dbname);
+
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    // Autosave draft
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['autosave'])) {
+        $title = $_POST['title'];
+        $content = $_POST['content'];
+        $sql = "INSERT INTO drafts (title, content) VALUES ('$title', '$content')";
+        if ($conn->query($sql) === TRUE) {
+            echo "Draft saved successfully";
+        } else {
+            echo "Error saving draft: " . $conn->error;
+        }
+    }
+
+    $conn->close();
+    ?>
 </body>
 
 </html>
