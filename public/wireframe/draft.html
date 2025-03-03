@@ -6,7 +6,8 @@
     <title>Profile </title>
     <link href="../assets/css/tailwindstyles.css" rel="stylesheet">
     <link rel="icon" type="image/png" href="../uploads/white-logo.png"  >
-
+    <link rel="stylesheet" href="../assets/css/utilities.css">
+        <link rel="stylesheet" href="../assets/css/dashboard.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body class="bg-gray-100">
@@ -35,42 +36,28 @@
                     <a class="block p-2 hover:bg-gray-200 rounded-md" href="#account-notifications">Notifications</a>
                 </div>
             </div>
-            <div class="md:w-3/4 w-full p-6">
+            <div class=" md:w-3/4 w-full p-6 ">
                 <div id="account-general">
                   
-                    <hr class="border-none my-4">
-                    <div class="space-y-4">
-                        <form >
-
-                            <div>
-                                <label class="block text-gray-700">Current Password</label>
-                                <input type="password" class="w-full p-2 border rounded-md" placeholder="••••••••">
+                    
+                    
+                        <div class="dashboard-content ">
+                            <h2>Saved Drafts</h2>
+                            <div class="drafts-container">
+                                <!-- Drafts will be dynamically loaded here -->
+                            </div>
+                            <div class="export-import-buttons">
+                                <button id="export-drafts-btn" class="w-full my-5 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center cursor-pointer">Export Drafts as JSON</button>
+                                <button id="import-drafts-btn"class="w-full  text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center cursor-pointer" >Import Drafts from JSON</button>
+                                <input type="file" id="import-drafts-input" accept="application/json" style="display: none;">
+                            </div>
                         </div>
-                        <div>
-                            <a href="#" class="text-sm text-blue-700 hover:underline dark:text-blue-500">Lost
-                                Password?</a>
-                        </div>
-                        <div>
-                            <label class="block text-gray-700">New Password</label>
-                            <input type="password" class="w-full p-2 border rounded-md" placeholder="••••••••">
-                        </div>
-                        <div>
-                            <label class="block text-gray-700">Repeat Password</label>
-                            <input type="password" class="w-full p-2 border rounded-md" placeholder="••••••••">
-                        <div>
-                            <button type="submit"
-                            class="w-full my-5 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center cursor-pointer ">Save Change</button>
-                        </div>
-                        <div>
-                            <button type="reset"
-                            class="w-full  text-white bg-gray-600 hover:bg-red-500 cursor-pointer focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm  py-2.5 text-center  ">Reset</button>
-                        </div>
-                    </form>
-                    </div>
+                   
                 </div>
             </div>
         </div>
     </div>
     <script src="../assets/js/setting.js"></script>
+    <script src="../assets/js/dashboard.js"></script>
 </body>
 </html>
