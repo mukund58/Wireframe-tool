@@ -13,9 +13,7 @@
     /* color: #ffffff; */
     
 }
-#account-general {
-    box-sizing:unset !important;
-}
+
 .drafts-container {
     display: flex;
     flex-wrap: wrap;
@@ -25,7 +23,7 @@
 
 .draft {
   
-    padding: 20px;
+    padding: 11px;
     background-color:wheat;
     border: 1px solid #ddd;
     border-radius: 8px;
