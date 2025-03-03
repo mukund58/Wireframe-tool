@@ -82,10 +82,10 @@
         margin: 10px;
     }
     .draft{
-        max-width: calc(46.333% - 40px);
+        max-width: calc(106.333% - 40px);
     }
     .dashboard-content{
-        max-width: 80%;
+        max-width: 100%;
         /* margin-top: 103px; */
     }
 }
