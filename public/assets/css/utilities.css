@@ -3,14 +3,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&family=Merienda:wght@300..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap');
 
-
-
 :root {
 	--main-bg-color: rgb(255, 255, 255);
 	--bg-navbar: #33130e;
 	--bg-link: #c9daff;
 	--bg-content: #434d5b;
-	--hover-color:  #0056b3;
+	--hover-color: #0056b3;
 	--font1: 'Lilita One', cursive;
 	--font2: 'Maven Pro', sans-serif;
 	--font3: 'Signika Negative', sans-serif;
@@ -19,6 +17,5 @@
 	--font6: 'Courier New', Courier, monospace;
 	--font7: "Atkinson Hyperlegible", sans-serif;
 	--font8: "Merienda", cursive;
-	--font9:'Nunito', sans-serif;
-
+	--font9: 'Nunito', sans-serif;
 }

@@ -1,8 +1,8 @@
 /* Dashboard Content Styles */
 .dashboard-content {
     padding: 20px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .dashboard-content h2 {
@@ -21,13 +21,13 @@
 }
 
 .draft {
-    padding: 20px;
-    background-color: var(--bg-content);
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     flex: 1 1 calc(33.333% - 40px);
     max-width: calc(33.333% - 40px);
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: var(--bg-content);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -44,8 +44,8 @@
 
 .draft p {
     font-size: 1em;
-    color: #666;
     margin-bottom: 15px;
+    color: #666;
 }
 
 .draft .actions {
@@ -54,11 +54,11 @@
 }
 
 .draft .actions button {
-    background: var(--bg-navbar);
-    color: #fff;
     border: none;
     padding: 10px 15px;
     border-radius: 5px;
+    background: var(--bg-navbar);
+    color: #fff;
     cursor: pointer;
     transition: background 0.3s ease;
 }

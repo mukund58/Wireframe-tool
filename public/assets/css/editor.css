@@ -94,11 +94,11 @@ button {
 }
 
 .dropdown-content a:hover {
-    background-color: #f1f1f1;
+    background-color: var(--hover-color);
 }
 
 .brush-dropdown-content a:hover {
-    background-color: #f1f1f1;
+    background-color: var(--hover-color);
 }
 
 /* Show dropdown on hover */
@@ -124,16 +124,13 @@ button {
 .profile-dropdown {
     z-index: 11;
     cursor: pointer;
-    /* box-shadow: 4px 5px 12px  rgba(0,0,0,0.1); */
 }
 
 .user-toolbar {
     display: flex;
     justify-content: space-between;
     width: 100%;
-    /* margin-top: 10px; */
     height: 50px;
-    /* background-color: rgb(146, 31, 31); */
     color: white;
     display: flex;
     flex-direction: row-reverse;
@@ -162,7 +159,6 @@ button {
 }
 
 .profile {
-    /* position: absolute; */
     display: flex;
     visibility: hidden;
     flex-wrap: wrap;
@@ -196,14 +192,13 @@ h1 {
 #create-team {
     padding: 5px;
     color: white;
-    background-color: rgb(89, 89, 235);
+    background-color: var(--bg-navbar);
 }
 
 .tool {
     width: 50px;
     height: 50px;
     margin: 10px 0;
-    /* background: #555; */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -213,15 +208,13 @@ h1 {
 }
 
 .tool:hover {
-    background: #777;
+    background: var(--hover-color);
     transform: scale(1.1);
 }
 
 #share-btn {
     color: white;
-    background-color: rgb(89, 89, 235);
-    /* border-radius: 10px; */
-    /* height: 80%; */
+    background-color: var(--bg-navbar);
 }
 
 .sharebtn {
@@ -282,8 +275,6 @@ canvas {
 }
 
 .magicToolBar {
-    /* width: 50%;
-    height: 50%; */
     background-color: gray;
     left: 240px;
     top: 76px;
@@ -321,7 +312,6 @@ canvas {
     scroll-margin-bottom: 2rem;
     position: relative;
     overflow: hidden scroll;
-    /* -webkit-mask-image: linear-gradient(#000 0% 90%,#0000 100%); */
     mask-image: linear-gradient(#000 0% 90%, #0000 100%);
 }
 
@@ -336,7 +326,6 @@ canvas {
     justify-content: center;
     align-items: center;
     margin-top: 14px;
-    /* width: 100%; */
 }
 
 /* Styles for undo and redo buttons */
@@ -355,7 +344,7 @@ canvas {
 
 #undo:hover,
 #redo:hover {
-    background: #777;
+    background: var(--hover-color);
     transform: scale(1.1);
 }
 
@@ -369,7 +358,6 @@ canvas {
     flex-direction: column;
     text-align: center;
     cursor: pointer;
-    /* position: relative; */
 }
 
 .file-drop-down:hover .drop-dron-menu {
@@ -379,7 +367,6 @@ canvas {
 .drop-dron-menu {
     visibility: hidden;
     opacity: 0;
-    /* position: absolute; */
     top: 100%;
     left: 0;
     background: white;

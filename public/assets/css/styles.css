@@ -57,7 +57,7 @@ p {
 }
 
 .menubar nav a:hover {
-    color: #ffcc00;
+    color: var(--bg-link);
     text-decoration: underline;
     transform: translateY(-3px);
 }

@@ -10,6 +10,7 @@ body {
     margin: 0;
     padding: 0;
 }
+
 .sticky-header {
     animation: slideIn 1s ease-out;
     background: var(--bg-navbar);
@@ -19,6 +20,7 @@ body {
     width: 100%;
     z-index: 1000;
 }
+
 .navigation {
     align-items: center;
     display: flex;
@@ -26,10 +28,12 @@ body {
     margin: 0 auto;
     max-width: 1200px;
 }
+
 .logo img {
     filter: invert(100%);
     mix-blend-mode: lighten;
 }
+
 .logo a {
     color: #ffcc00;
     font-size: 1em;
@@ -38,10 +42,12 @@ body {
     text-transform: uppercase;
     transition: transform 0.3s ease-in-out;
 }
+
 .logo a:hover {
     color: #fff;
     transform: scale(1.1);
 }
+
 nav a {
     color: #fff;
     font-weight: 600;
@@ -49,10 +55,12 @@ nav a {
     text-decoration: none;
     transition: color 0.3s ease, transform 0.3s ease;
 }
+
 nav a:hover {
     color: #ffd700;
     transform: translateY(-2px);
 }
+
 /* Hero Section (Login Form Section) */
 .login-form {
     align-items: center;
@@ -68,6 +76,7 @@ nav a:hover {
     padding: 40px 30px;
     width: 100%;
 }
+
 .register-form {
     align-items: center;
     background: linear-gradient(-2deg, #970808, var(--hover-color));
@@ -82,6 +91,7 @@ nav a:hover {
     padding: 40px 30px;
     width: 100%;
 }
+
 .register-form h2 {
     color: #fff;
     font-size: 1.2em;
@@ -91,6 +101,7 @@ nav a:hover {
     padding: 0;
     text-align: center;
 }
+
 h2 {
     color: #fff;
     font-size: 2.2em;
@@ -98,11 +109,13 @@ h2 {
     margin-bottom: 30px;
     text-align: center;
 }
+
 form {
     display: flex;
     flex-direction: column;
     width: 100%;
 }
+
 input {
     background: #fff;
     border: none;
@@ -113,11 +126,13 @@ input {
     padding: 15px;
     transition: background-color 0.3s ease;
 }
+
 input:focus {
     background: #f7f7f7;
     border: 2px solid #ffd700;
     outline: none;
 }
+
 button {
     background-color: #ffd700;
     border: none;
@@ -128,10 +143,12 @@ button {
     padding: 14px;
     transition: background 0.3s ease, transform 0.3s ease;
 }
+
 button:hover {
     background-color: #ffcc00;
     transform: translateY(-3px);
 }
+
 /* Footer Styles */
 .footer {
     border-radius: 8px;
@@ -144,9 +161,11 @@ button:hover {
     padding: 20px;
     text-align: center;
 }
+
 .footer footer {
     margin: 0;
 }
+
 /* Animations */
 @keyframes fadeInUp {
     0% {
@@ -158,6 +177,7 @@ button:hover {
         transform: translateY(0);
     }
 }
+
 @keyframes bounceIn {
     0% {
         opacity: 0;
@@ -172,57 +192,71 @@ button:hover {
         transform: scale(1);
     }
 }
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .login-form, .register-form {
         padding: 30px 20px;
     }
+
     h2 {
         font-size: 1.8em;
     }
+
     input {
         font-size: 0.9em;
         padding: 12px;
     }
+
     button {
         font-size: 1em;
         padding: 12px;
     }
 }
+
 @media (max-width: 480px) {
     .login-form, .register-form {
         padding: 20px 15px;
     }
+
     h2 {
         font-size: 1.5em;
     }
+
     input {
         font-size: 0.8em;
         padding: 10px;
     }
+
     button {
         font-size: 0.9em;
         padding: 10px;
     }
 }
+
 @media (max-width: 1024px) {
     .logo a {
         font-size: 0.8em;
         padding: 0;
     }
+
     .login-form {
         width: 70%;
     }
+
     .register-form {
         width: 70%;
     }
+
     h2 {
         font-size: 1.5em;
     }
+
     input {
         font-size: 0.8em;
         padding: 10px;
     }
+
     button {
         font-size: 0.9em;
         padding: 10px;
