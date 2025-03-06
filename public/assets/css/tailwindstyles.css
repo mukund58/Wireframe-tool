@@ -1010,8 +1010,8 @@
 .bg-\[\#0088cc\] {
   background-color: #0088cc;
 }
-.bg-\[\#101828\] {
-  background-color: #101828;
+.bg-\[\#33130e\] {
+  background-color: #33130e;
 }
 .bg-\[color\:var\(--my-color\)\] {
   background-color: var(--my-color);
@@ -1300,10 +1300,6 @@
 .text-4xl {
   font-size: var(--text-4xl);
   line-height: var(--tw-leading, var(--text-4xl--line-height));
-}
-.text-5xl {
-  font-size: var(--text-5xl);
-  line-height: var(--tw-leading, var(--text-5xl--line-height));
 }
 .text-sm {
   font-size: var(--text-sm);
@@ -2025,30 +2021,12 @@
     justify-content: flex-start;
   }
 }
-.md\:space-x-0 {
-  @media (width >= 48rem) {
-    :where(& > :not(:last-child)) {
-      --tw-space-x-reverse: 0;
-      margin-inline-start: calc(calc(var(--spacing) * 0) * var(--tw-space-x-reverse));
-      margin-inline-end: calc(calc(var(--spacing) * 0) * calc(1 - var(--tw-space-x-reverse)));
-    }
-  }
-}
 .md\:space-x-6 {
   @media (width >= 48rem) {
     :where(& > :not(:last-child)) {
       --tw-space-x-reverse: 0;
       margin-inline-start: calc(calc(var(--spacing) * 6) * var(--tw-space-x-reverse));
       margin-inline-end: calc(calc(var(--spacing) * 6) * calc(1 - var(--tw-space-x-reverse)));
-    }
-  }
-}
-.md\:space-x-7 {
-  @media (width >= 48rem) {
-    :where(& > :not(:last-child)) {
-      --tw-space-x-reverse: 0;
-      margin-inline-start: calc(calc(var(--spacing) * 7) * var(--tw-space-x-reverse));
-      margin-inline-end: calc(calc(var(--spacing) * 7) * calc(1 - var(--tw-space-x-reverse)));
     }
   }
 }
@@ -2383,26 +2361,6 @@
   }
 }
 @layer utilities;
-:root {
-  --main-bg-color: rgb(255, 255, 255);
-  --bg-navbar: #101828;
-  --color-navbar: #101828;
-  --bg-link: #c9daff;
-  --bg-content: #434d5b;
-  --hover-color: #0056b3;
-  --font1: 'Lilita One', cursive;
-  --font2: 'Maven Pro', sans-serif;
-  --font3: 'Signika Negative', sans-serif;
-  --font4: 'Ubuntu', sans-serif;
-  --font5: 'Fjalla One', sans-serif;
-  --font6: 'Courier New', Courier, monospace;
-  --font7: "Atkinson Hyperlegible", sans-serif;
-  --font8: "Merienda", cursive;
-  --font9: 'Nunito', sans-serif;
-}
-.root, #root, #docs-root {
-  --navbar-color: #101828;
-}
 @property --tw-translate-x {
   syntax: "*";
   inherits: false;
