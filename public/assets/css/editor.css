@@ -7,7 +7,8 @@ body {
     font-family: Arial, sans-serif;
     display: flex;
     height: 100vh;
-    background: #b3adad;}
+    background: var(--bg-content);
+}
 
 button {
     border: none;
@@ -138,10 +139,12 @@ button {
     flex-direction: row-reverse;
     z-index: 10;
 }
-#jsonFileInput{
-   display: none;
+
+#jsonFileInput {
+    display: none;
 }
-.importbtn{
+
+.importbtn {
     color: black;
     display: flex;
     flex-direction: row-reverse;
@@ -149,12 +152,15 @@ button {
     align-items: center;
     font-size: 1em;
 }
-.importbtn button{
+
+.importbtn button {
     width: auto;
 }
+
 .importbtn i {
     font-size: 2em;
 }
+
 .profile {
     /* position: absolute; */
     display: flex;
@@ -167,7 +173,6 @@ button {
     margin-right: 10px;
     background: white;
     transition: visibility 0.2s, opacity 0.2s ease-in-out;
-
 }
 
 .profile a {
@@ -175,8 +180,6 @@ button {
     color: black;
     margin: 10px;
 }
-
-
 
 .flex-row {
     display: flex;
@@ -215,7 +218,6 @@ h1 {
 }
 
 #share-btn {
-
     color: white;
     background-color: rgb(89, 89, 235);
     /* border-radius: 10px; */
@@ -250,7 +252,6 @@ canvas {
     z-index: 1;
 }
 
-
 /* New styles for infinite canvas and zooming */
 #canvas-container {
     width: 100%;
@@ -268,14 +269,13 @@ canvas {
 canvas {
     width: 2000px;
     height: 2000px;
-    
 }
 
 .magicToolBarHolder {
     display: none;
     z-index: 10;
     color: #fff;
-    filter: drop-shadow(0 -1px #ffffff4d)drop-shadow(0 1px #ffffff4d)drop-shadow(-1px 0 #ffffff4d)drop-shadow(1px 0 #ffffff4d);
+    filter: drop-shadow(0 -1px #ffffff4d) drop-shadow(0 1px #ffffff4d) drop-shadow(-1px 0 #ffffff4d) drop-shadow(1px 0 #ffffff4d);
     position: absolute;
     top: 118px;
     left: 530px;
@@ -299,28 +299,30 @@ canvas {
     background-color: gray;
     color: #ddd;
     font-size: 1.2em;
-
 }
-.widget-search{
+
+.widget-search {
     padding: 10px;
 }
+
 .widget-list ul {
     list-style: none;
     padding-left: 27px;
 }
-.widget-list{
+
+.widget-list {
     border-right: 1px solid var(--grey-1);
-  overscroll-behavior: contain;
-  scrollbar-gutter: stable;
-  scrollbar-color: var(--grey-1)#ffffff;
-  scrollbar-width: thin;
-  width: 100%;
-  height: 320px;
-  scroll-margin-bottom: 2rem;
-  position: relative;
-  overflow: hidden scroll;
-  /* -webkit-mask-image: linear-gradient(#000 0% 90%,#0000 100%); */
-  mask-image: linear-gradient(#000 0% 90%,#0000 100%);
+    overscroll-behavior: contain;
+    scrollbar-gutter: stable;
+    scrollbar-color: var(--grey-1) #ffffff;
+    scrollbar-width: thin;
+    width: 100%;
+    height: 320px;
+    scroll-margin-bottom: 2rem;
+    position: relative;
+    overflow: hidden scroll;
+    /* -webkit-mask-image: linear-gradient(#000 0% 90%,#0000 100%); */
+    mask-image: linear-gradient(#000 0% 90%, #0000 100%);
 }
 
 .user-toolbar button {
@@ -385,7 +387,6 @@ canvas {
     box-shadow: 8px 6px 9px rgba(0, 0, 0, 0.1);
     transition: visibility 0.2s, opacity 0.2s ease-in-out;
     border-radius: 5px;
-
 }
 
 /* Responsive Design */
@@ -398,7 +399,6 @@ canvas {
         width: 40px;
         height: 40px;
     }
-
 
     canvas {
         width: calc(100% - 20px);
@@ -427,8 +427,6 @@ canvas {
         width: 30px;
         height: 30px;
     }
-
-
 
     canvas {
         width: calc(100% - 10px);
