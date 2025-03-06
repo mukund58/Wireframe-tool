@@ -244,7 +244,7 @@ nav {
 }
 
 .cta-button {
-    background: linear-gradient(45deg, #ffcc00, #ff8040);
+    background: white;
     border-radius: 50px;
     color: #000;
     cursor: pointer;
@@ -255,10 +255,12 @@ nav {
     text-decoration: none;
     text-transform: uppercase;
     transition: all 0.3s ease;
+    width: max-content;
+    margin: 0 auto;
 }
 
 .cta-button:hover {
-    background: linear-gradient(45deg, #ff8040, #ffcc00);
+    background:  #101828;
     color: #fff;
     text-decoration: underline;
     transform: translateY(-5px) scale(1.05);
@@ -292,7 +294,7 @@ nav {
 .hero h1 {
     animation: slideUp 1s ease-out;
     color: #fff;
-    font-size: 4.5em;
+    font-size: 4em;
     font-weight: bold;
     letter-spacing: 1px;
     text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.4);
