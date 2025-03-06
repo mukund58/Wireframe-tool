@@ -316,8 +316,9 @@ nav {
     margin: 0;
     z-index:5;
     bottom:0;
+    top: 100%;
     position:absolute;
-    left:0px;
+    left:0;
     float:left;
   }
   
