@@ -1,35 +1,33 @@
 body {
+    align-items: center;
+    background: linear-gradient(171deg, #000, var(--hover-color));
+    color: #fff;
+    display: flex;
+    flex-direction: column;
     font-family: "Open Sans", sans-serif;
+    justify-content: center;
     margin: 0;
     padding: 0;
-    background: linear-gradient(171deg, #000, #ff3d00);
-    color: #fff;
-    /* line-height: 1.6; */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
 }
+
 .sticky-header {
+    animation: slideIn 1s ease-out;
+    background: var(--bg-navbar);
+    box-shadow: 1px 4px 24px #000;
+    font-family: var(--font1);
+    left: 0;
+    padding: 15px 0;
     position: fixed;
     top: 0;
-    left: 0;
     width: 100%;
-    background: indianred;
-    padding: 15px 0;
     z-index: 1000;
-    animation: slideIn 1s ease-out;
-    /* box-shadow: 1px 4px 24px #000; */
-    font-family: var(--font1);
 }
 
 .navigation {
-    display: flex;
-    /* justify-content: space-between; */
     align-items: center;
-    max-width: 1200px;
+    display: flex;
     margin: 0 auto;
-
+    max-width: 1200px;
 }
 
 .logo img {
@@ -37,28 +35,25 @@ body {
     mix-blend-mode: lighten;
 }
 
-
 .logo a {
-
-    font-size: 1em;
     color: #ffcc00;
-    text-transform: uppercase;
+    font-size: 1em;
     letter-spacing: 2px;
-    transition: transform 0.3s ease-in-out;
     margin-bottom: 10px;
+    text-transform: uppercase;
+    transition: transform 0.3s ease-in-out;
 }
 
 .logo a:hover {
-    transform: scale(1.1);
     color: #fff;
+    transform: scale(1.1);
 }
-
 
 nav a {
     color: #fff;
-    text-decoration: none;
-    margin-left: 20px;
     font-weight: 600;
+    margin-left: 20px;
+    text-decoration: none;
     transition: color 0.3s ease, transform 0.3s ease;
 }
 
@@ -70,42 +65,46 @@ nav a:hover {
 .container {
     margin-top: 6em;
 }
-.profile{
+
+.profile {
+    align-items: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
 }
-#input-file{
+
+#input-file {
     display: none;
 }
+
 .profile label {
-    margin-top: 10px;
-    padding: 10px;
-    color: white;
     background-color: rgb(89, 89, 235);
     border-radius: 10px;
+    color: white;
     cursor: pointer;
+    margin-top: 10px;
+    padding: 10px;
 }
-.mb-3 span , mb-3 text-center profile {
 
-white-space: nowrap;
- font-size:1em;
- color: red;
-
+.mb-3 span,
+.mb-3 text-center profile {
+    color: red;
+    font-size: 1em;
+    white-space: nowrap;
 }
-.flex{
+
+.flex {
+    align-items: center;
     display: flex;
     flex-direction: row;
-    align-items: center;
     justify-content: center;
 }
-.d-grid gap-2{
 
+.d-grid gap-2 {
     color: red;
 }
-.mb-3 span i{
-    font-size: 2em;
-     color: seagreen;
+
+.mb-3 span i {
+    color: seagreen;
     font-size: 2em;
 }
