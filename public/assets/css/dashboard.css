@@ -73,6 +73,7 @@
     color: var(--bg-navbar);
 }
 
+
 @media (max-width: 1024px) {
     .draft .actions {
         display: flex;
@@ -87,4 +88,18 @@
     .dashboard-content {
         max-width: 100%;
     }
+    .drafts-container{
+        flex-direction: column;
+    }
+}
+@media (max-width:600px) {
+    .draft{
+        gap: 40px;
+        /* background-color: aqua; */
+
+    }
+    .drafts-container{
+        flex-direction: column;
+    }
+    
 }
