@@ -9,17 +9,28 @@ canvas = document.getElementById("canvas");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-
-
 // Apply transformations
 function setTransform() {
     zoom.style.transform = `translate(${pointX}px, ${pointY}px) scale(${scale})`;
     drawCanvas(); // Redraw canvas after transform
     canvas.renderAll();
-
+    adjustCanvasSize(); // Adjust canvas size based on zoom and panning
 }
 
-// // Right-click for panning
+// Adjust canvas size based on zoom and panning
+function adjustCanvasSize() {
+    const containerRect = zoom.getBoundingClientRect();
+    const canvasRect = canvas.getBoundingClientRect();
+
+    if (canvasRect.width < containerRect.width) {
+        canvas.width = containerRect.width;
+    }
+    if (canvasRect.height < containerRect.height) {
+        canvas.height = containerRect.height;
+    }
+}
+
+// Right-click for panning
 zoom.onmousedown = function (e) {
     if (e.button === 2) {
         e.preventDefault();
@@ -58,8 +69,6 @@ zoom.onwheel = function (e) {
 zoom.oncontextmenu = function (e) {
     e.preventDefault();
 };
-
-
 
 // Initial render
 // drawCanvas();
