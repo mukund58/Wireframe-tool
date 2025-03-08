@@ -11,9 +11,13 @@ canvas.height = window.innerHeight;
 
 
 
+
 // Apply transformations
 function setTransform() {
     zoom.style.transform = `translate(${pointX}px, ${pointY}px) scale(${scale})`;
+   
+    
+    
     drawCanvas(); // Redraw canvas after transform
     canvas.renderAll();
 

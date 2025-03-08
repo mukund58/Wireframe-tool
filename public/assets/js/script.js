@@ -1,19 +1,23 @@
 document.addEventListener("DOMContentLoaded", () => {
     const canvas = new fabric.Canvas('canvas');
+   const zoom = document.getElementById("canvas-container");
+
     let undoStack = [];
     let redoStack = [];
 
     function resizeCanvas() {
-        canvas.setWidth(window.innerWidth);
+        canvas.setWidth(window.innerWidth );
         canvas.setHeight(window.innerHeight);
+        // zoom.setWidth(window.innerWidth )
+        // zoom.setHeight(window.innerHeight )
         canvas.renderAll();
     }
+    window.addEventListener("resize", resizeCanvas);
+    resizeCanvas();
 
     // Remove these event listeners if they exist
     canvas.off('after:render');
 
-    window.addEventListener("resize", resizeCanvas);
-    resizeCanvas();
 
     // Helper function to deselect any active object and turn off drawing mode
     function clearSelection() {
