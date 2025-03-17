@@ -1,13 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
     <link href="../assets/css/tailwindstyles.css" rel="stylesheet">
-    <link rel="icon" type="image/png" href="../uploads/white-logo.png"  >
+    <link rel="icon" type="image/png" href="../uploads/white-logo.png">
 
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        span{
+            color: red;
+        }
+        span i {
+            color: green;
+            /* font-size: 2em; */
+        }
+    </style>
 </head>
 
 <body class="bg-gray-100">
@@ -31,9 +41,6 @@
                     <a class="block p-2 bg-blue-500 text-white rounded-md" href="setting.html">General</a>
                     <a class="block p-2 hover:bg-gray-200 rounded-md" href="password.html">Change Password</a>
                     <a class="block p-2 hover:bg-gray-200 rounded-md" href="draft.html">Draft</a>
-                    <a class="block p-2 hover:bg-gray-200 rounded-md" href="#account-social-links">Social Links</a>
-                    <a class="block p-2 hover:bg-gray-200 rounded-md" href="#account-connections">Connections</a>
-                    <a class="block p-2 hover:bg-gray-200 rounded-md" href="#account-notifications">Notifications</a>
                 </div>
             </div>
             <div class="md:w-3/4 w-full p-6">
@@ -45,45 +52,57 @@
                                 Upload new photo
                                 <input type="file" class="hidden" id="input-file">
                             </label>
-                            <button class="ml-2 px-4 py-2 bg-gray-300 rounded-md" id="rest-pic" >Reset</button>
+                            <button class="ml-2 px-4 py-2 bg-gray-300 rounded-md" id="rest-pic">Reset</button>
                             <p class="text-gray-500 text-sm mt-1">Allowed JPG, GIF or PNG. Max size of 800K</p>
                         </div>
                     </div>
                     <hr class="border-gray-300 my-4">
-                    <div class="space-y-4">
-                        <div>
-                            <label class="block text-gray-700">Username</label>
-                            <input type="text" class="w-full p-2 border rounded-md" value="mukund58">
-                        </div>
-                        <div>
-                            <label class="block text-gray-700">Name</label>
-                            <input type="text" class="w-full p-2 border rounded-md" value="Mukund Parmar">
-                        </div>
-                        <div>
-                            <label class="block text-gray-700">Phone Number</label>
-                            <input type="number" class="w-full p-2 border rounded-md" >
-                        </div>
-                        <div>
-                            <label class="block text-gray-700">E-mail</label>
-                            <input type="email" class="w-full p-2 border rounded-md" value="hi@mukund.xyz">
-                            <div class="bg-yellow-200 text-yellow-700 p-2 mt-2 rounded-md">
-                                Your email is not confirmed. Please check your inbox.<br>
-                                <a href="#" class="text-blue-500">Resend confirmation</a>
+                    <form action="">
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-gray-700">Username</label>
+                                <input type="text" class="w-full p-2 border rounded-md"  id="userName" onkeyup="validateUserName()"  placeholder="Enter your username">
+                                <span id="username-error"> </span>
+
+                            </div>
+                            <div>
+                                <label class="block text-gray-700">Name</label>
+                                <input type="text" class="w-full p-2 border rounded-md"  id="fullName" onkeyup="validateName()"  placeholder="Enter your full name">
+                                <span id="name-error"> </span>
+
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 ">Phone Number</label>
+                                <input type="text" class="w-full p-2 border rounded-md"id="phone" onkeyup="validatePhone()" placeholder="Enter your phone number" >
+                                <span id="phone-error"> </span>
+
+                            </div>
+                            <div>
+                                <label class="block text-gray-700">E-mail</label>
+                                <input type="email" class="w-full p-2 border rounded-md" id="email" onkeyup="validateEmail()" placeholder="Enter your email" >
+                                <span id="email-error"> </span>
+                                <div class="bg-yellow-200 text-yellow-700 p-2 mt-2 rounded-md">
+                                    Your email is not confirmed. Please check your inbox.<br>
+                                    <a href="#" class="text-blue-500">Resend confirmation</a>
+                                </div>
+                            </div>
+                            <div>
+                                <button type="submit"
+                                    class="w-full  text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center cursor-pointer ">Save
+                                    Change</button>
+                            </div>
+                            <div>
+                                <button type="reset"
+                                    class="w-full  text-white bg-gray-600 hover:bg-red-500 cursor-pointer focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm  py-2.5 text-center  ">Reset</button>
                             </div>
                         </div>
-                        <div>
-                            <button type="submit"
-                            class="w-full  text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center cursor-pointer ">Save Change</button>
-                        </div>
-                        <div>
-                            <button type="reset"
-                            class="w-full  text-white bg-gray-600 hover:bg-red-500 cursor-pointer focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm  py-2.5 text-center  ">Reset</button>
-                        </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
     <script src="../assets/js/setting.js"></script>
+    <script src="../assets/js/profile.js"></script>
 </body>
+
 </html>

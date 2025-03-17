@@ -30,7 +30,21 @@ var addressError = document.getElementById("address-error");
 var bioError = document.getElementById("bio-error");
 var submitError = document.getElementById("submit-error");
 var profileError = document.getElementById("profile -error");
+var userNameError = document.getElementById("username-error");
 
+function validateUserName() {
+  var name = document.getElementById("userName").value;
+  if (name.length == 0) {
+    userNameError.innerHTML = "Username is required";
+    return false;
+  }
+  if (!name.match(/^[a-z][a-z0-9].{3,15}$/)) {
+    userNameError.innerHTML = " Write Username in small letters and atleast one digit";
+    return false;
+  }
+  userNameError.innerHTML = "<i class='bx bx-check-circle'></i>";
+  return true;
+}
 function validateName() {
   var name = document.getElementById("fullName").value;
   if (name.length == 0) {

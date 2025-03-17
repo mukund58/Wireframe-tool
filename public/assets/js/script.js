@@ -6,8 +6,8 @@ document.addEventListener("DOMContentLoaded", () => {
     let redoStack = [];
 
     function resizeCanvas() {
-        canvas.setWidth(window.innerWidth );
-        canvas.setHeight(window.innerHeight);
+        // canvas.setWidth(1000);
+        // canvas.setHeight(1000);
         // zoom.setWidth(window.innerWidth )
         // zoom.setHeight(window.innerHeight )
         canvas.renderAll();
