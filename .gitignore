@@ -1,0 +1,15 @@
+# Ignore compiled files
+*.o
+*.out
+*.class
+
+# Ignore logs and temporary files
+*.log
+*.tmp
+
+# Ignore the node_modules folder (for JavaScript projects)
+node_modules/
+
+# Ignore environment files
+.env
+.vscode
