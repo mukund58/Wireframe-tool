@@ -36,13 +36,24 @@
           <a href="wireframe/setting.html">Profile</a>
           <a href="wireframe/dashboard.html">Dashboard</a>
           <a href="wireframe/contact.html">Contact Sales</a>
-          <a id="loginOpenModal">Login</a>
-          <a id="signUpopenModal">Sign Up Free</a>
-        </nav>
+
+    <!-- Buttons to open the modals -->
+    <?php if (!isset($_SESSION['user_id'])): ?>
+        <button onclick="openModal('loginModal')">Login</button>
+        <button onclick="openModal('signUpModal')">Sign Up</button>
+    <?php endif; ?>       
+	</nav>
       </div>
 
     </div>
   </header>
+
+
+<main>
+    <h1>Welcome to the Wireframe Tool</h1>
+    <p>Start creating wireframes with our intuitive editor.</p>
+    <a href="wireframe/editor.php">Go to Editor</a>
+</main>
 
   <div id="loginModal" class="modeal">
     <div class="modal-content relative  max-w-md px-4  ">

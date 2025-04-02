@@ -1,4 +1,5 @@
 <?php
+define("BASE_PATH", dirname(__DIR__)); // One level up from /php/
 $servername = "localhost";
 $username = "root";
 $password = "bundb";

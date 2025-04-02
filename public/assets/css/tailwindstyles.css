@@ -2043,15 +2043,6 @@
     }
   }
 }
-.md\:space-x-7 {
-  @media (width >= 48rem) {
-    :where(& > :not(:last-child)) {
-      --tw-space-x-reverse: 0;
-      margin-inline-start: calc(calc(var(--spacing) * 7) * var(--tw-space-x-reverse));
-      margin-inline-end: calc(calc(var(--spacing) * 7) * calc(1 - var(--tw-space-x-reverse)));
-    }
-  }
-}
 .md\:border-b-0 {
   @media (width >= 48rem) {
     border-bottom-style: var(--tw-border-style);
