@@ -1,5 +1,7 @@
 <?php
-include __DIR__ . "/config.php"; // Ensure correct inclusionsession_start();
+session_start();
+
+include __DIR__ . "/config.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST["username"];
@@ -13,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
         if (password_verify($password, $row["password"])) {
             $_SESSION["user"] = $row["username"];
-            header("Location: dashboard.php"); // Redirect after successful login
+            header("Location: dashboard.php");
         } else {
             echo "Invalid password!";
         }
@@ -24,5 +26,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 $conn->close();
 ?>
-
-

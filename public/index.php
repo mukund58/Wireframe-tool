@@ -61,12 +61,12 @@
 
         <svg class="close h-5 ml-auto" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
           <path fill-rule="evenodd"
-            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 111.414 1.414L11.414 10l4.293 4.293a1 1 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 01-1.414-1.414L8.586 10 4.293 5.707a1 1 010-1.414z"
             clip-rule="evenodd"></path>
         </svg>
         <h2 class="text-xl font-medium text-gray-900">Sign in to our platform</h2>
       </div>
-      <form onsubmit="return validateForm(event)" action="./php/login.php" method="post">
+      <form onsubmit="return validateForm(event)" action="./php/process_login.php" method="post">
         <div class="form-group ">
           <label for="email">Email or Username</label>
           <input type="email" id="email" placeholder="name@company.com" required>
@@ -104,12 +104,12 @@
       <div class="close-signup flex flex-row-reverse">
         <svg class=" h-5 ml-auto" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
           <path fill-rule="evenodd"
-            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+            d="M4.293 4.293a1 1 011.414 0L10 8.586l4.293-4.293a1 1 111.414 1.414L11.414 10l4.293 4.293a1 1 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 01-1.414-1.414L8.586 10 4.293 5.707a1 1 010-1.414z"
             clip-rule="evenodd"></path>
         </svg>
         <h2 class="text-xl font-medium text-gray-900">Sign Up to our platform</h2>
       </div>
-      <form onsubmit="return validateForm(event)" action="./php/register.php" method="post">
+      <form onsubmit="return validateForm(event)" action="./php/process_register.php" method="post">
         <div class="form-group ">
           <label for="email">Email</label>
           <input type="email" id="email" name="email" placeholder="name@company.com" required>
