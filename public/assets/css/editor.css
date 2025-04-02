@@ -7,7 +7,7 @@ body {
     font-family: Arial, sans-serif;
     display: flex;
     height: 100vh;
-    background: var(--bg-content);
+    background: #959595;
 }
 
 button {
@@ -21,6 +21,7 @@ button {
     display: flex;
     align-content: center;
     align-items: center;
+    margin-left: 10px;
 }
 
 .brush-drop-down-menu {
@@ -138,7 +139,7 @@ button {
 }
 
 #jsonFileInput {
-    display: none;
+    /* display: none; */
 }
 
 .importbtn {
@@ -192,7 +193,7 @@ h1 {
 #create-team {
     padding: 5px;
     color: white;
-    background-color: var(--bg-navbar);
+    background-color: #101828;
 }
 
 .tool {
@@ -214,7 +215,7 @@ h1 {
 
 #share-btn {
     color: white;
-    background-color: var(--bg-navbar);
+    background-color: #101828;
 }
 
 .sharebtn {
@@ -371,7 +372,7 @@ canvas {
     left: 0;
     background: white;
     padding: 10px;
-    box-shadow: 8px 6px 9px rgba(0, 0, 0, 0.1);
+    box-shadow: -6px 2px 9px rgba(0, 0, 0, 0.3);
     transition: visibility 0.2s, opacity 0.2s ease-in-out;
     border-radius: 5px;
 }
