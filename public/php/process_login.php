@@ -1,27 +1,37 @@
 <?php
 session_start();
-include __DIR__ . "/php/config.php";
+include __DIR__ . "/config.php";
 
-if (isset($_POST['submit'])) {    // if Form is submitted
-
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = trim($_POST['email']);
-	$password = trim($_POST['password']);
-	$password = md5($password);
+    $password = trim($_POST['password']);
 
-	$sql = "select * from users where email = '$email' and password = '$password'";
-	$result = mysqli_query($conn,$sql);
+    if (empty($email) || empty($password)) {
+        $_SESSION['login_err_msg'] = "Email and Password are required.";
+        header("Location: ../index.php");
+        exit();
+    }
+
+    $password = md5($password);
+
+    $sql = "SELECT * FROM users WHERE email = ? AND password = ?";
+    $stmt = mysqli_prepare($conn, $sql);
+    mysqli_stmt_bind_param($stmt, "ss", $email, $password);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
 
     if (mysqli_num_rows($result) > 0) {
-
         $row = mysqli_fetch_array($result);
-		$_SESSION['username'] = $row['username'];
-		$_SESSION['userid'] = $email;
-		header("location:/wireframe/setting.php");
-	}
-	else {
-		$_SESSION['email'] = $email;
-		$_SESSION['login_err_msg'] = "Incorrect Email id or Password";
-		header("location:index.php");
-	}
+        $_SESSION['username'] = $row['username'];
+        $_SESSION['userid'] = $email;
+        setcookie("user", $email, time() + (86400 * 30), "/"); // P81d5
+        header("Location: /wireframe/setting.php");
+        exit();
+    } else {
+        $_SESSION['login_err_msg'] = "Incorrect Email id or Password";
+        $_SESSION['email'] = $email;
+        header("Location: ../index.php");
+        exit();
+    }
 }
 ?>

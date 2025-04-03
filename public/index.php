@@ -7,6 +7,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = trim($_POST['email']);
     $password = md5(trim($_POST['password']));
 
+    if (empty($email) || empty($password)) {
+        $_SESSION['login_err_msg'] = "Email and Password are required.";
+        header("Location: index.php");
+        exit();
+    }
+
     $sql = "SELECT * FROM users WHERE email = ? AND password = ?";
     $stmt = mysqli_prepare($conn, $sql);
     mysqli_stmt_bind_param($stmt, "ss", $email, $password);
@@ -17,9 +23,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $row = mysqli_fetch_array($result);
         $_SESSION['username'] = $row['username'];
         $_SESSION['userid'] = $email;
-        echo "success";  // JavaScript will check for this response
+        setcookie("user", $email, time() + (86400 * 30), "/"); // P408b
+        header("Location: /wireframe/setting.php");
+        exit();
     } else {
-        echo "error";  // JavaScript will show an error message
+        $_SESSION['login_err_msg'] = "Incorrect Email id or Password";
+        $_SESSION['email'] = $email;
+        header("Location: index.php");
+        exit();
     }
 }
 ?>
@@ -48,22 +59,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         <svg class="close h-5 ml-auto" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
           <path fill-rule="evenodd"
-            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 111.414 1.414L11.414 10l4.293 4.293a1 1 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 01-1.414-1.414L8.586 10 4.293 5.707a1 1 010-1.414z"
             clip-rule="evenodd"></path>
         </svg>
         <h2 class="text-xl font-medium text-gray-900">Sign in to our platform</h2>
       </div>
-      <form onsubmit="return validateForm(event)" action="/wireframe/setting.php" method="post" >
+      <form onsubmit="return validateForm(event)" action="index.php" method="post" >
       <?php if ($login_err_msg != "") { ?>
       <p class="err-msg"><?php echo $login_err_msg;
         } ?></p>
       <div class="form-group ">
           <label for="email">Email or Username</label>
-          <input type="email" id="email" placeholder="name@company.com" required pattern="^[A-Za-z][A-Za-z0-9._-]*@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$" title="Enter Valid Email ">
+          <input type="email" id="email" name="email" placeholder="name@company.com" required pattern="^[A-Za-z][A-Za-z0-9._-]*@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$" title="Enter Valid Email ">
         </div>
         <div class="form-group">
           <label for="password">Password</label>
-          <input type="password" id="password" placeholder="••••••••" required>
+          <input type="password" id="password" name="password" placeholder="••••••••" required>
         </div>
         <p id="error-message" class="error-message"></p>
         <div class="flex justify-between m-4">
@@ -94,7 +105,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       <div class="close-signup flex flex-row-reverse">
         <svg class=" h-5 ml-auto" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
           <path fill-rule="evenodd"
-            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+            d="M4.293 4.293a1 1 011.414 0L10 8.586l4.293-4.293a1 1 111.414 1.414L11.414 10l4.293 4.293a1 1 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 01-1.414-1.414L8.586 10 4.293 5.707a1 1 010-1.414z"
             clip-rule="evenodd"></path>
         </svg>
         <h2 class="text-xl font-medium text-gray-900">Sign Up to our platform</h2>
