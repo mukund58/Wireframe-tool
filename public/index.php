@@ -1,48 +1,46 @@
+<?php
+session_start();
+define("BASE_PATH", dirname(__DIR__)); // One level up from /php/
+include __DIR__ . "/php/config.php";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $email = trim($_POST['email']);
+    $password = md5(trim($_POST['password']));
+
+    $sql = "SELECT * FROM users WHERE email = ? AND password = ?";
+    $stmt = mysqli_prepare($conn, $sql);
+    mysqli_stmt_bind_param($stmt, "ss", $email, $password);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+
+    if (mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_array($result);
+        $_SESSION['username'] = $row['username'];
+        $_SESSION['userid'] = $email;
+        echo "success";  // JavaScript will check for this response
+    } else {
+        echo "error";  // JavaScript will show an error message
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Wireframe Tool</title>
-  <link rel="stylesheet" href="assets/css/styles.css">
-  <link rel="stylesheet" href="assets/css/utilities.css">
-  <link href="assets/css/tailwindstyles.css" rel="stylesheet">
-  <link rel="icon" type="image/png" href="uploads/white-logo.png"  >
-  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-
-</head>
-
-<body>
-  <header class="sticky-header ">
-    <div class="navigation">
-      <div class="logo">
-        <h1><a href="index.html"><img src="uploads/logo.png" width="50px" height="50px" alt=""></a></h1>
-      </div>
-      <div class="menubar">
-        <input type="checkbox" id="hamburger-checkbox" style="display: none;">
-        <label for="hamburger-checkbox">
-          <!-- <img class="" src="uploads/avatar.svg" alt="menu-icon"> -->
-           <h1>
-            <i class='menu-icon bx bx-menu-alt-right text-5xl'></i>
-
-           </h1>
-        </label>
-
-        <nav class="nav-user">
-          <label for="hamburger-checkbox">
-            <img class="close-icon" src="uploads/close-icon.svg" alt="close-icon">
-          </label>
-          <a href="wireframe/setting.html">Profile</a>
-          <a href="wireframe/dashboard.html">Dashboard</a>
-          <a href="wireframe/contact.html">Contact Sales</a>
-          <a id="loginOpenModal">Login</a>
-          <a id="signUpopenModal">Sign Up Free</a>
-        </nav>
-      </div>
-
-    </div>
-  </header>
+  
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wireframe Tool</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/utilities.css">
+    <link href="assets/css/tailwindstyles.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="uploads/white-logo.png"  >
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    
+  </head>
+  
+  <body>
+    <?php include(__DIR__."/includes/navbar.php"); ?>
 
   <div id="loginModal" class="modeal">
     <div class="modal-content relative  max-w-md px-4  ">
@@ -55,8 +53,11 @@
         </svg>
         <h2 class="text-xl font-medium text-gray-900">Sign in to our platform</h2>
       </div>
-      <form onsubmit="return validateForm(event)">
-        <div class="form-group ">
+      <form onsubmit="return validateForm(event)" action="/wireframe/setting.php" method="post" >
+      <?php if ($login_err_msg != "") { ?>
+      <p class="err-msg"><?php echo $login_err_msg;
+        } ?></p>
+      <div class="form-group ">
           <label for="email">Email or Username</label>
           <input type="email" id="email" placeholder="name@company.com" required pattern="^[A-Za-z][A-Za-z0-9._-]*@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$" title="Enter Valid Email ">
         </div>
@@ -68,7 +69,7 @@
         <div class="flex justify-between m-4">
           <div class="flex items-start">
             <div class="flex items-center h-5">
-              <input id="remember" aria-describedby="remember" type="checkbox" required="">
+              <input id="remember" aria-describedby="remember" type="checkbox" onclick="togglePwd()">
             </div>
             <div class="text-sm ml-3">
               <label for="remember" class=" text-gray-900  ">Remember
@@ -115,10 +116,10 @@
         <div class="flex justify-between m-4">
           <div class="flex items-start">
             <div class="flex items-center h-5">
-              <input id="remember" aria-describedby="remember" type="checkbox" required="">
+              <input id="remember" aria-describedby="remember" type="checkbox" onclick="togglePwd()">
             </div>
             <div class="text-sm ml-3">
-              <label for="remember" class=" text-gray-900  ">Remember
+              <label for="remember" class=" text-gray-900  ">Show Password
                 me</label>
             </div>
           </div>
