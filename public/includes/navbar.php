@@ -1,13 +1,4 @@
-<?php 
-session_start();
 
-$email = $login_err_msg = "";
-if (!empty($_SESSION['login_err_msg'])) {
-  $login_err_msg = $_SESSION['login_err_msg'];
-  $email = $_SESSION['email'];
-  unset($_SESSION['login_err_msg'], $_SESSION['email']); // Clear session error messages
-}
-?>
 <header class="sticky-header">
   <div class="navigation">
     <div class="logo">

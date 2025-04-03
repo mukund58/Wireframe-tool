@@ -1,6 +1,6 @@
 <?php
 session_start();
-include __DIR__ . "/config.php";
+include "config.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST["username"];
@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($stmt->execute()) {
         $_SESSION['user_id'] = $stmt->insert_id;
-        header("Location: index.php");
+        header("Location: ../index.html");
     } else {
         echo "Error: " . $stmt->error;
     }

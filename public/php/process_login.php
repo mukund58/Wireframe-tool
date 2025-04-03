@@ -1,6 +1,6 @@
 <?php
 session_start();
-include __DIR__ . "/php/config.php";
+include "config.php";
 
 if (isset($_POST['submit'])) {    // if Form is submitted
 

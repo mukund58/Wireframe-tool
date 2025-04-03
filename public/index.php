@@ -1,28 +1,4 @@
-<?php
-session_start();
-define("BASE_PATH", dirname(__DIR__)); // One level up from /php/
-include __DIR__ . "/php/config.php";
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $email = trim($_POST['email']);
-    $password = md5(trim($_POST['password']));
-
-    $sql = "SELECT * FROM users WHERE email = ? AND password = ?";
-    $stmt = mysqli_prepare($conn, $sql);
-    mysqli_stmt_bind_param($stmt, "ss", $email, $password);
-    mysqli_stmt_execute($stmt);
-    $result = mysqli_stmt_get_result($stmt);
-
-    if (mysqli_num_rows($result) > 0) {
-        $row = mysqli_fetch_array($result);
-        $_SESSION['username'] = $row['username'];
-        $_SESSION['userid'] = $email;
-        echo "success";  // JavaScript will check for this response
-    } else {
-        echo "error";  // JavaScript will show an error message
-    }
-}
-?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -40,36 +16,62 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   </head>
   
   <body>
-    <?php include(__DIR__."/includes/navbar.php"); ?>
+   
+<header class="sticky-header">
+  <div class="navigation">
+    <div class="logo">
+      <h1><a href="/index.html"><img src="/uploads/logo.png" width="50px" height="50px" alt="Logo"></a></h1>
+    </div>
+    <div class="menubar">
+      <input type="checkbox" id="hamburger-checkbox" style="display: none;">
+      <label for="hamburger-checkbox">
+        <h1><i class='menu-icon bx bx-menu-alt-right text-5xl'></i></h1>
+      </label>
 
-  <div id="loginModal" class="modeal">
+      <nav class="nav-user">
+        <label for="hamburger-checkbox">
+          <img class="close-icon" src="/uploads/close-icon.svg" alt="close-icon">
+        </label>
+        <a href="/wireframe/setting.php">Profile</a>
+        <a href="/wireframe/dashboard.html">Dashboard</a>
+        <a href="/wireframe/contact.html">Contact Sales</a>
+
+        <?php if (isset($_SESSION['username']) && !empty($_SESSION['username'])) { ?>
+          <a id="logout" href="/php/logout.php">Log Out</a>
+        <?php } else { ?>
+          <a id="loginOpenModal" href="#user-login">Login</a>
+          <a id="signUpopenModal">Sign Up Free</a>
+        <?php } ?>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<div id="loginModal" class="modeal">
     <div class="modal-content relative  max-w-md px-4  ">
       <div class="close-login flex flex-col">
 
-        <svg class="close h-5 ml-auto" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+      <svg class="close h-5 ml-auto" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
           <path fill-rule="evenodd"
             d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
             clip-rule="evenodd"></path>
         </svg>
         <h2 class="text-xl font-medium text-gray-900">Sign in to our platform</h2>
       </div>
-      <form onsubmit="return validateForm(event)" action="/wireframe/setting.php" method="post" >
-      <?php if ($login_err_msg != "") { ?>
-      <p class="err-msg"><?php echo $login_err_msg;
-        } ?></p>
-      <div class="form-group ">
-          <label for="email">Email or Username</label>
-          <input type="email" id="email" placeholder="name@company.com" required pattern="^[A-Za-z][A-Za-z0-9._-]*@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$" title="Enter Valid Email ">
+      <form onsubmit="return validateForm(event)" action="/php/process_login.php" method="post">
+        <div class="form-group ">
+          <label for="email">Username</label>
+          <input type="text" id="username" placeholder="username" required >
         </div>
         <div class="form-group">
           <label for="password">Password</label>
-          <input type="password" id="password" placeholder="••••••••" required>
+          <input type="password" id="password" placeholder="••••••••" required >
         </div>
         <p id="error-message" class="error-message"></p>
         <div class="flex justify-between m-4">
           <div class="flex items-start">
             <div class="flex items-center h-5">
-              <input id="remember" aria-describedby="remember" type="checkbox" onclick="togglePwd()">
+              <input id="remember" aria-describedby="remember" type="checkbox" >
             </div>
             <div class="text-sm ml-3">
               <label for="remember" class=" text-gray-900  ">Remember
@@ -92,34 +94,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <div id="signUpModal" class="modeal">
     <div class="modal-content relative  max-w-md px-4  ">
       <div class="close-signup flex flex-row-reverse">
-        <svg class=" h-5 ml-auto" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+      <svg class=" h-5 ml-auto" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
           <path fill-rule="evenodd"
             d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
             clip-rule="evenodd"></path>
         </svg>
         <h2 class="text-xl font-medium text-gray-900">Sign Up to our platform</h2>
       </div>
-      <form onsubmit="return validateForm(event)">
+      <form onsubmit="return validateForm(event)" action="./php/process_register.php" method="post">
         <div class="form-group ">
           <label for="email">Email</label>
-          <input type="email" id="email" placeholder="name@company.com" required>
+          <input type="email" id="email" name="email" placeholder="name@company.com" required>
         </div>
         <div class="form-group ">
           <label for="username">Username</label>
-          <input type="username" id="username" placeholder="username123" required pattern="^[a-z][a-z0-9].{3,15}$" title="Enter Valid Username">
+          <input type="username" id="username" name="username" placeholder="username123" required pattern="^[a-z][a-z0-9].{3,15}$" title="Enter Valid Username">
         </div>
         <div class="form-group">
           <label for="password">Password</label>
-          <input type="password" id="password" placeholder="••••••••" required pattern="^(?=.*?[0-9])(?=.*?[A-Za-z]).{8,32}$" title="Enter Strong Password">
+          <input type="password" id="password" name="password" placeholder="••••••••" required pattern="^(?=.*?[0-9])(?=.*?[A-Za-z]).{8,32}$" title="Enter Strong Password">
         </div>
         <p id="error-message" class="error-message"></p>
         <div class="flex justify-between m-4">
           <div class="flex items-start">
             <div class="flex items-center h-5">
-              <input id="remember" aria-describedby="remember" type="checkbox" onclick="togglePwd()">
+              <input id="remember" aria-describedby="remember" type="checkbox" >
             </div>
             <div class="text-sm ml-3">
-              <label for="remember" class=" text-gray-900  ">Show Password
+              <label for="remember" class=" text-gray-900  ">Remember
                 me</label>
             </div>
           </div>
@@ -136,6 +138,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       </form>
     </div>
   </div>
+
 
   <div class="page1 ">
     <div class="hero">
