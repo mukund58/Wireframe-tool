@@ -1,3 +1,36 @@
+<?php
+session_start();
+include "../php/config.php";
+
+if (isset($_POST['submit'])) {  
+    $email = trim($_POST['email']);
+    $password = trim($_POST['password']);
+
+    // Use prepared statement to fetch stored hashed password
+    $stmt = $conn->prepare("SELECT id, username, password FROM users WHERE email = ?");
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        
+        // Verify entered password with the stored hashed password
+        if (password_verify($password, $row['password'])) {
+            $_SESSION['username'] = $row['username'];
+            $_SESSION['userid'] = $row['id']; 
+            header("Location: /wireframe/setting.php");
+            exit();
+        }
+    }
+
+    // If email is not found or password is incorrect
+    $_SESSION['email'] = $email;
+    $_SESSION['login_err_msg'] = "Incorrect Email or Password";
+    header("Location: /index.php");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -29,7 +62,7 @@
             <nav class="space-x-6  md:flex">
                 <a href="../index.html" class="text-white">Home</a>
                 <a href="../wireframe/editor.html" class="text-white">Editor</a>
-                <a href="/" class="text-white">Logout</a>
+                <a href="../php/logout.php" class="text-white">Logout</a>
             </nav>
         </div>
     </header>

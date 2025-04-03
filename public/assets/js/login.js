@@ -49,4 +49,32 @@ function validateForm(event) {
 
     return true;
 }
+
+function togglePwd() {
+	// get the object password in a varible
+  var pwd = document.getElementById("password");
+  if (pwd.type === "password") 
+    pwd.type = "text";
+  else 
+    pwd.type = "password";
+}
+document.getElementById("loginForm").addEventListener("submit", function(event) {
+    event.preventDefault(); // Prevent default form submission
+    
+    let formData = new FormData(this);
+    
+    fetch("/php/process_login.php", {
+        method: "POST",
+        body: formData
+    })
+    .then(response => response.text())
+    .then(data => {
+        if (data.includes("Incorrect Email id or Password")) {
+            alert("Login failed. Please check your credentials.");
+        } else {
+            window.location.href = "/wireframe/setting.php"; // Redirect on success
+        }
+    })
+    .catch(error => console.error("Error:", error));
+});
 });
