@@ -24,6 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $row = mysqli_fetch_array($result);
         $_SESSION['username'] = $row['username'];
         $_SESSION['userid'] = $email;
+        setcookie("user", $email, time() + (86400 * 30), "/"); // P81d5
         header("Location: /wireframe/setting.php");
         exit();
     } else {

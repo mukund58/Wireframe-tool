@@ -7,6 +7,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = trim($_POST['email']);
     $password = md5(trim($_POST['password']));
 
+    if (empty($email) || empty($password)) {
+        $_SESSION['login_err_msg'] = "Email and Password are required.";
+        header("Location: index.php");
+        exit();
+    }
+
     $sql = "SELECT * FROM users WHERE email = ? AND password = ?";
     $stmt = mysqli_prepare($conn, $sql);
     mysqli_stmt_bind_param($stmt, "ss", $email, $password);
@@ -17,6 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $row = mysqli_fetch_array($result);
         $_SESSION['username'] = $row['username'];
         $_SESSION['userid'] = $email;
+        setcookie("user", $email, time() + (86400 * 30), "/"); // P408b
         header("Location: /wireframe/setting.php");
         exit();
     } else {
