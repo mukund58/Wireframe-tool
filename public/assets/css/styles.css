@@ -26,14 +26,14 @@ p {
     position: fixed;
     top: 0;
     width: 100%;
-    z-index: 1000;
+    z-index: 3;
 }
 
 .navigation {
     align-items: center;
     display: flex;
     max-width: 1200px;
-    margin: 0 auto;
+    /* margin: 0 auto; */
 }
 
 .logo a:hover {
@@ -68,12 +68,7 @@ nav {
     margin-inline: auto;
 }
 
-.menubar {
-    display: flex;
-    flex-direction: row-reverse;
-    flex-grow: 1;
-    margin-right: 16px;
-}
+
 
 .close-icon {
     filter: opacity;
@@ -213,10 +208,7 @@ nav {
     width: 87%;
 }
 
-.menubar {
-    display: flex;
-    justify-content: end;
-}
+
 
 .menubar img {
     cursor: pointer;

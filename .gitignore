@@ -14,4 +14,8 @@ node_modules/
 .env
 .vscode
 
+<<<<<<< HEAD
 vendor
+=======
+vendor
+>>>>>>> add-login
