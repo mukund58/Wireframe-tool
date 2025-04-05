@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 include "config.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -13,12 +13,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("sss", $username, $email, $hashed_password);
 
-    if ($stmt->execute()) {
-        $_SESSION['user_id'] = $stmt->insert_id;
+    $stmt->execute() or die(mysqli_error($conn));
         header("Location: ../index.html");
-    } else {
-        echo "Error: " . $stmt->error;
-    }
+      
+   
 
     $stmt->close();
     $conn->close();

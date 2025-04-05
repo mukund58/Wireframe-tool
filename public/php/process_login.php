@@ -1,27 +1,46 @@
 <?php
-session_start();
-include "config.php";
+session_start(); // Start the session at the very top
 
-if (isset($_POST['submit'])) {    // if Form is submitted
+$login = false;
+$showError = false;
 
-    $email = trim($_POST['email']);
-	$password = trim($_POST['password']);
-	$password = md5($password);
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    include 'config.php';
 
-	$sql = "select * from users where email = '$email' and password = '$password'";
-	$result = mysqli_query($conn,$sql);
+    $username = $_POST["username"];
+    $password = $_POST["password"];
 
-    if (mysqli_num_rows($result) > 0) {
+    // Use prepared statements to prevent SQL injection
+    $stmt = $conn->prepare("SELECT * FROM users WHERE username = ?");
+    if ($stmt) {
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
 
-        $row = mysqli_fetch_array($result);
-		$_SESSION['username'] = $row['username'];
-		$_SESSION['userid'] = $email;
-		header("location:/wireframe/setting.php");
-	}
-	else {
-		$_SESSION['email'] = $email;
-		$_SESSION['login_err_msg'] = "Incorrect Email id or Password";
-		header("location:index.php");
-	}
+        $result = $stmt->get_result();
+        $num = $result->num_rows;
+
+        if ($num === 1) {
+            $row = $result->fetch_assoc();
+
+            // Verify the hashed password
+            if (password_verify($password, $row['password'])) {
+                // Password matched, start session
+                $_SESSION['loggedin'] = true;
+                $_SESSION['username'] = $username;
+                header("Location: /wireframe/setting.php");
+                exit;
+            } else {
+                $showError = "Invalid Credentials";
+            }
+        } else {
+            $showError = "Invalid Credentials";
+        }
+
+        $stmt->close();
+    } else {
+        $showError = "Database error: " . $conn->error;
+    }
+
+    $conn->close();
 }
 ?>

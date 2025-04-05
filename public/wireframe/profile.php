@@ -15,12 +15,12 @@
     <header class="sticky-header">
         <div class="navigation">
             <div class="logo">
-                <h1><a href="../index.html"><img src="../uploads/logo.jpeg" height="50px" width="50px" alt=""></a></h1>
+                <h1><a href="../index.php"><img src="../uploads/logo.jpeg" height="50px" width="50px" alt=""></a></h1>
             </div>
             <div class="menubar">
                 <nav>
-                    <a href="../index.html">Home</a>
-                    <a href="../wireframe/editor.html">Editor</a>
+                    <a href="../index.php">Home</a>
+                    <a href="../wireframe/editor.php">Editor</a>
                     <a href="/">Logout</a>
                 </nav>
             </div>

@@ -1,4 +1,7 @@
-
+<?php
+session_start();
+$alert = $_SESSION['username']
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -12,30 +15,49 @@
     <link href="assets/css/tailwindstyles.css" rel="stylesheet">
     <link rel="icon" type="image/png" href="uploads/white-logo.png"  >
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    
+
   </head>
   
   <body>
-   
+
 <header class="sticky-header">
-  <div class="navigation">
+
+<div class="navigation">
     <div class="logo">
       <h1><a href="/index.html"><img src="/uploads/logo.png" width="50px" height="50px" alt="Logo"></a></h1>
     </div>
+<!-- 
+    <div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md " role="alert">
+  <div class="flex">
+    <div class="py-1"><svg class="fill-current h-6 w-6 text-teal-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/></svg></div>
+    <div>
+      <p class="font-bold">Our privacy policy has changed</p>
+      <p class="text-sm">Make sure you know how these changes affect you.</p>
+    </div>
+  </div>
+</div>   -->
+      
     <div class="menubar">
       <input type="checkbox" id="hamburger-checkbox" style="display: none;">
       <label for="hamburger-checkbox">
-        <h1><i class='menu-icon bx bx-menu-alt-right text-5xl'></i></h1>
+
+      <?php if (isset($_SESSION['username']) && !empty($_SESSION['username'])) { ?>
+        <img src="../uploads/avatar.svg" class="h-10 w-10 rounded-full" id="profile-pic">
+        <?php } else { ?>
+            <h1><i class='menu-icon bx bx-menu-alt-right text-5xl'></i></h1>
+            <?php } ?>
       </label>
+
 
       <nav class="nav-user">
         <label for="hamburger-checkbox">
           <img class="close-icon" src="/uploads/close-icon.svg" alt="close-icon">
         </label>
-        <a href="/wireframe/setting.php">Profile</a>
-        <a href="/wireframe/dashboard.html">Dashboard</a>
-        <a href="/wireframe/contact.html">Contact Sales</a>
 
+        <?php if (isset($_SESSION['username']) && !empty($_SESSION['username'])) { ?>
+        <a href="/wireframe/setting.php">Profile</a>
+        <a href="/wireframe/draft.php">Dashboard</a>
+        <?php } ?>
         <?php if (isset($_SESSION['username']) && !empty($_SESSION['username'])) { ?>
           <a id="logout" href="/php/logout.php">Log Out</a>
         <?php } else { ?>
@@ -46,6 +68,7 @@
     </div>
   </div>
 </header>
+
 
 <div id="loginModal" class="modeal">
     <div class="modal-content relative  max-w-md px-4  ">
@@ -61,11 +84,11 @@
       <form onsubmit="return validateForm(event)" action="/php/process_login.php" method="post">
         <div class="form-group ">
           <label for="email">Username</label>
-          <input type="text" id="username" placeholder="username" required >
+          <input type="text" id="username" placeholder="username" name="username" required >
         </div>
         <div class="form-group">
           <label for="password">Password</label>
-          <input type="password" id="password" placeholder="••••••••" required >
+          <input type="password" id="password" name="password" placeholder="••••••••" required class="input-field password" >
         </div>
         <p id="error-message" class="error-message"></p>
         <div class="flex justify-between m-4">
@@ -112,7 +135,9 @@
         </div>
         <div class="form-group">
           <label for="password">Password</label>
-          <input type="password" id="password" name="password" placeholder="••••••••" required pattern="^(?=.*?[0-9])(?=.*?[A-Za-z]).{8,32}$" title="Enter Strong Password">
+          
+          <input type="password" id="password" class="input-field password"  name="password" placeholder="••••••••" required pattern="^(?=.*?[0-9])(?=.*?[A-Za-z]).{8,32}$" title="Enter Strong Password" >
+          
         </div>
         <p id="error-message" class="error-message"></p>
         <div class="flex justify-between m-4">
@@ -141,11 +166,13 @@
 
 
   <div class="page1 ">
-    <div class="hero">
+ 
+  <div class="hero">
       <h1>Design Seamlessly with Our Wireframe Tool</h1>
       <p>Create professional wireframes quickly and efficiently with our easy-to-use editor. Perfect for designers,
         developers, and teams.</p>
     </div>
+ 
     <a href="wireframe/editor.html" class="cta-button">Start Designing</a>
     
      <svg class="editorial"

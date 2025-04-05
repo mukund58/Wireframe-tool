@@ -7,6 +7,7 @@
     <title>Wireframe Editor</title>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="../assets/css/editor.css">
+    <link rel="stylesheet" href="../assets/css/utilities.css">
     <link rel="icon" type="image/png" href="../uploads/white-logo.png"  >
 
 </head>
@@ -113,8 +114,8 @@
                 </button>
                 <div class="profile" id="profile-menu">
                     <a href="#" id="username">username</a>
-                    <a href="../wireframe/setting.html" id="profileSetting">Profile settings</a>
-                    <a href="../wireframe/draft.html" id="dasboard">Dashboard</a>
+                    <a href="../wireframe/setting.php" id="profileSetting">Profile settings</a>
+                    <a href="../wireframe/draft.php" id="dasboard">Dashboard</a>
                     <a href="#" id="create-team">Create Team</a>
                 </div>
             </div>

@@ -13,12 +13,12 @@
 <body class="bg-gray-100">
     <header class="sticky top-0 bg-[#101828]   shadow-[1px_4px_24px_#000]">
         <div class="flex items-center justify-between px-6 py-4">
-            <a href="../index.html">
+            <a href="../index.php">
                 <img src="../uploads/logo.png" alt="Logo" class="h-12 w-12 invert">
             </a>
             <nav class="space-x-6  md:flex">
-                <a href="../index.html" class="text-white">Home</a>
-                <a href="../wireframe/editor.html" class="text-white">Editor</a>
+                <a href="../index.php" class="text-white">Home</a>
+                <a href="../wireframe/editor.php" class="text-white">Editor</a>
                 <a href="/" class="text-white">Logout</a>
             </nav>
         </div>
@@ -28,8 +28,8 @@
         <div class="bg-white shadow-md rounded-lg p-6 md:flex md:space-x-6">
             <div class="md:w-1/4 w-full border-b-gray-500 md:border-b-0  pb-4 md:pb-0">
                 <div class="space-y-4">
-                    <a class="block p-2 hover:bg-gray-200  rounded-md" href="setting.html">General</a>
-                    <a class="block p-2 hover:bg-gray-200 rounded-md" href="password.html">Change Password</a>
+                    <a class="block p-2 hover:bg-gray-200  rounded-md" href="setting.php">General</a>
+                    <a class="block p-2 hover:bg-gray-200 rounded-md" href="password.php">Change Password</a>
                     <a class="block p-2 bg-blue-500 text-white rounded-md" href="#account-info">Draft</a>
                 </div>
             </div>

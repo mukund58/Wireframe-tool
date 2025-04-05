@@ -1,35 +1,20 @@
 <?php
 session_start();
 include "../php/config.php";
-
-if (isset($_POST['submit'])) {  
-    $email = trim($_POST['email']);
-    $password = trim($_POST['password']);
-
-    // Use prepared statement to fetch stored hashed password
-    $stmt = $conn->prepare("SELECT id, username, password FROM users WHERE email = ?");
-    $stmt->bind_param("s", $email);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-        
-        // Verify entered password with the stored hashed password
-        if (password_verify($password, $row['password'])) {
-            $_SESSION['username'] = $row['username'];
-            $_SESSION['userid'] = $row['id']; 
-            header("Location: /wireframe/setting.php");
-            exit();
-        }
-    }
-
-    // If email is not found or password is incorrect
-    $_SESSION['email'] = $email;
-    $_SESSION['login_err_msg'] = "Incorrect Email or Password";
-    header("Location: /index.php");
-    exit();
+if (!isset($_SESSION['username'])) {
+    header("location:/index.php");
 }
+
+$username = $_SESSION["username"];
+// $email = $_SESSION["email"];
+
+$stmt = $conn->prepare("SELECT * FROM users WHERE username = ?");
+$stmt->bind_param("s", $username);
+$stmt->execute();
+$result = $stmt->get_result();
+
+$user = $result->fetch_assoc(); // now $user contains all user info like email, phone etc.
+// echo $user;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -56,12 +41,12 @@ if (isset($_POST['submit'])) {
 <body class="bg-gray-100">
     <header class="sticky top-0 bg-[#101828]   shadow-[1px_4px_24px_#000]">
         <div class="flex items-center justify-between px-6 py-4">
-            <a href="../index.html">
+            <a href="../index.php">
                 <img src="../uploads/logo.png" alt="Logo" class="h-12 w-12 invert">
             </a>
             <nav class="space-x-6  md:flex">
-                <a href="../index.html" class="text-white">Home</a>
-                <a href="../wireframe/editor.html" class="text-white">Editor</a>
+                <a href="../index.php" class="text-white">Home</a>
+                <a href="../wireframe/editor.php" class="text-white">Editor</a>
                 <a href="../php/logout.php" class="text-white">Logout</a>
             </nav>
         </div>
@@ -71,9 +56,9 @@ if (isset($_POST['submit'])) {
         <div class="bg-white shadow-md rounded-lg p-6 md:flex md:space-x-0">
             <div class="md:w-1/4 w-full border-b-gray-500 md:border-b-0  pb-4 md:pb-0">
                 <div class="space-y-4">
-                    <a class="block p-2 bg-blue-500 text-white rounded-md" href="setting.html">General</a>
-                    <a class="block p-2 hover:bg-gray-200 rounded-md" href="password.html">Change Password</a>
-                    <a class="block p-2 hover:bg-gray-200 rounded-md" href="draft.html">Draft</a>
+                    <a class="block p-2 bg-blue-500 text-white rounded-md" href="setting.php">General</a>
+                    <a class="block p-2 hover:bg-gray-200 rounded-md" href="password.php">Change Password</a>
+                    <a class="block p-2 hover:bg-gray-200 rounded-md" href="draft.php">Draft</a>
                 </div>
             </div>
             <div class="md:w-3/4 w-full p-6">
@@ -94,7 +79,7 @@ if (isset($_POST['submit'])) {
                         <div class="space-y-4">
                             <div>
                                 <label class="block text-gray-700">Username</label>
-                                <input type="text" class="w-full p-2 border rounded-md"  id="userName" onkeyup="validateUserName()"  placeholder="Enter your username">
+                                <input type="text" class="w-full p-2 border rounded-md"  id="userName" onkeyup="validateUserName()"  placeholder="Enter your username"   value="<?php echo htmlspecialchars($user['username']); ?>" >
                                 <span id="username-error"> </span>
 
                             </div>
@@ -112,7 +97,7 @@ if (isset($_POST['submit'])) {
                             </div>
                             <div>
                                 <label class="block text-gray-700">E-mail</label>
-                                <input type="email" class="w-full p-2 border rounded-md" id="email" onkeyup="validateEmail()" placeholder="Enter your email" >
+                                <input type="email" class="w-full p-2 border rounded-md" id="email" onkeyup="validateEmail()" placeholder="Enter your email" value="<?php echo htmlspecialchars($user['email']); ?>" />
                                 <span id="email-error"> </span>
                                 <div class="bg-yellow-200 text-yellow-700 p-2 mt-2 rounded-md">
                                     Your email is not confirmed. Please check your inbox.<br>
