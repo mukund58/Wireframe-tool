@@ -1,8 +1,10 @@
 <?php
 session_start(); // Start the session at the very top
-
 $login = false;
 $showError = false;
+
+$_SESSION['loggedin'] = $login ;
+$_SESSION['showError'] = $showError ;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     include 'config.php';
@@ -30,17 +32,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 header("Location: /wireframe/setting.php");
                 exit;
             } else {
-                $showError = "Invalid Credentials";
+                $showError = "Invalid Password";
+                $_SESSION['showError'] = $showError;
             }
         } else {
-            $showError = "Invalid Credentials";
+            $showError = "Invalid Username";
+            $_SESSION['showError'] = $showError;
         }
-
+        
         $stmt->close();
     } else {
         $showError = "Database error: " . $conn->error;
     }
 
+    header("Location: /wireframe/setting.php");
     $conn->close();
 }
 ?>

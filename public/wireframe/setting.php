@@ -1,19 +1,43 @@
 <?php
 session_start();
 include "../php/config.php";
-if (!isset($_SESSION['username'])) {
+if (!isset($_SESSION['loggedin'])) {
     header("location:/index.php");
 }
 
 $username = $_SESSION["username"];
-// $email = $_SESSION["email"];
 
 $stmt = $conn->prepare("SELECT * FROM users WHERE username = ?");
 $stmt->bind_param("s", $username);
 $stmt->execute();
 $result = $stmt->get_result();
+$user = $result->fetch_assoc(); // <-- This line was missing
 
-$user = $result->fetch_assoc(); // now $user contains all user info like email, phone etc.
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $newUsername = trim($_POST['username']);
+    $newEmail = trim($_POST['email']);
+
+    // Optional: Add validations here
+    echo "sub";
+    $updateStmt = $conn->prepare("UPDATE users SET username = ?, email = ? WHERE username = ?");
+    $updateStmt->bind_param("sss", $newUsername, $newEmail, $username);
+
+    if ($updateStmt->execute()) {
+        // Update session username if it was changed
+        $_SESSION['username'] = $newUsername;
+        header("Location: setting.php?updated=1");
+        exit();
+    } else {
+        echo "<script>alert('Failed to update. Try again.');</script>";
+    }
+}
+$stmt = $conn->prepare("INSERT INTO users (username, email, token) VALUES (?, ?, ?)");
+$stmt->bind_param("sss", $username, $email, $token);
+
+// Later in the success block:
+// $verifyLink = "http://yourdomain.com/php/verify.php?token=$token";
+// mail($newEmail, "Verify your email", "Click the link to verify: $verifyLink");
+
 // echo $user;
 ?>
 <!DOCTYPE html>
@@ -75,7 +99,7 @@ $user = $result->fetch_assoc(); // now $user contains all user info like email, 
                         </div>
                     </div>
                     <hr class="border-gray-300 my-4">
-                    <form action="">
+                    <form action="" method="post">
                         <div class="space-y-4">
                             <div>
                                 <label class="block text-gray-700">Username</label>
@@ -83,26 +107,35 @@ $user = $result->fetch_assoc(); // now $user contains all user info like email, 
                                 <span id="username-error"> </span>
 
                             </div>
-                            <div>
+                            <!-- <div>
                                 <label class="block text-gray-700">Name</label>
                                 <input type="text" class="w-full p-2 border rounded-md"  id="fullName" onkeyup="validateName()"  placeholder="Enter your full name">
                                 <span id="name-error"> </span>
 
-                            </div>
-                            <div>
+                            </div> -->
+                            <!-- <div>
                                 <label class="block text-gray-700 ">Phone Number</label>
                                 <input type="text" class="w-full p-2 border rounded-md"id="phone" onkeyup="validatePhone()" placeholder="Enter your phone number" >
                                 <span id="phone-error"> </span>
 
-                            </div>
+                            </div> -->
                             <div>
                                 <label class="block text-gray-700">E-mail</label>
                                 <input type="email" class="w-full p-2 border rounded-md" id="email" onkeyup="validateEmail()" placeholder="Enter your email" value="<?php echo htmlspecialchars($user['email']); ?>" />
                                 <span id="email-error"> </span>
-                                <div class="bg-yellow-200 text-yellow-700 p-2 mt-2 rounded-md">
-                                    Your email is not confirmed. Please check your inbox.<br>
-                                    <a href="#" class="text-blue-500">Resend confirmation</a>
-                                </div>
+                                <?php if ($user['email_verified'] == 0): ?>
+
+                                  <div class="bg-yellow-200 text-yellow-700 p-2 mt-2 rounded-md">
+                                Your email is not confirmed. Please check your inbox.<br>
+                                 <a href="../php/resend.php" class="text-blue-500">Resend confirmation</a>
+                                  </div>
+
+                                 <?php else: ?>
+                                  <div class="bg-green-100 text-green-700 p-2 mt-2 rounded-md">
+                                ✅ Your email is verified.
+                             </div>
+                           <?php endif; ?>
+
                             </div>
                             <div>
                                 <button type="submit"
