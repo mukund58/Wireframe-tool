@@ -1,6 +1,23 @@
-<?php 
+<?php
 session_start();
+include "../php/config.php";
+
+$draftJSON = null;
+if (isset($_GET['draft_id']) && isset($_SESSION['id'])) {
+    $id = intval($_GET['draft_id']);
+    $uid = $_SESSION['id'];
+
+    $stmt = $conn->prepare("SELECT content FROM drafts WHERE id = ? AND user_id = ?");
+    $stmt->bind_param("ii", $id, $uid);
+    $stmt->execute();
+    $stmt->bind_result($content);
+    if ($stmt->fetch()) {
+        $draftJSON = $content;
+    }
+    $stmt->close();
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -167,6 +184,17 @@ session_start();
     <!-- <script src="../assets/js/shape-object.js"></script> -->
     <script src="../assets/js/script.js" defer></script>
     <script src="../assets/js/toolbar.js" defer></script>
+    <script src="../assets/js/draft.js" defer></script>
+    <script>
+    const draftData = <?php echo $draftJSON ? $draftJSON : 'null'; ?>;
+
+    document.addEventListener("DOMContentLoaded", () => {
+        if (draftData) {
+            canvas.loadFromJSON(draftData, canvas.renderAll.bind(canvas));
+        }
+    });
+</script>
+
 </body>
 
 </html>

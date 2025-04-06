@@ -17,6 +17,7 @@ if (!isset($_SESSION['loggedin'])) {
     <title>Profile </title>
     <link href="../assets/css/tailwindstyles.css" rel="stylesheet">
     <link rel="icon" type="image/png" href="../uploads/white-logo.png"  >
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.5.0/fabric.min.js"></script>
     <link rel="stylesheet" href="../assets/css/utilities.css">
         <link rel="stylesheet" href="../assets/css/dashboard.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -51,9 +52,30 @@ if (!isset($_SESSION['loggedin'])) {
                     
                         <div class="dashboard-content ">
                             <h2>Saved Drafts</h2>
+                            <form action="" method="get">
+                            <div class="my-5">
+                                    <input type="text" id="draft-title" placeholder="Enter draft title" class="w-full p-2 border rounded-md" />
+                                    <button id="create-draft-btn" class="mt-2 w-full bg-green-600 text-white px-4 py-2 rounded-md">Create Draft</button>
+                              </div>
+                              </form>
                             <div class="drafts-container">
+                            <?php
+                                $uid = $_SESSION['user_id'];
+                                $result = $conn->query("SELECT * FROM drafts WHERE user_id = $uid ORDER BY created_at DESC");
+                                while ($row = $result->fetch_assoc()) {
+                                    echo '<div class="draft border rounded p-4 my-2">';
+                                    echo '<h3 class="font-bold text-lg">' . htmlspecialchars($row['title']) . '</h3>';
+                                    echo '<div class="actions mt-2">';
+                                    echo '<a href="../wireframe/editor.php?draft_id=' . $row['id'] . '" class="edit-draft text-blue-600">Edit</a> | ';
+                                    echo '<a href="../php/delete_draft.php?id=' . $row['id'] . '" class="text-red-600" onclick="return confirm(\'Delete this draft?\')">Delete</a>';
+                                    echo '</div></div>';
+                                }
+                                ?>
+
                                 <!-- Drafts will be dynamically loaded here -->
                             </div>
+                        
+
                             <div class="export-import-buttons">
                                 <button id="export-drafts-btn" class="w-full my-5 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center cursor-pointer">Export Drafts as JSON</button>
                                 <button id="import-drafts-btn"class="w-full  text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center cursor-pointer" >Import Drafts from JSON</button>
@@ -65,7 +87,10 @@ if (!isset($_SESSION['loggedin'])) {
             </div>
         </div>
     </div>
-    <script src="../assets/js/setting.js"></script>
-    <script src="../assets/js/dashboard.js"></script>
+    <!-- <script src="../assets/js/setting.js"></script> -->
+    <!-- <script src="../assets/js/dashboard.js"></script> -->
+    <script src="../assets/js/script.js" defer></script>
+    <script src="../assets/js/draft.js" defer></script>
+
 </body>
 </html>

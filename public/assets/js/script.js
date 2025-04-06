@@ -1,5 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
     const canvas = new fabric.Canvas('canvas');
+    window.canvas = new fabric.Canvas("canvas");
+    window.loadCanvasFromJSON = function() {
+        // your logic to load canvas from JSON
+        const json = '{"version":"4.6.0","objects":[...]}'; // example
+        canvas.loadFromJSON(json, canvas.renderAll.bind(canvas));
+    };
    const zoom = document.getElementById("canvas-container");
 
     let undoStack = [];
@@ -97,7 +103,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.getElementById("savePNG").addEventListener("click", saveCanvasAsPNG);
     document.getElementById("saveJSON").addEventListener("click", saveCanvasAsJSON);
-    document.getElementById("loadJSON").addEventListener("click", loadCanvasFromJSON);
+    document.getElementById("loadJSON").addEventListener("click", window.loadCanvasFromJSON);
 
     function addRect() {
         var Rectangle = (function () {
