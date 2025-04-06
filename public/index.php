@@ -1,7 +1,26 @@
 <?php
 session_start();
-$alert = $_SESSION['username']
+require '../vendor/autoload.php';
 
+$dotenv = Dotenv\Dotenv::createImmutable( '../');
+$dotenv->load();
+
+// define("BASE_PATH", dirname(__DIR__)); // One level up from /php/
+
+$servername = $_ENV['DB_HOST'];
+$username = $_ENV['DB_USER'];
+$password = $_ENV['DB_PASS'];
+$dbname = $_ENV['DB_NAME'];
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// include "../php/config.php";
+$username = $_SESSION['username'];
+
+$stmt = $conn->prepare("SELECT * FROM users WHERE username = ?");
+$stmt->bind_param("s", $username);
+$stmt->execute();
+$result = $stmt->get_result();
+$user = $result->fetch_assoc();
 ?>
 
 <!DOCTYPE html>
@@ -35,7 +54,7 @@ $alert = $_SESSION['username']
       <label for="hamburger-checkbox">
 
       <?php if (isset($_SESSION['username']) && !empty($_SESSION['username'])) { ?>
-        <img src="../uploads/avatar.svg" class="h-10 w-10 rounded-full" id="profile-pic">
+        <img src="../pic/<?= htmlspecialchars($user['profile_pic']) ?>" class="h-10 w-10 rounded-full" id="profile-pic">
         <?php } else { ?>
             <h1><i class='menu-icon bx bx-menu-alt-right text-5xl'></i></h1>
             <?php } ?>

@@ -4,6 +4,7 @@ include "../php/config.php";
 $username = $_SESSION["username"];
 if (!isset($_SESSION['loggedin'])) {
     header("location:/index.php");
+    exit();
 }
 
 
@@ -29,7 +30,7 @@ if (!isset($_SESSION['loggedin'])) {
             <nav class="space-x-6  md:flex">
                 <a href="../index.php" class="text-white">Home</a>
                 <a href="../wireframe/editor.php" class="text-white">Editor</a>
-                <a href="/" class="text-white">Logout</a>
+                <a href="../php/logout.php" class="text-white">Logout</a>
             </nav>
         </div>
     </header>

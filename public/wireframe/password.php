@@ -1,12 +1,46 @@
 <?php 
 session_start();
 include "../php/config.php";
+
 if (!isset($_SESSION['loggedin'])) {
     header("location:/index.php");
+    exit();
 }
 
 $username = $_SESSION["username"];
+$success = $error = "";
 
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $current_password = $_POST["current_password"];
+    $new_password = $_POST["new_password"];
+    $repeat_password = $_POST["repeat_password"];
+
+    // 1. Fetch current user from DB
+    $stmt = $conn->prepare("SELECT password FROM users WHERE username = ?");
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+    $stmt->bind_result($hashed_password);
+    $stmt->fetch();
+    $stmt->close();
+
+    // 2. Verify current password
+    if (!password_verify($current_password, $hashed_password)) {
+        $error = "Current password is incorrect.";
+    } elseif ($new_password !== $repeat_password) {
+        $error = "New passwords do not match.";
+    } else {
+        // 3. Hash and update new password
+        $new_hashed = password_hash($new_password, PASSWORD_DEFAULT);
+        $update = $conn->prepare("UPDATE users SET password=? WHERE username=?");
+        $update->bind_param("ss", $new_hashed, $username);
+        if ($update->execute()) {
+            $success = "Password changed successfully.";
+        } else {
+            $error = "Error updating password.";
+        }
+        $update->close();
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -46,11 +80,16 @@ $username = $_SESSION["username"];
                   
                     <hr class="border-none my-4">
                     <div class="space-y-4">
-                        <form >
+                        <form method="POST" action="">
+                        <?php if ($success): ?>
+                             <div class="text-green-600 font-medium mb-2"><?php echo $success; ?></div>
+                                  <?php elseif ($error): ?>
+                             <div class="text-red-600 font-medium mb-2"><?php echo $error; ?></div>
+                        <?php endif; ?>
 
                             <div>
                                 <label class="block text-gray-700">Current Password</label>
-                                <input type="password" class="w-full p-2 border rounded-md" >
+                                <input type="password" class="w-full p-2 border rounded-md" name="current_password" >
                         </div>
                         <div>
                             <a href="#" class="text-sm text-blue-700 hover:underline dark:text-blue-500">Forget
@@ -58,11 +97,11 @@ $username = $_SESSION["username"];
                         </div>
                         <div>
                             <label class="block text-gray-700">New Password</label>
-                            <input type="password" class="w-full p-2 border rounded-md" >
+                            <input type="password" class="w-full p-2 border rounded-md" name="new_password" >
                         </div>
                         <div>
                             <label class="block text-gray-700">Repeat Password</label>
-                            <input type="password" class="w-full p-2 border rounded-md" >
+                            <input type="password" class="w-full p-2 border rounded-md" name="repeat_password">
                         <div>
                             <button type="submit"
                             class="w-full my-5 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center cursor-pointer ">Save Change</button>
@@ -74,6 +113,6 @@ $username = $_SESSION["username"];
             </div>
         </div>
     </div>
-    <script src="../assets/js/setting.js"></script>
+    <!-- <script src="../assets/js/setting.js"></script> -->
 </body>
 </html>

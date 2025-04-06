@@ -42,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION['showError'] = $showError;
             }
             
-            $token = row['token'];
+            // $token = row['token'];
         } else {
             $showError = "Invalid Username";
             $_SESSION['showError'] = $showError;
