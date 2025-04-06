@@ -35,6 +35,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $showError = "Invalid Password";
                 $_SESSION['showError'] = $showError;
             }
+            if (isset($row['remember'])) {
+                setcookie("username", $username, time() + (86400 * 30), "/"); // 30 days
+                // setcookie("password", $password, time() + (86400 * 30), "/"); // Not recommended to store plain password
+            } else {
+                // Remove cookies if unchecked
+                // setcookie("username", "", time() - 3600, "/");
+                // setcookie("password", "", time() - 3600, "/");
+            }
         } else {
             $showError = "Invalid Username";
             $_SESSION['showError'] = $showError;

@@ -1,3 +1,14 @@
+<?php 
+session_start();
+include "../php/config.php";
+if (!isset($_SESSION['loggedin'])) {
+    header("location:/index.php");
+}
+
+$username = $_SESSION["username"];
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

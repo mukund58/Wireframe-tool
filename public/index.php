@@ -28,19 +28,7 @@ $alert = $_SESSION['username']
       <h1><a href="/index.html"><img src="/uploads/logo.png" width="50px" height="50px" alt="Logo"></a></h1>
     </div>
 
-    <!-- show error  -->
-<?php if($_SESSION['showError']){ ?>
-
-  <div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md " role="alert">
-  <div class="flex">
-      <div class="py-1"><svg class="fill-current h-6 w-6 text-teal-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/></svg></div>
-      <div>
-        <p class="font-bold"><?php echo $_SESSION['showError'] ?></p>
-      </div>
-      </div>
-      </div> 
-
-    <?php } session_destroy(); ?>
+ 
 
     <div class="menubar">
       <input type="checkbox" id="hamburger-checkbox" style="display: none;">
@@ -76,7 +64,9 @@ $alert = $_SESSION['username']
 
 
 <div id="loginModal" class="modeal">
+  
     <div class="modal-content relative  max-w-md px-4  ">
+      
       <div class="close-login flex flex-col">
 
       <svg class="close h-5 ml-auto" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -84,8 +74,10 @@ $alert = $_SESSION['username']
             d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
             clip-rule="evenodd"></path>
         </svg>
+      
         <h2 class="text-xl font-medium text-gray-900">Sign in to our platform</h2>
       </div>
+   
       <form onsubmit="return validateForm(event)" action="/php/process_login.php" method="post">
         <div class="form-group ">
           <label for="email">Username</label>
@@ -112,10 +104,16 @@ $alert = $_SESSION['username']
         <button type="submit"
           class="w-full my-5 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center my-3 ">Login
           to your account</button>
+          <?php if($_SESSION['showError']){ ?>
+            <div class="bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4" role="alert">
+  <p class="font-bold"><?php echo $_SESSION['showError'] ?></p>
+</div>
+          <?php } ?>
         <div class="text-sm font-medium text-gray-500 cursor-pointer">
           Not registered? <a id="switchToSignup" class="text-blue-700 hover:underline ">Create
             account</a>
         </div>
+      
       </form>
     </div>
   </div>
