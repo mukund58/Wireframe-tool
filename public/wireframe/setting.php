@@ -41,7 +41,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             exit;
         }
     }
-
+    
+    $profile_pic_path = $targetFile; // new path to be saved in DB
+    // $profile_pic_path = $_FILES['profile_pic']['name'];
     // Update user info
     $updateStmt = $conn->prepare("UPDATE users SET username = ?, email = ?, profile_pic = ? WHERE username = ?");
     $updateStmt->bind_param("ssss", $newUsername, $newEmail, $profile_pic_path, $username);
