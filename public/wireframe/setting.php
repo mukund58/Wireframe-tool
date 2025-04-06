@@ -2,20 +2,43 @@
 session_start();
 include "../php/config.php";
 
-// Check if user is logged in
-if (!isset($_SESSION['username'])) {
+
+// Start session and check login
+if (!isset($_SESSION['username']) && !isset($_COOKIE['remember_token'])) {
     header("Location: /index.php");
     exit();
 }
 
+if (isset($_COOKIE['remember_token']) && !isset($_SESSION['username'])) {
+    // Only do this if session not already set
+    $token = $_COOKIE['remember_token'];
+    $stmt = $conn->prepare("SELECT * FROM users WHERE token = ?");
+    $stmt->bind_param("s", $token);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $user = $result->fetch_assoc();
+    $stmt->close();
+
+    if ($user) {
+        $_SESSION['username'] = $user['username'];
+    } else {
+        // Invalid token, clear cookie and redirect
+        setcookie("remember_token", "", time() - 3600, "/");
+        header("Location: /index.php");
+        exit();
+    }
+}
+
 $username = $_SESSION['username'];
 
-// Fetch current user info
+// Now safely fetch user info
 $stmt = $conn->prepare("SELECT * FROM users WHERE username = ?");
 $stmt->bind_param("s", $username);
 $stmt->execute();
 $result = $stmt->get_result();
 $user = $result->fetch_assoc();
+$stmt->close();
+
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $newUsername = trim($_POST['username']);

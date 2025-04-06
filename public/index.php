@@ -91,7 +91,7 @@ $alert = $_SESSION['username']
         <div class="flex justify-between m-4">
           <div class="flex items-start">
             <div class="flex items-center h-5">
-              <input id="remember" aria-describedby="remember" type="checkbox" >
+              <input id="remember" aria-describedby="remember" type="checkbox" name="remember_me">
             </div>
             <div class="text-sm ml-3">
               <label for="remember" class=" text-gray-900  ">Remember
@@ -146,7 +146,7 @@ $alert = $_SESSION['username']
         <div class="flex justify-between m-4">
           <div class="flex items-start">
             <div class="flex items-center h-5">
-              <input id="remember" aria-describedby="remember" type="checkbox" >
+              <input id="remember" aria-describedby="remember" type="checkbox" name="remember_me">
             </div>
             <div class="text-sm ml-3">
               <label for="remember" class=" text-gray-900  ">Remember
