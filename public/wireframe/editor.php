@@ -29,6 +29,8 @@ if (isset($_GET['draft_id']) && isset($_SESSION['id'])) {
     <link rel="stylesheet" href="../assets/css/editor.css">
     <link rel="stylesheet" href="../assets/css/utilities.css">
     <link rel="icon" type="image/png" href="../uploads/white-logo.png"  >
+    <!-- <link href="../assets/css/tailwindstyles.css" rel="stylesheet"> -->
+
 
 </head>
 
@@ -142,12 +144,26 @@ if (isset($_GET['draft_id']) && isset($_SESSION['id'])) {
         </div>
         
         <div class="file-drop-down">
+
+                           
             <h3 style="color: black;"><i class='bx bx-menu'></i></h3>
             <div class="drop-dron-menu">
-                <div class="exportbtn">
+            <div class="my-5">
+    
+                    <input type="text" id="draft-title" placeholder="Enter draft title" class="w-full p-2 border rounded-md" />
+                    <button id="create-draft-btn" class="mt-2 w-full bg-green-600 text-white px-4 py-2 rounded-md">Create Draft</button>
+            </div>
+                              
+                <!-- <div class="exportbtn">
                     <button id="element-btn" class="flex-row">
                         <span>All Element</span>
                         <h1><i class='bx bx-right-arrow-alt'></i></h1>
+                    </button>
+                </div> -->
+                <div class="exportbtn">
+                    
+                    <!-- <button id="element-btn" > -->
+                    <button class="flex-row" id="saveDraft" >Save Draft</button>
                     </button>
                 </div>
                 <div class="exportbtn" >
@@ -184,16 +200,8 @@ if (isset($_GET['draft_id']) && isset($_SESSION['id'])) {
     <!-- <script src="../assets/js/shape-object.js"></script> -->
     <script src="../assets/js/script.js" defer></script>
     <script src="../assets/js/toolbar.js" defer></script>
-    <script src="../assets/js/draft.js" defer></script>
-    <script>
-    const draftData = <?php echo $draftJSON ? $draftJSON : 'null'; ?>;
+    <!-- <script src="../assets/js/draft.js" defer></script> -->
 
-    document.addEventListener("DOMContentLoaded", () => {
-        if (draftData) {
-            canvas.loadFromJSON(draftData, canvas.renderAll.bind(canvas));
-        }
-    });
-</script>
 
 </body>
 

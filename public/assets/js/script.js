@@ -104,7 +104,92 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("savePNG").addEventListener("click", saveCanvasAsPNG);
     document.getElementById("saveJSON").addEventListener("click", saveCanvasAsJSON);
     document.getElementById("loadJSON").addEventListener("click", window.loadCanvasFromJSON);
+    document.getElementById("saveDraft").addEventListener("click",saveDraft);
 
+    document.getElementById('create-draft-btn').addEventListener('click', () => {
+        const title = document.getElementById('draft-title').value.trim();
+        const canvasData = canvas.toJSON(); // your Fabric.js canvas object
+      
+        if (!title) {
+          alert("Please enter a title");
+          return;
+        }
+      
+        fetch('/draft/save_draft.php', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            title: title,
+            draft: canvasData
+          })
+        })
+        .then(async res => {
+          const text = await res.text();
+          try {
+            const data = JSON.parse(text);
+            if (data.success) {
+              alert("Draft saved!");
+            } else {
+              alert("Error: " + data.message);
+            }
+          } catch (err) {
+            console.error("Invalid JSON response:", text);
+            alert("Something went wrong. Check console.");
+          }
+        });
+      });
+      function autoSaveDraft() {
+        // const title = document.getElementById('draftTitle').value.trim();
+        const json = JSON.stringify(canvas.toJSON());
+    
+        fetch('../draft/update_draft.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                draft_id: draftId,
+                draft_data: json
+            })
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                console.log("Auto-saved at " + new Date().toLocaleTimeString());
+            }
+        });
+    }
+    
+    setInterval(autoSaveDraft, 10000); // Save every 10 seconds
+    
+    function saveDraft() {
+        const title = document.getElementById('draftTitle').value.trim();
+    const json = JSON.stringify(canvas.toJSON());
+
+    if (!draftId) {
+        alert("No draft selected!");
+        return;
+    }
+
+    fetch('../php/save_draft_update.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            draft_id: draftId,
+            draft_data: json,
+            title: title
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.success) {
+            console.log("Draft saved");
+        } else {
+            alert("Failed to save draft");
+        }
+    });
+          
+      }
     function addRect() {
         var Rectangle = (function () {
             function Rectangle(canvas) {
@@ -479,5 +564,20 @@ document.addEventListener("DOMContentLoaded", () => {
             default:
                 canvas.freeDrawingBrush.width = 1;
         }
+    }
+    const urlParams = new URLSearchParams(window.location.search);
+    const draftId = urlParams.get('draft_id');
+  
+    if (draftId) {
+      // fetch and load draft if editing
+      fetch(`/draft/load_draft_by_id.php?draft_id=${draftId}`)
+        .then(res => res.json())
+        .then(data => {
+          if (data.success) {
+            canvas.loadFromJSON(JSON.parse(data.draft_data), canvas.renderAll.bind(canvas));
+          } else {
+            alert("Failed to load draft.");
+          }
+        });
     }
 });

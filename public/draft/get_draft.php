@@ -1,6 +1,6 @@
 <?php
 session_start();
-include "../config.php";
+include "../php/config.php";
 
 if (!isset($_SESSION["loggedin"])) {
     http_response_code(403);

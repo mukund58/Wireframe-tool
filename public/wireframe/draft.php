@@ -51,31 +51,53 @@ if (!isset($_SESSION['loggedin'])) {
                     
                     
                         <div class="dashboard-content ">
+                           
                             <h2>Saved Drafts</h2>
-                            <form action="" method="get">
-                            <div class="my-5">
-                                    <input type="text" id="draft-title" placeholder="Enter draft title" class="w-full p-2 border rounded-md" />
-                                    <button id="create-draft-btn" class="mt-2 w-full bg-green-600 text-white px-4 py-2 rounded-md">Create Draft</button>
-                              </div>
-                              </form>
+                            <form method="GET" action="">
+                                <input type="text" name="q" placeholder="Search drafts..." 
+                                class="border p-2 rounded" 
+                                value="<?= htmlspecialchars($_GET['q'] ?? '') ?>">
+                                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Search</button>
+                            </form>
                             <div class="drafts-container">
-                            <?php
-                                $uid = $_SESSION['user_id'];
-                                $result = $conn->query("SELECT * FROM drafts WHERE user_id = $uid ORDER BY created_at DESC");
-                                while ($row = $result->fetch_assoc()) {
-                                    echo '<div class="draft border rounded p-4 my-2">';
-                                    echo '<h3 class="font-bold text-lg">' . htmlspecialchars($row['title']) . '</h3>';
-                                    echo '<div class="actions mt-2">';
-                                    echo '<a href="../wireframe/editor.php?draft_id=' . $row['id'] . '" class="edit-draft text-blue-600">Edit</a> | ';
-                                    echo '<a href="../php/delete_draft.php?id=' . $row['id'] . '" class="text-red-600" onclick="return confirm(\'Delete this draft?\')">Delete</a>';
-                                    echo '</div></div>';
-                                }
-                                ?>
 
-                                <!-- Drafts will be dynamically loaded here -->
-                            </div>
+<?php
+$uid = $_SESSION['user_id'];
+$search = $_GET['q'] ?? '';
+
+if (!empty($search)) {
+    $like = "%" . $search . "%";
+    $stmt = $conn->prepare("SELECT * FROM drafts WHERE user_id = ? AND title LIKE ? ORDER BY created_at DESC");
+    $stmt->bind_param("is", $uid, $like);
+} else {
+    $stmt = $conn->prepare("SELECT * FROM drafts WHERE user_id = ? ORDER BY created_at DESC");
+    $stmt->bind_param("i", $uid);
+}
+
+$stmt->execute();
+$result = $stmt->get_result();
+
+while ($row = $result->fetch_assoc()) {
+    $id = htmlspecialchars($row['id']);
+    $title = !empty($row['title']) ? $row['title'] : 'Untitled Draft';
+    $createdAt = date("d M Y, h:i A", strtotime($row['created_at']));
+
+    echo '<div class="draft border rounded p-4 my-2">';
+    echo '<h3 class="font-bold text-lg">' . htmlspecialchars($title) . '</h3>';
+    echo '<p class="text-gray-500 text-sm">Created on ' . $createdAt . '</p>';
+    echo '<div class="actions mt-2">';
+    echo '<a href="../wireframe/editor.php?draft_id=' .$id . '" class="edit-draft text-blue-600">Edit</a> | ';
+    echo '<a href="../draft/delete_draft.php?id=' . $id. '" class="text-red-600" onclick="return confirm(\'Delete this draft?\')">Delete</a> ';
+    echo '</div></div>';
+}
+
+$stmt->close();
+?>
+
+                            <!-- Inside your drafts loop in drafts.php -->
+
                         
-
+</div>
                             <div class="export-import-buttons">
                                 <button id="export-drafts-btn" class="w-full my-5 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center cursor-pointer">Export Drafts as JSON</button>
                                 <button id="import-drafts-btn"class="w-full  text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center cursor-pointer" >Import Drafts from JSON</button>
@@ -89,8 +111,8 @@ if (!isset($_SESSION['loggedin'])) {
     </div>
     <!-- <script src="../assets/js/setting.js"></script> -->
     <!-- <script src="../assets/js/dashboard.js"></script> -->
-    <script src="../assets/js/script.js" defer></script>
-    <script src="../assets/js/draft.js" defer></script>
+    <!-- <script src="../assets/js/script.js" defer></script> -->
+    <!-- <script src="../assets/js/draft.js" defer></script> -->
 
 </body>
 </html>
