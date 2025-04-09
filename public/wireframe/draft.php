@@ -98,12 +98,12 @@ $stmt->close();
 
                         
 </div>
-                            <div class="export-import-buttons">
+                            <!-- <div class="export-import-buttons">
                                 <button id="export-drafts-btn" class="w-full my-5 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center cursor-pointer">Export Drafts as JSON</button>
                                 <button id="import-drafts-btn"class="w-full  text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center cursor-pointer" >Import Drafts from JSON</button>
                                 <input type="file" id="import-drafts-input" accept="application/json" style="display: none;">
                             </div>
-                        </div>
+                        </div> -->
                    
                 </div>
             </div>

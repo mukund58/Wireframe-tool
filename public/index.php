@@ -1,11 +1,13 @@
 <?php
 session_start();
-require '../vendor/autoload.php';
+require 'php/config.php'; // relative to current file
+include '../vendor/autoload.php';
 
 $dotenv = Dotenv\Dotenv::createImmutable( '../');
 $dotenv->load();
 
 // define("BASE_PATH", dirname(__DIR__)); // One level up from /php/
+$client_id = $_ENV['CLIENT_ID'];
 
 $servername = $_ENV['DB_HOST'];
 $username = $_ENV['DB_USER'];
@@ -35,6 +37,7 @@ $user = $result->fetch_assoc();
     <link href="assets/css/tailwindstyles.css" rel="stylesheet">
     <link rel="icon" type="image/png" href="uploads/white-logo.png"  >
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 
   </head>
   
@@ -44,7 +47,7 @@ $user = $result->fetch_assoc();
 
 <div class="navigation">
     <div class="logo">
-      <h1><a href="/index.html"><img src="/uploads/logo.png" width="50px" height="50px" alt="Logo"></a></h1>
+      <h1><a href="/index.php"><img src="/uploads/logo.png" width="50px" height="50px" alt="Logo"></a></h1>
     </div>
 
  
@@ -134,6 +137,28 @@ $user = $result->fetch_assoc();
         </div>
       
       </form>
+      <div class="bg-white p-8 rounded-2xl shadow-lg max-w-sm w-full text-center">
+
+    <!-- Google Sign-In -->
+    <div id="g_id_onload"
+         data-client_id="<?php echo $client_id; ?>"
+         data-callback="handleCredentialResponse"
+         data-auto_prompt="false">
+    </div>
+
+    <div class="g_id_signin"
+         data-type="standard"
+         data-size="large"
+         data-theme="outline"
+         data-text="sign_in_with"
+         data-shape="rectangular"
+         data-logo_alignment="left"
+         data-width="300">
+    </div>
+
+    <p class="text-sm text-gray-500 mt-6">Continue securely with your Google account</p>
+  </div>
+
     </div>
   </div>
   <div id="signUpModal" class="modeal">
@@ -183,6 +208,7 @@ $user = $result->fetch_assoc();
             account</a>
         </div>
       </form>
+      
     </div>
   </div>
 
@@ -195,7 +221,7 @@ $user = $result->fetch_assoc();
         developers, and teams.</p>
     </div>
  
-    <a href="wireframe/editor.html" class="cta-button">Start Designing</a>
+    <a href="wireframe/editor.php" class="cta-button">Start Designing</a>
     
      <svg class="editorial"
      xmlns="http://www.w3.org/2000/svg"

@@ -2,6 +2,10 @@
 session_start();
 include "../php/config.php";
 
+if (!isset($_SESSION['username']) && !isset($_COOKIE['remember_token'])) {
+    header("Location: /index.php");
+    exit();
+}
 $draftJSON = null;
 if (isset($_GET['draft_id']) && isset($_SESSION['id'])) {
     $id = intval($_GET['draft_id']);
@@ -138,7 +142,7 @@ if (isset($_GET['draft_id']) && isset($_SESSION['id'])) {
                     <a href="#" id="username">username</a>
                     <a href="../wireframe/setting.php" id="profileSetting">Profile settings</a>
                     <a href="../wireframe/draft.php" id="dasboard">Dashboard</a>
-                    <a href="#" id="create-team">Create Team</a>
+                    <!-- <a href="#" id="create-team">Create Team</a> -->
                 </div>
             </div>
         </div>
@@ -163,6 +167,8 @@ if (isset($_GET['draft_id']) && isset($_SESSION['id'])) {
                 <div class="exportbtn">
                     
                     <!-- <button id="element-btn" > -->
+                    <h1><i class='bx bx-save'></i></h1>
+
                     <button class="flex-row" id="saveDraft" >Save Draft</button>
                     </button>
                 </div>
@@ -186,12 +192,12 @@ if (isset($_GET['draft_id']) && isset($_SESSION['id'])) {
                     </button>
                     <input type="file" id="import-input" accept="application/json" style="display: none;">
                 </div>
-                <div class="sharebtn">
+                <!-- <div class="sharebtn">
                     <button id="share-btn" class="flex-row">
                         <h1><i class='bx bx-share-alt'></i></h1>
                         <span>Share</span>
                     </button>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>

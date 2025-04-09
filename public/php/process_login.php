@@ -1,5 +1,8 @@
 <?php
 session_start(); // Start the session at the very top
+
+
+
 $login = false;
 $showError = false;
 
