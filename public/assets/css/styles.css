@@ -227,7 +227,7 @@ nav {
 
 .navigation {
     justify-content: space-between;
-    padding-inline: 23px;
+    padding-left: 23px;
 }
 
 .user {
