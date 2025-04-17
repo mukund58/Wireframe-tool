@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bind_param("ssss", $username, $email, $hashed_password,$token);
     
     // echo " <a herf='../index.html'></a>";
-    echo 'Invalid username and email. <a href="/index.php">Register Again</a>';
+    echo 'Already register username and email. <a href="/index.php">Register Again</a>';
 
     if ($stmt->execute()) {
         
@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $info_stmt->execute();
         $info_stmt->close();
 
-        header("Location: ../index.html");
+        header("Location: ../index.php");
         exit();
     } else {
         echo "Error: " . $stmt->error;

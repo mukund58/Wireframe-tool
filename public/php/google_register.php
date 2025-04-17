@@ -36,27 +36,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $check_stmt->store_result();
 
         if ($check_stmt->num_rows === 0) {
-            // Insert new user
+	       
+       
+       // Insert new user
             $sql = "INSERT INTO users (username, email, password, token) VALUES (?, ?, ?, ?)";
             $stmt = $conn->prepare($sql);
             $null_password = NULL; // Since password is not used
             $stmt->bind_param("ssss", $name, $email, $null_password, $token);
             
-            $_SESSION['username'] = $name;
-            $_SESSION['user_id'] = $userid;
-            $_SESSION['loggedin'] = true;
-
-            if ($stmt->execute()) {
+                if ($stmt->execute()) {
                 $userid = $stmt->insert_id;
 
-                // Insert into user_info
-                $info_sql = "INSERT INTO user_info (user_id) VALUES (?)";
-                $info_stmt = $conn->prepare($info_sql);
-                $info_stmt->bind_param("i", $userid);
-                $info_stmt->execute();
-                $info_stmt->close();
-
-                $_SESSION['username'] = $name;
+		$_SESSION['username'] = $name;
                 $_SESSION['user_id'] = $userid;
                 $_SESSION['loggedin'] = true;
 
@@ -67,7 +58,17 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             $stmt->close();
         } else {
-            echo "User already registered.";
+	 // Fetch user ID for session
+	    
+	$check_stmt->bind_result($userid);
+            $check_stmt->fetch();
+
+            $_SESSION['username'] = $name;
+            $_SESSION['user_id'] = $userid;
+            $_SESSION['loggedin'] = true;
+
+
+		echo "User already registered.";
         }
 
         $check_stmt->close();
