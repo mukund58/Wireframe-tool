@@ -47,7 +47,7 @@ $user = $result->fetch_assoc();
 
 <div class="navigation">
     <div class="logo">
-      <h1><a href="/index.php"><img src="/uploads/logo.png" width="50px" height="50px" alt="Logo"></a></h1>
+      <h1><a href="/index.php"><img src="/uploads/logo.png" width="50px" height="50px" alt="Logo "></a></h1>
     </div>
 
  
@@ -57,7 +57,7 @@ $user = $result->fetch_assoc();
       <label for="hamburger-checkbox">
 
       <?php if (isset($_SESSION['username']) && !empty($_SESSION['username'])) { ?>
-        <img src="../pic/<?= htmlspecialchars($user['profile_pic']) ?>" class="h-10 w-10 rounded-full" id="profile-pic">
+        <img src="../pic/<?= htmlspecialchars($user['profile_pic']) ?>" class="h-10 w-10 rounded-full object-cover" id="profile-pic" onerror="this.onerror=null;this.src='../uploads/avatar.svg'";">
         <?php } else { ?>
             <h1><i class='menu-icon bx bx-menu-alt-right text-5xl'></i></h1>
             <?php } ?>

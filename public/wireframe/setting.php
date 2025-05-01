@@ -134,8 +134,8 @@ $user = $result->fetch_assoc();
             <div class="md:w-3/4 w-full p-6">
                 <div id="account-general">
                     <div class="flex flex-wrap items-center space-x-4 mb-4">
-                        <img src="../pic/<?= htmlspecialchars($user['profile_pic']) ?>" class="h-20 w-20 rounded-full" id="profile-pic">
-                        <form action="" method="POST" enctype="multipart/form-data">
+		    <img src="../pic/<?= htmlspecialchars($user['profile_pic']) ?>" alt="Avatar" class="h-20 w-20 rounded-full object-cover" id="profile-pic" onerror="this.onerror=null;this.src='../uploads/avatar.svg';">			
+<form action="" method="POST" enctype="multipart/form-data">
                             <div class="mt-4 md:mt-0">
                                 <label class="cursor-pointer bg-blue-500 text-white px-4 py-2 rounded-md inline-block">
                                     Upload new photo
