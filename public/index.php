@@ -1,9 +1,9 @@
 <?php
 session_start();
-require 'php/config.php'; // relative to current file
+require 'php/config.php';  // relative to current file
 include '../vendor/autoload.php';
 
-$dotenv = Dotenv\Dotenv::createImmutable( '../');
+$dotenv = Dotenv\Dotenv::createImmutable('../');
 $dotenv->load();
 
 // define("BASE_PATH", dirname(__DIR__)); // One level up from /php/
@@ -18,8 +18,8 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 // include "../php/config.php";
 $username = $_SESSION['username'];
 
-$stmt = $conn->prepare("SELECT * FROM users WHERE username = ?");
-$stmt->bind_param("s", $username);
+$stmt = $conn->prepare('SELECT * FROM users WHERE username = ?');
+$stmt->bind_param('s', $username);
 $stmt->execute();
 $result = $stmt->get_result();
 $user = $result->fetch_assoc();
@@ -126,7 +126,7 @@ $user = $result->fetch_assoc();
         <button type="submit"
           class="w-full my-5 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center my-3 ">Login
           to your account</button>
-          <?php if($_SESSION['showError']){ ?>
+          <?php if ($_SESSION['showError']) { ?>
             <div class="bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4" role="alert">
   <p class="font-bold"><?php echo $_SESSION['showError'] ?></p>
 </div>
@@ -160,58 +160,59 @@ $user = $result->fetch_assoc();
 
     </div>
   </div>
-  <div id="signUpModal" class="modeal">
-    <div class="modal-content relative  max-w-md px-4  ">
-      <div class="close-signup flex flex-row-reverse">
-      <svg class=" h-5 ml-auto" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-          <path fill-rule="evenodd"
-            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-            clip-rule="evenodd"></path>
-        </svg>
-        <h2 class="text-xl font-medium text-gray-900">Sign Up to our platform</h2>
-      </div>
-      <form onsubmit="return validateForm(event)" action="./php/process_register.php" method="post">
-        <div class="form-group ">
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" placeholder="name@company.com" required>
-        </div>
-        <div class="form-group ">
-          <label for="username">Username</label>
-          <input type="username" id="username" name="username" placeholder="username123" required pattern="^[a-z][a-z0-9].{3,15}$" title="Enter Valid Username">
-        </div>
-        <div class="form-group">
-          <label for="password">Password</label>
-          
-          <input type="password" id="password" class="input-field password"  name="password" placeholder="••••••••" required pattern="^(?=.*?[0-9])(?=.*?[A-Za-z]).{8,32}$" title="Enter Strong Password" >
-          
-        </div>
-        <p id="error-message" class="error-message"></p>
-        <div class="flex justify-between m-4">
-          <div class="flex items-start">
-            <div class="flex items-center h-5">
-              <input id="remember" aria-describedby="remember" type="checkbox" name="remember_me">
-            </div>
-            <div class="text-sm ml-3">
-              <label for="remember" class=" text-gray-900  ">Remember
-                me</label>
-            </div>
-          </div>
-          <a href="#" class="text-sm text-blue-700 hover:underline dark:text-blue-500">Lost
-            Password?</a>
-        </div>
-        <button type="submit"
-          class="w-full my-5 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center my-3 ">Register
-          to your account</button>
-        <div class="text-sm font-medium text-gray-500 cursor-pointer">
-          Already have an account? <a id="switchToSignin" class="text-blue-700 hover:underline ">Login
-            account</a>
-        </div>
-      </form>
-      
-      <p class="mb-4 font-small text-gray-500" >By signing up, you agree with the following terms: <a class="text-blue-700 hover:underline " href="php/terms-of-service.php" target="_blank" rel="noopener noreferrer">Terms & Conditions</a> And <a class="text-blue-700 hover:underline " href="php/privacy-policy.php" target="_blank" rel="noopener noreferrer">Privacy & Policy</a>  </p>
-    </div>
 
+<div id="signUpModal" class="modeal">
+  <div class="modal-content relative  max-w-md px-4  ">
+    <div class="close-signup flex flex-row-reverse">
+    <svg class=" h-5 ml-auto" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd"
+          d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+          clip-rule="evenodd"></path>
+      </svg>
+      <h2 class="text-xl font-medium text-gray-900">Sign Up to our platform</h2>
+    </div>
+    <form onsubmit="return validateForm(event)" action="./php/process_register.php" method="post">
+      <div class="form-group ">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="name@company.com" required>
+      </div>
+      <div class="form-group ">
+        <label for="username">Username</label>
+        <input type="username" id="username" name="username" placeholder="username123" required pattern="^[a-z][a-z0-9].{3,15}$" title="Enter Valid Username">
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        
+        <input type="password" id="password" class="input-field password"  name="password" placeholder="••••••••" required pattern="^(?=.*?[0-9])(?=.*?[A-Za-z]).{8,32}$" title="Enter Strong Password" >
+        
+      </div>
+      <p id="error-message" class="error-message"></p>
+      <div class="flex justify-between m-4">
+        <div class="flex items-start">
+          <div class="flex items-center h-5">
+            <input id="remember" aria-describedby="remember" type="checkbox" name="remember_me">
+          </div>
+          <div class="text-sm ml-3">
+            <label for="remember" class=" text-gray-900  ">Remember
+              me</label>
+          </div>
+        </div>
+        <a href="#" class="text-sm text-blue-700 hover:underline dark:text-blue-500">Lost
+          Password?</a>
+      </div>
+      <div class="text-sm font-medium text-gray-500 cursor-pointer">
+        Already have an account? <a id="switchToSignin" class="text-blue-700 hover:underline ">Login
+          account</a>
+      </div>
+      <button type="submit"
+        class="w-full my-5 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center my-3 ">Register
+        to your account</button>
+    </form>
+    
+    <p class="mb-4 font-small text-gray-500" >By signing up, you agree with the following terms: <a class="text-blue-700 hover:underline " href="php/terms-of-service.php" target="_blank" rel="noopener noreferrer">Terms & Conditions</a> And <a class="text-blue-700 hover:underline " href="php/privacy-policy.php" target="_blank" rel="noopener noreferrer">Privacy & Policy</a>  </p>
   </div>
+
+</div>
 
 
   <div class="page1 ">

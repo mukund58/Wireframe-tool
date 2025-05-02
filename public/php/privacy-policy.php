@@ -115,6 +115,7 @@ require 'config.php'; // relative to current file
       </div>
     </footer>
   </div>
-
+  <script src="../assets/js/login.js"></script>
+  <script src="../assets/js/register.js"></script>
 </body>
 </html>
