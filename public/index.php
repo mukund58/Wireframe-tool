@@ -47,7 +47,7 @@ $user = $result->fetch_assoc();
 
 <div class="navigation">
     <div class="logo">
-      <h1><a href="/index.php"><img src="/uploads/logo.png" width="50px" height="50px" alt="Logo"></a></h1>
+      <h1><a href="/index.php"><img src="/uploads/logo.png" width="50px" height="50px" alt="Logo "></a></h1>
     </div>
 
  
@@ -57,7 +57,7 @@ $user = $result->fetch_assoc();
       <label for="hamburger-checkbox">
 
       <?php if (isset($_SESSION['username']) && !empty($_SESSION['username'])) { ?>
-        <img src="../pic/<?= htmlspecialchars($user['profile_pic']) ?>" class="h-10 w-10 rounded-full" id="profile-pic">
+        <img src="../pic/<?= htmlspecialchars($user['profile_pic']) ?>" class="h-10 w-10 rounded-full object-cover" id="profile-pic" onerror="this.onerror=null;this.src='../uploads/avatar.svg'";">
         <?php } else { ?>
             <h1><i class='menu-icon bx bx-menu-alt-right text-5xl'></i></h1>
             <?php } ?>
@@ -134,21 +134,20 @@ $user = $result->fetch_assoc();
         <div class="text-sm font-medium text-gray-500 cursor-pointer">
           Not registered? <a id="switchToSignup" class="text-blue-700 hover:underline ">Create
             account</a>
+          </div>
+        </form>
+        <div class="bg-white p-8 rounded-2xl  max-w-sm w-full text-center">
+          
+          <!-- Google Sign-In -->
+          <div id="g_id_onload"
+          data-client_id="<?php echo $client_id; ?>"
+          data-callback="handleCredentialResponse"
+          data-auto_prompt="false">
         </div>
-      
-      </form>
-      <div class="bg-white p-8 rounded-2xl shadow-lg max-w-sm w-full text-center">
-
-    <!-- Google Sign-In -->
-    <div id="g_id_onload"
-         data-client_id="<?php echo $client_id; ?>"
-         data-callback="handleCredentialResponse"
-         data-auto_prompt="false">
-    </div>
-
-    <div class="g_id_signin"
-         data-type="standard"
-         data-size="large"
+        
+        <div class="g_id_signin"
+        data-type="standard"
+        data-size="large"
          data-theme="outline"
          data-text="sign_in_with"
          data-shape="rectangular"
@@ -156,8 +155,8 @@ $user = $result->fetch_assoc();
          data-width="300">
     </div>
 
-    <p class="text-sm text-gray-500 mt-6">Continue securely with your Google account</p>
   </div>
+  <p class="mb-4 font-medium text-gray-500" >By signing in, you agree with the following terms: <a class="text-blue-700 hover:underline " href="php/terms-of-service.php" target="_blank" rel="noopener noreferrer">Terms & Conditions</a> And <a class="text-blue-700 hover:underline " href="php/privacy-policy.php" target="_blank" rel="noopener noreferrer">Privacy & Policy</a>  </p>
 
     </div>
   </div>
@@ -209,7 +208,9 @@ $user = $result->fetch_assoc();
         </div>
       </form>
       
+      <p class="mb-4 font-small text-gray-500" >By signing up, you agree with the following terms: <a class="text-blue-700 hover:underline " href="php/terms-of-service.php" target="_blank" rel="noopener noreferrer">Terms & Conditions</a> And <a class="text-blue-700 hover:underline " href="php/privacy-policy.php" target="_blank" rel="noopener noreferrer">Privacy & Policy</a>  </p>
     </div>
+
   </div>
 
 
