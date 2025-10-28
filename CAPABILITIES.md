@@ -204,6 +204,6 @@ Access comprehensive account management:
 
 ---
 
-*Last Updated: 2025*
+*Last Updated: October 2025*
 
 This tool is designed to help designers, developers, and teams create professional wireframes quickly and efficiently. Start designing today!
