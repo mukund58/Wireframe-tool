@@ -1,7 +1,7 @@
 {
   "name": "mukund58/wireframe-tool",
   "description": "A tool for creating wireframes",
-  "license": "GPL-3.0-or-later"
+  "license": "GPL-3.0-or-later",
   "require": {
     "php": "^7.4 || ^8.0",
     "vlucas/phpdotenv": "^5.5",
