@@ -1,7 +1,16 @@
 <?php
-require '../../vendor/autoload.php';
-$dotenv = Dotenv\Dotenv::createImmutable( '../../');
-$dotenv->load();
+require __DIR__ . '/../../vendor/autoload.php';
+
+$envPath = __DIR__ . '/../../';
+if (file_exists($envPath . '.env')) {
+    $dotenv = Dotenv\Dotenv::createImmutable($envPath);
+    $dotenv->load();
+} else {
+    error_log("⚠️ .env file not found at $envPath.env. Skipping environment load.");
+}
+
+// $dotenv = Dotenv\Dotenv::createImmutable( '../../');
+// $dotenv->load();
 
 define("BASE_PATH", dirname(__DIR__)); // One level up from /php/
 

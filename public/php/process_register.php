@@ -14,8 +14,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("ssss", $username, $email, $hashed_password,$token);
     
-    // echo "Alreay used email";
+    // echo " <a herf='../index.html'></a>";
+    echo 'Already register username and email. <a href="/index.php">Register Again</a>';
+
     if ($stmt->execute()) {
+        
         $userid = $stmt->insert_id;
 
         // Insert into user_info table with just user_id for now
@@ -25,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $info_stmt->execute();
         $info_stmt->close();
 
-        header("Location: ../index.html");
+        header("Location: ../index.php");
         exit();
     } else {
         echo "Error: " . $stmt->error;

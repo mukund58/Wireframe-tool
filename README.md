@@ -10,58 +10,6 @@ A web-based application designed for creating and designing web UI wireframes ef
 - **User Authentication**: Register and login functionalities.
 - **Asset Management**: Upload and manage assets for your wireframes.
 
-## File Structure
-
-```
-.
-├── CNAME
-├── LICENSE
-├── public
-│   ├── assets
-│   │   ├── dashboard.css
-│   │   ├── editor.css
-│   │   ├── js
-│   │   │   ├── dashboard.js
-│   │   │   ├── login.js
-│   │   │   ├── profile.js
-│   │   │   ├── script.js
-│   │   │   ├── toolbar.js
-│   │   │   └── viewport.js
-│   │   ├── login.css
-│   │   ├── profile.css
-│   │   ├── styles.css
-│   │   └── utiles.css
-│   ├── auth
-│   │   ├── login.html
-│   │   └── register.html
-│   ├── index.html
-│   ├── uploads
-│   │   ├── abstract-colors-2048x1152-wallpaper.jpg
-│   │   ├── arrow-right.svg
-│   │   ├── arrow.svg
-│   │   ├── avatar.svg
-│   │   ├── Brush_103.png
-│   │   ├── circle.svg
-│   │   ├── close-icon.svg
-│   │   ├── cursor-2.svg
-│   │   ├── download.svg
-│   │   ├── export.svg
-│   │   ├── favicon.ico
-│   │   ├── image-shapes.svg
-│   │   ├── line.svg
-│   │   ├── logo.jpeg
-│   │   ├── pfp.jpeg
-│   │   ├── profile.svg
-│   │   ├── rectangle.svg
-│   │   └── triangle.svg
-│   └── wireframe
-│       ├── dashboard.html
-│       ├── editor.html
-│       └── profile.html
-└── README.md
-
-7 directories, 39 files
-```
 
 ## Installation
 
@@ -76,7 +24,14 @@ To install and run this project locally, follow these steps:
    ```sh
    cd Wireframe-tool
    ```
-
+3. Install PHP dependencies: :
+   ```sh
+   composer install
+   ```
+4. Install Node.js dependencies: :
+   ```sh
+   npm install
+   ```
 
 
 

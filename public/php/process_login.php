@@ -1,5 +1,8 @@
 <?php
 session_start(); // Start the session at the very top
+
+
+
 $login = false;
 $showError = false;
 
@@ -23,18 +26,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if ($num === 1) {
             $row = $result->fetch_assoc();
-
+            
             // Verify the hashed password
             if (password_verify($password, $row['password'])) {
                 // Password matched, start session
                 $_SESSION['loggedin'] = true;
                 $_SESSION['username'] = $username;
+                $_SESSION['user_id'] = $row['id'];
+                if(isset($_POST['remember_me']))
+                {
+                    setcookie("remember_token", $row['token'], time() + 604800, "/");
+                }
+                
                 header("Location: /wireframe/setting.php");
                 exit;
             } else {
                 $showError = "Invalid Password";
                 $_SESSION['showError'] = $showError;
             }
+            
+            // $token = row['token'];
         } else {
             $showError = "Invalid Username";
             $_SESSION['showError'] = $showError;

@@ -1,7 +1,28 @@
 <?php
 session_start();
-$alert = $_SESSION['username']
+require 'php/config.php'; // relative to current file
+include '../vendor/autoload.php';
 
+$dotenv = Dotenv\Dotenv::createImmutable( '../');
+$dotenv->load();
+
+// define("BASE_PATH", dirname(__DIR__)); // One level up from /php/
+$client_id = $_ENV['CLIENT_ID'];
+
+$servername = $_ENV['DB_HOST'];
+$username = $_ENV['DB_USER'];
+$password = $_ENV['DB_PASS'];
+$dbname = $_ENV['DB_NAME'];
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// include "../php/config.php";
+$username = $_SESSION['username'];
+
+$stmt = $conn->prepare("SELECT * FROM users WHERE username = ?");
+$stmt->bind_param("s", $username);
+$stmt->execute();
+$result = $stmt->get_result();
+$user = $result->fetch_assoc();
 ?>
 
 <!DOCTYPE html>
@@ -16,6 +37,7 @@ $alert = $_SESSION['username']
     <link href="assets/css/tailwindstyles.css" rel="stylesheet">
     <link rel="icon" type="image/png" href="uploads/white-logo.png"  >
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 
   </head>
   
@@ -25,29 +47,17 @@ $alert = $_SESSION['username']
 
 <div class="navigation">
     <div class="logo">
-      <h1><a href="/index.html"><img src="/uploads/logo.png" width="50px" height="50px" alt="Logo"></a></h1>
+      <h1><a href="/index.php"><img src="/uploads/logo.png" width="50px" height="50px" alt="Logo "></a></h1>
     </div>
 
-    <!-- show error  -->
-<?php if($_SESSION['showError']){ ?>
-
-  <div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md " role="alert">
-  <div class="flex">
-      <div class="py-1"><svg class="fill-current h-6 w-6 text-teal-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/></svg></div>
-      <div>
-        <p class="font-bold"><?php echo $_SESSION['showError'] ?></p>
-      </div>
-      </div>
-      </div> 
-
-    <?php } session_destroy(); ?>
+ 
 
     <div class="menubar">
       <input type="checkbox" id="hamburger-checkbox" style="display: none;">
       <label for="hamburger-checkbox">
 
       <?php if (isset($_SESSION['username']) && !empty($_SESSION['username'])) { ?>
-        <img src="../uploads/avatar.svg" class="h-10 w-10 rounded-full" id="profile-pic">
+        <img src="../pic/<?= htmlspecialchars($user['profile_pic']) ?>" class="h-10 w-10 rounded-full object-cover" id="profile-pic" onerror="this.onerror=null;this.src='../uploads/avatar.svg'";">
         <?php } else { ?>
             <h1><i class='menu-icon bx bx-menu-alt-right text-5xl'></i></h1>
             <?php } ?>
@@ -76,7 +86,9 @@ $alert = $_SESSION['username']
 
 
 <div id="loginModal" class="modeal">
+  
     <div class="modal-content relative  max-w-md px-4  ">
+      
       <div class="close-login flex flex-col">
 
       <svg class="close h-5 ml-auto" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -84,8 +96,10 @@ $alert = $_SESSION['username']
             d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
             clip-rule="evenodd"></path>
         </svg>
+      
         <h2 class="text-xl font-medium text-gray-900">Sign in to our platform</h2>
       </div>
+   
       <form onsubmit="return validateForm(event)" action="/php/process_login.php" method="post">
         <div class="form-group ">
           <label for="email">Username</label>
@@ -99,7 +113,7 @@ $alert = $_SESSION['username']
         <div class="flex justify-between m-4">
           <div class="flex items-start">
             <div class="flex items-center h-5">
-              <input id="remember" aria-describedby="remember" type="checkbox" >
+              <input id="remember" aria-describedby="remember" type="checkbox" name="remember_me">
             </div>
             <div class="text-sm ml-3">
               <label for="remember" class=" text-gray-900  ">Remember
@@ -112,11 +126,38 @@ $alert = $_SESSION['username']
         <button type="submit"
           class="w-full my-5 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center my-3 ">Login
           to your account</button>
+          <?php if($_SESSION['showError']){ ?>
+            <div class="bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4" role="alert">
+  <p class="font-bold"><?php echo $_SESSION['showError'] ?></p>
+</div>
+          <?php } ?>
         <div class="text-sm font-medium text-gray-500 cursor-pointer">
           Not registered? <a id="switchToSignup" class="text-blue-700 hover:underline ">Create
             account</a>
+          </div>
+        </form>
+        <div class="bg-white p-8 rounded-2xl  max-w-sm w-full text-center">
+          
+          <!-- Google Sign-In -->
+          <div id="g_id_onload"
+          data-client_id="<?php echo $client_id; ?>"
+          data-callback="handleCredentialResponse"
+          data-auto_prompt="false">
         </div>
-      </form>
+        
+        <div class="g_id_signin"
+        data-type="standard"
+        data-size="large"
+         data-theme="outline"
+         data-text="sign_in_with"
+         data-shape="rectangular"
+         data-logo_alignment="left"
+         data-width="300">
+    </div>
+
+  </div>
+  <p class="mb-4 font-medium text-gray-500" >By signing in, you agree with the following terms: <a class="text-blue-700 hover:underline " href="php/terms-of-service.php" target="_blank" rel="noopener noreferrer">Terms & Conditions</a> And <a class="text-blue-700 hover:underline " href="php/privacy-policy.php" target="_blank" rel="noopener noreferrer">Privacy & Policy</a>  </p>
+
     </div>
   </div>
   <div id="signUpModal" class="modeal">
@@ -148,7 +189,7 @@ $alert = $_SESSION['username']
         <div class="flex justify-between m-4">
           <div class="flex items-start">
             <div class="flex items-center h-5">
-              <input id="remember" aria-describedby="remember" type="checkbox" >
+              <input id="remember" aria-describedby="remember" type="checkbox" name="remember_me">
             </div>
             <div class="text-sm ml-3">
               <label for="remember" class=" text-gray-900  ">Remember
@@ -166,7 +207,10 @@ $alert = $_SESSION['username']
             account</a>
         </div>
       </form>
+      
+      <p class="mb-4 font-small text-gray-500" >By signing up, you agree with the following terms: <a class="text-blue-700 hover:underline " href="php/terms-of-service.php" target="_blank" rel="noopener noreferrer">Terms & Conditions</a> And <a class="text-blue-700 hover:underline " href="php/privacy-policy.php" target="_blank" rel="noopener noreferrer">Privacy & Policy</a>  </p>
     </div>
+
   </div>
 
 
@@ -178,7 +222,7 @@ $alert = $_SESSION['username']
         developers, and teams.</p>
     </div>
  
-    <a href="wireframe/editor.html" class="cta-button">Start Designing</a>
+    <a href="wireframe/editor.php" class="cta-button">Start Designing</a>
     
      <svg class="editorial"
      xmlns="http://www.w3.org/2000/svg"

@@ -1,3 +1,27 @@
+<?php
+session_start();
+include "../php/config.php";
+
+if (!isset($_SESSION['username']) && !isset($_COOKIE['remember_token'])) {
+    header("Location: /index.php");
+    exit();
+}
+$draftJSON = null;
+if (isset($_GET['draft_id']) && isset($_SESSION['id'])) {
+    $id = intval($_GET['draft_id']);
+    $uid = $_SESSION['id'];
+
+    $stmt = $conn->prepare("SELECT content FROM drafts WHERE id = ? AND user_id = ?");
+    $stmt->bind_param("ii", $id, $uid);
+    $stmt->execute();
+    $stmt->bind_result($content);
+    if ($stmt->fetch()) {
+        $draftJSON = $content;
+    }
+    $stmt->close();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,6 +33,8 @@
     <link rel="stylesheet" href="../assets/css/editor.css">
     <link rel="stylesheet" href="../assets/css/utilities.css">
     <link rel="icon" type="image/png" href="../uploads/white-logo.png"  >
+    <!-- <link href="../assets/css/tailwindstyles.css" rel="stylesheet"> -->
+
 
 </head>
 
@@ -116,18 +142,34 @@
                     <a href="#" id="username">username</a>
                     <a href="../wireframe/setting.php" id="profileSetting">Profile settings</a>
                     <a href="../wireframe/draft.php" id="dasboard">Dashboard</a>
-                    <a href="#" id="create-team">Create Team</a>
+                    <!-- <a href="#" id="create-team">Create Team</a> -->
                 </div>
             </div>
         </div>
         
         <div class="file-drop-down">
+
+                           
             <h3 style="color: black;"><i class='bx bx-menu'></i></h3>
             <div class="drop-dron-menu">
-                <div class="exportbtn">
+            <div class="my-5">
+    
+                    <input type="text" id="draft-title" placeholder="Enter draft title" class="w-full p-2 border rounded-md" />
+                    <button id="create-draft-btn" class="mt-2 w-full bg-green-600 text-white px-4 py-2 rounded-md">Create Draft</button>
+            </div>
+                              
+                <!-- <div class="exportbtn">
                     <button id="element-btn" class="flex-row">
                         <span>All Element</span>
                         <h1><i class='bx bx-right-arrow-alt'></i></h1>
+                    </button>
+                </div> -->
+                <div class="exportbtn">
+                    
+                    <!-- <button id="element-btn" > -->
+                    <h1><i class='bx bx-save'></i></h1>
+
+                    <button class="flex-row" id="saveDraft" >Save Draft</button>
                     </button>
                 </div>
                 <div class="exportbtn" >
@@ -150,12 +192,12 @@
                     </button>
                     <input type="file" id="import-input" accept="application/json" style="display: none;">
                 </div>
-                <div class="sharebtn">
+                <!-- <div class="sharebtn">
                     <button id="share-btn" class="flex-row">
                         <h1><i class='bx bx-share-alt'></i></h1>
                         <span>Share</span>
                     </button>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
@@ -164,6 +206,9 @@
     <!-- <script src="../assets/js/shape-object.js"></script> -->
     <script src="../assets/js/script.js" defer></script>
     <script src="../assets/js/toolbar.js" defer></script>
+    <!-- <script src="../assets/js/draft.js" defer></script> -->
+
+
 </body>
 
 </html>

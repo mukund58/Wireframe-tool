@@ -88,4 +88,22 @@ const toggle = document.querySelector(".toggle"),
       } else {
         input.type = "password";
       }
-    })
+    });
+
+
+function handleCredentialResponse(response) {
+  // Send token to your backend
+  fetch("../../php/google_register.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+    body: "id_token=" + encodeURIComponent(response.credential)
+  })
+  .then(res => res.text())
+  .then(data => {
+    console.log(data);
+    // Redirect or show message
+  });
+}
+
