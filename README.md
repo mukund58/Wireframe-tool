@@ -10,6 +10,8 @@ A web-based application designed for creating and designing web UI wireframes ef
 - **User Authentication**: Register and login functionalities.
 - **Asset Management**: Upload and manage assets for your wireframes.
 
+For a comprehensive list of all features and capabilities, see [CAPABILITIES.md](CAPABILITIES.md).
+
 
 ## Installation
 
